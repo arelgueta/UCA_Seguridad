@@ -1,0 +1,425 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 5
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor} % Necesario para \cellcolor en tablas
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+
+% Colores para la Matriz de Riesgos (Mapa de Calor)
+\definecolor{riskLow}{HTML}{A9DFBF}   % Verde
+\definecolor{riskMed}{HTML}{F9E79F}   % Amarillo
+\definecolor{riskHigh}{HTML}{F5CBA7}  % Naranja
+\definecolor{riskCrit}{HTML}{F1948A}  % Rojo
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaProceso}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=El Proceso, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Nota de Negocio, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 5}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 5}\\[12pt]
+{\Large\itshape ``Gesti\'on de riesgos I:\\[2pt] Metodología y Matriz P$\times$I''}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Unidad 2 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{¿Qu\'e es gestionar riesgos en un negocio digital?}
+
+En las clases anteriores identificamos \textbf{activos}, \textbf{amenazas} y \textbf{vulnerabilidades}. Hoy damos el siguiente paso: ¿qu\'e hacemos con todo eso? 
+
+\begin{cajaDefinicion}
+La \textbf{Gesti\'on de Riesgos} es el proceso de identificar, analizar y evaluar los riesgos para luego decidir c\'omo tratarlos, optimizando los recursos del negocio.
+\end{cajaDefinicion}
+
+\begin{cajaNota}
+\textbf{El objetivo NO es el ``Riesgo Cero''.} Eliminar todos los riesgos es t\'ecnicamente imposible y econ\'omicamente inviable (arruinaría la usabilidad y el presupuesto). El objetivo es \textbf{administrar el riesgo} hasta un nivel aceptable para el negocio, invirtiendo en controles solo donde el costo-beneficio lo justifique.
+\end{cajaNota}
+
+\section{El Ciclo de Gesti\'on de Riesgos}
+
+El proceso es iterativo y c\'iclico. Consta de 4 etapas principales:
+
+\begin{cajaProceso}
+\begin{enumerate}[leftmargin=2em, itemsep=8pt]
+    \item \textbf{Identificaci\'on:} ¿Qu\'e puede salir mal? (Listar activos, amenazas y vulnerabilidades).
+    \item \textbf{An\'alisis:} ¿Qu\'e tan grave ser\'ia y qu\'e tan probable es que ocurra? (Estimar Probabilidad e Impacto).
+    \item \textbf{Evaluaci\'on:} ¿Qu\'e riesgos son prioritarios? (Usar la Matriz P$\times$I para rankearlos).
+    \item \textbf{Tratamiento:} ¿Qu\'e vamos a hacer al respecto? (Mitigar, Transferir, Aceptar o Evitar).
+\end{enumerate}
+\end{cajaProceso}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — LA MATRIZ P x I
+% ============================================================
+\section{La Matriz de Probabilidad e Impacto (P$\times$I)}
+
+Para no tratar todos los riesgos por igual, los cruzamos en una matriz cualitativa. Esto nos da un \textbf{Mapa de Calor} que dicta la urgencia.
+
+\subsection{Escalas de medici\'on}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Probabilidad (P):} ¿Qu\'e tan frecuente o f\'acil es que la amenaza explote la vulnerabilidad? (Baja, Media, Alta).
+    \item \textbf{Impacto (I):} Si ocurre, ¿cu\'anto da\~no causa al negocio (financiero, legal, reputacional, operativo)? (Bajo, Medio, Alto).
+\end{itemize}
+
+\subsection{Mapa de Calor (Heatmap)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|>{\columncolor{grisClaro}}c|>{\columncolor{grisClaro}}c|>{\columncolor{grisClaro}}c|}
+\hline
+\rowcolor{azulUCA!20}
+\textbf{Prob. $\downarrow$ \quad Impacto $\rightarrow$} & \textbf{Bajo} & \textbf{Medio} & \textbf{Alto} \\
+\hline
+\textbf{Alta} & \cellcolor{riskMed} \textbf{MEDIO} & \cellcolor{riskHigh} \textbf{ALTO} & \cellcolor{riskCrit} \textbf{CR\'ITICO} \\
+\hline
+\textbf{Media} & \cellcolor{riskLow} \textbf{BAJO} & \cellcolor{riskMed} \textbf{MEDIO} & \cellcolor{riskHigh} \textbf{ALTO} \\
+\hline
+\textbf{Baja} & \cellcolor{riskLow} \textbf{BAJO} & \cellcolor{riskLow} \textbf{BAJO} & \cellcolor{riskMed} \textbf{MEDIO} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{8pt}
+\textbf{¿C\'omo se lee?}
+\begin{itemize}[leftmargin=2em]
+    \item \textcolor{red!80!black}{\textbf{Cr\'itico / Alto:}} Requieren tratamiento inmediato. No se pueden dejar pasar.
+    \item \textcolor{orange!80!black}{\textbf{Medio:}} Requieren un plan de acci\'on a mediano plazo y monitoreo.
+    \item \textcolor{green!60!black}{\textbf{Bajo:}} Se aceptan o se monitorean peri\'odicamente.
+\end{itemize}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — TRATAMIENTO DE RIESGOS
+% ============================================================
+\section{Opciones de Tratamiento (Las 4 T)}
+
+Una vez evaluado el riesgo, la direcci\'on del negocio debe decidir qu\'e hacer. Existen 4 caminos cl\'asicos:
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulUCA}}p{3cm}|X|p{4cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Estrategia} & \textbf{Descripci\'on} & \textbf{Ejemplo en Negocio Digital} \\
+\hline
+\textbf{Mitigar} (Reducir) & Aplicar controles para bajar la Probabilidad o el Impacto. & Implementar MFA (doble factor) para reducir la probabilidad de robo de credenciales. \\
+\hline
+\textbf{Transferir} (Compartir) & Pasar el impacto financiero a un tercero. & Contratar un \textbf{seguro de ciber-riesgo} o tercerizar el hosting a un proveedor con SLA. \\
+\hline
+\textbf{Aceptar} (Tolerar) & Asumir el riesgo porque el control es m\'as caro que el da\~no potencial. & Aceptar que el servidor se caiga 10 min al a\~no porque un backup redundante cuesta u\$s 50k y la p\'erdida es de u\$s 500. \\
+\hline
+\textbf{Evitar} (Eliminar) & Dejar de realizar la actividad que genera el riesgo. & Decidir NO almacenar datos de tarjetas de cr\'edito propios y usar siempre pasarelas como Mercado Pago o Stripe. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}
+\textbf{El BIA (Business Impact Analysis):} Antes de decidir, hay que entender el impacto real en el negocio. Si el sistema de facturaci\'on cae 2 horas, ¿cu\'anto dinero se pierde? Eso dicta cu\'anto estamos dispuestos a invertir en prevenirlo.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — ACTIVIDAD PRÁCTICA
+% ============================================================
+\section{Taller Grupal: Matriz para el TP Integrador}
+
+\begin{cajaActividad}[title={Construcci\'on de la Matriz de Riesgos}]
+En sus grupos del Trabajo Pr\'actico Integrador, identifiquen \textbf{3 riesgos clave} para el negocio digital que eligieron. 
+
+\textbf{Pasos:}
+\begin{enumerate}
+    \item Describan el riesgo (Amenaza + Vulnerabilidad).
+    \item Identifiquen el Activo afectado.
+    \item As\'ignenle un valor de Probabilidad (B/M/A) e Impacto (B/M/A).
+    \item Determinen el Nivel de Riesgo seg\'un el Mapa de Calor.
+    \item Propongan un Control y la Estrategia (Mitigar, Transferir, etc.).
+\end{enumerate}
+\end{cajaActividad}
+
+\vspace{8pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Riesgo 1:} \hrulefill \\
+\textbf{Activo:} \hrulefill \quad \textbf{Prob:} [ B / M / A ] \quad \textbf{Imp:} [ B / M / A ] \quad \textbf{Nivel:} \hrulefill \\
+\textbf{Control propuesto:} \hrulefill \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Riesgo 2:} \hrulefill \\
+\textbf{Activo:} \hrulefill \quad \textbf{Prob:} [ B / M / A ] \quad \textbf{Imp:} [ B / M / A ] \quad \textbf{Nivel:} \hrulefill \\
+\textbf{Control propuesto:} \hrulefill \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Riesgo 3:} \hrulefill \\
+\textbf{Activo:} \hrulefill \quad \textbf{Prob:} [ B / M / A ] \quad \textbf{Imp:} [ B / M / A ] \quad \textbf{Nivel:} \hrulefill \\
+\textbf{Control propuesto:} \hrulefill \\
+\hline
+\end{tabularx}
+
+\vspace{12pt}
+\begin{cajaNota}
+\textbf{Nota para el TP:} Esta tabla es el borrador directo del Entregable 2 de su Trabajo Pr\'actico Integrador. Gu\'ardenla y s\'aquenle foto/escan\'eenla para su informe.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — CUESTIONARIO 2
+% ============================================================
+\section{Cuestionario 2 de autoevaluaci\'on}
+
+\begin{cajaNota}[title={Instrucciones}]
+Este cuestionario se realiza al cierre de la clase. \textbf{No es eliminatorio.} Usalo para medir cu\'anto entendiste antes del Parcial 1 (Clase 6). Las respuestas correctas est\'an al final.
+\end{cajaNota}
+
+\vspace{6pt}
+
+\textbf{1.} El proceso de gesti\'on de riesgos sigue, en orden:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Tratamiento, identificaci\'on, an\'alisis, evaluaci\'on
+  \item Identificaci\'on, an\'alisis, evaluaci\'on, tratamiento
+  \item Evaluaci\'on, identificaci\'on, tratamiento, an\'alisis
+  \item No sigue un orden espec\'ifico
+\end{enumerate}
+
+\textbf{2.} En una matriz de probabilidad e impacto, un riesgo con alta probabilidad y alto impacto debe:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Ignorarse por ser poco com\'un
+  \item Priorizarse para tratamiento inmediato
+  \item Transferirse siempre a un seguro
+  \item Aceptarse sin m\'as
+\end{enumerate}
+
+\textbf{3.} BIA significa:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Business Impact Analysis (An\'alisis de Impacto al Negocio)
+  \item Basic Information Access
+  \item Business Information Audit
+  \item Backup and Incident Assessment
+\end{enumerate}
+
+\textbf{4.} Un ejemplo de control t\'ecnico es:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Una pol\'itica firmada por empleados
+  \item Un firewall o un sistema de autenticaci\'on multifactor (MFA)
+  \item Una capacitaci\'on anual
+  \item Un cerco perimetral
+\end{enumerate}
+
+\textbf{5.} Un ejemplo de control humano/organizativo es:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Antivirus
+  \item Capacitaci\'on en concientizaci\'on de seguridad
+  \item Cifrado de disco
+  \item C\'amaras de seguridad
+\end{enumerate}
+
+\textbf{6.} ISO/IEC 27001 es principalmente:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Una ley argentina de protecci\'on de datos
+  \item Una norma internacional sobre sistemas de gesti\'on de seguridad de la informaci\'on
+  \item Un lenguaje de programaci\'on seguro
+  \item Un tipo de malware
+\end{enumerate}
+
+\textbf{7.} ``Tratar'' un riesgo puede significar (eleg\'i todas las correctas):
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Evitarlo
+  \item Mitigarlo
+  \item Transferirlo
+  \item Aceptarlo
+\end{enumerate}
+
+\textbf{8.} Verdadero o Falso: la gesti\'on de riesgos es un proceso que se hace una sola vez y no se repite.
+\vspace{4pt}
+\checkboxVacio Verdadero \qquad \checkboxVacio Falso
+
+% --- Clave de respuestas ---
+\vspace{12pt}
+\begin{tcolorbox}[colback=verdeOK!10, colframe=verdeOK,
+                  title={\checkMark \; Clave de respuestas}, arc=3mm]
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{b)} Identificaci\'on, an\'alisis, evaluaci\'on, tratamiento.
+  \item \textbf{b)} Priorizarse para tratamiento inmediato.
+  \item \textbf{a)} Business Impact Analysis.
+  \item \textbf{b)} Un firewall o un sistema MFA.
+  \item \textbf{b)} Capacitaci\'on en concientizaci\'on.
+  \item \textbf{b)} Una norma internacional (SGSI).
+  \item \textbf{a, b, c, d} (Todas son estrategias v\'alidas de tratamiento).
+  \item \textbf{Falso.} Es un proceso continuo y c\'iclico que debe revisarse peri\'odicamente.
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 5}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Gesti\'on de Riesgos & Proceso de identificar, analizar, evaluar y tratar riesgos. \\
+Matriz P$\times$I & Herramienta visual para cruzar Probabilidad e Impacto. \\
+Mapa de Calor & Representaci\'on gr\'afica de la matriz con colores de urgencia. \\
+BIA & An\'alisis de Impacto al Negocio (cu\'anto cuesta que algo se detenga). \\
+Mitigar & Aplicar controles para reducir la probabilidad o el impacto. \\
+Transferir & Traspasar el impacto financiero (ej. seguros, tercerizaci\'on). \\
+Aceptar & Asumir el riesgo porque el control es m\'as caro que el da\~no. \\
+Evitar & Eliminar la actividad que genera el riesgo. \\
+ISO/IEC 27001 & Norma internacional para Sistemas de Gesti\'on de Seguridad (SGSI). \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Anot\'a aqu\'i dudas sobre la matriz, ideas de controles para tu TP Integrador o conceptos para el Parcial 1.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

@@ -1,4 +1,4 @@
-name: Compilar TODOS los LaTeX y subir a Release
+name: Compilar cuadernillos en carpetas y subir a Release
 
 on:
   release:
@@ -12,16 +12,24 @@ jobs:
       - name: Configurar repositorio Git
         uses: actions/checkout@v4
 
-      # 2. Buscar y compilar CADA archivo .tex que encuentre en el proyecto
+      # 2. Buscar y compilar CADA archivo .tex dentro de cualquier subcarpeta
       - name: Compilar todos los documentos LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          # Al usar la expresión asterisco, procesará cada archivo independiente
-          root_file: |
-            *.tex
+          # El doble asterisco (**) busca en todas las carpetas del repositorio
+          root_file: "**/*.tex"
+          glob_root_file: true
+          # Obliga al compilador a pararse dentro de cada carpeta antes de compilar
+          # Esto es crucial para que encuentre las imágenes o archivos locales de cada tema
+          work_in_root_file_dir: true
 
-      # 3. Subir de forma masiva todos los PDFs generados a la Release
-      - name: Adjuntar PDFs a la Release
+      # 3. Mover todos los PDFs generados a la raíz para facilitar la subida masiva
+      - name: Organizar archivos PDF
+        run: |
+          find . -name "*.pdf" -exec mv {} . \;
+
+      # 4. Adjuntar de manera masiva todos los PDFs a la lista de la Release
+      - name: Adjuntar cuadernillos a la Release
         uses: softprops/action-gh-release@v2
         with:
           files: |

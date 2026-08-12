@@ -2,7 +2,7 @@
 %  CUADERNILLO DE ESTUDIO — CLASE 3
 %  Seguridad de la Información y de Sistemas
 %  Lic. en Gestión de Negocios Digitales — UCA
-%  Compilar con: pdflatex (dos pasadas)
+%  Compilar con: pdflatex (dos pasadas para el índice)
 % ============================================================
 
 \documentclass[12pt,a4paper]{article}
@@ -12,7 +12,8 @@
 \usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=2.2cm]{geometry}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{booktabs}
@@ -101,7 +102,7 @@
 % ---------- Enlaces ----------
 \hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
 
-% ---------- Checkboxes ----------
+% ---------- Checkbox ----------
 \newcommand{\checkboxVacio}{$\square$\;}
 
 % ============================================================
@@ -132,21 +133,22 @@
 
 \vfill
 
-\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.85\textwidth]
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
   \centering
-  {\bfseries Datos del/la estudiante}\\[8pt]
-  \begin{tabular}{p{5cm}l p{5cm}l}
-    Nombre y apellido: & \underline{\hspace{4.8cm}} &
-    Grupo N.\textdegree: & \underline{\hspace{4.8cm}} \\[10pt]
-    Correo: & \underline{\hspace{4.8cm}} &
-    Fecha: & \underline{\hspace{4.8cm}} \\
-  \end{tabular}
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Correo: \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
 \end{tcolorbox}
 
 \vspace{1cm}
 {\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
 \end{titlepage}
 
+% ============================================================
+%  ÍNDICE
+% ============================================================
 \tableofcontents
 \newpage
 
@@ -161,7 +163,7 @@ En la clase anterior definimos qu\'e es una \textbf{amenaza}: un evento o actor 
 \subsection{Phishing y Spear Phishing}
 \begin{cajaAmenaza}
 El \textbf{Phishing} es el env\'io de comunicaciones masivas (correos, SMS, WhatsApp) que suplantan la identidad de una entidad confiable (un banco, Mercado Pago, Netflix) para robar credenciales o datos financieros.\\[4pt]
-El \textbf{Spear Phishing} es su versi\'on dirigida: el atacante investiga a la v\'ictima en redes sociales (LinkedIn, Instagram) para crear un mensaje hiper-personalizado y mucho m\'as difícil de detectar.
+El \textbf{Spear Phishing} es su versi\'on dirigida: el atacante investiga a la v\'ictima en redes sociales (LinkedIn, Instagram) para crear un mensaje hiper-personalizado y mucho m\'as dif\'icil de detectar.
 \end{cajaAmenaza}
 
 \textbf{Pilar CID m\'as afectado:} Confidencialidad (robo de credenciales).
@@ -175,17 +177,25 @@ Un software malicioso que \textbf{cifra los archivos} del servidor o las bases d
 \textbf{Pilar CID m\'as afectado:} Disponibilidad (el negocio se detiene) e Integridad/Confidencialidad (si hay fuga de datos).
 
 % --- 1.3 Ingeniería Social ---
-\subsection{Ingeniería Social}
+\subsection{Ingenier\'ia Social}
 \begin{cajaAmenaza}
 El arte de manipular a las personas para que revelen informaci\'on confidencial o realicen acciones que comprometan la seguridad. No ataca a la m\'aquina, \textbf{ataca al eslab\'on m\'as d\'ebil: el humano}.\\[4pt]
-\emph{Ejemplo:} Llamar por tel\'efono hac\'i\'endose pasar por ``Soporte T\'ecnico de AWS'' y pedirle a un empleado junior que le dicte el c\'odigo de autenticaci\'on de dos factores (2FA).
+\emph{Ejemplo:} Llamar por tel\'efono haci\'endose pasar por ``Soporte T\'ecnico de AWS'' y pedirle a un empleado junior que le dicte el c\'odigo de autenticaci\'on de dos factores (2FA).
 \end{cajaAmenaza}
 
-% --- 1.4 Caso de Estudio ---
-\begin{cajaCaso}[title={Caso: La caída de ``FintechYa''}]
-\textbf{Contexto:} Una fintech argentina de 20 empleados sufre un ataque de \emph{Spear Phishing}. El atacante envía un correo al Gerente de RR.HH. con un PDF adjunto llamado ``Recibos\_Sueldo\_Actualizados.pdf.exe''.\\[4pt]
+% --- 1.4 Fraude / BEC ---
+\subsection{Fraude y Business Email Compromise (BEC)}
+\begin{cajaAmenaza}
+El atacante se hace pasar por un directivo, proveedor o cliente leg\'itimo para inducir una transferencia de dinero o una acci\'on fraudulenta. En el caso BEC, se compromete el correo corporativo de un ejecutivo para enviar instrucciones falsas al \'area de finanzas.
+\end{cajaAmenaza}
+
+\textbf{Pilar CID m\'as afectado:} Confidencialidad e Integridad.
+
+% --- 1.5 Caso de Estudio ---
+\begin{cajaCaso}[title={Caso: La ca\'ida de ``FintechYa''}]
+\textbf{Contexto:} Una fintech argentina de 20 empleados sufre un ataque de \emph{Spear Phishing}. El atacante env\'ia un correo al Gerente de RR.HH. con un PDF adjunto llamado ``Recibos\_Sueldo\_Actualizados.pdf.exe''.\\[4pt]
 \textbf{El error:} Windows ocultaba la extensi\'on real ``.exe'' y el gerente hizo doble clic.\\[4pt]
-\textbf{El impacto:} Se instal\'o un \emph{Ransomware}. La base de datos de clientes qued\'o cifrada. La empresa estuvo 5 días sin poder procesar transacciones.\\[4pt]
+\textbf{El impacto:} Se instal\'o un \emph{Ransomware}. La base de datos de clientes qued\'o cifrada. La empresa estuvo 5 d\'ias sin poder procesar transacciones.\\[4pt]
 \textbf{Consecuencias:}
 \begin{itemize}[leftmargin=1.5em]
     \item \textbf{Econ\'omico:} P\'erdida de u\$s 50.000 en ingresos no percibidos.
@@ -235,7 +245,7 @@ El cerebro humano no puede recordar 50 contrase\~nas distintas, complejas y \'un
 
 En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'oviles/notebooks si el aula lo permite). En cada estaci\'on deben completar el siguiente registro.
 
-\begin{cajaActividad}[title={Estaci\'on 1: Radiografía de Brechas (HIBP)}]
+\begin{cajaActividad}[title={Estaci\'on 1: Radiograf\'ia de Brechas (HIBP)}]
 1. Ingresen a \texttt{haveibeenpwned.com}.\\
 2. Busquen un correo electr\'onico antiguo o secundario (por privacidad, eviten usar su correo institucional principal en la pantalla compartida).\\
 3. Respondan:
@@ -244,11 +254,11 @@ En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'ovile
 \renewcommand{\arraystretch}{1.5}
 \begin{tabularx}{\textwidth}{|X|}
 \hline
-\textbf{\textquestion En cu\'antas brechas de datos (``pwned'') apareci\'o el correo?} \\[1.5cm]
+\textbf{¿En cu\'antas brechas de datos (``pwned'') apareci\'o el correo?} \\[1.5cm]
 \hline
 \textbf{Mencionen una de las empresas filtradas y qu\'e tipo de datos se robaron (ej. contrase\~nas, tel\'efonos, direcciones).} \\[2.5cm]
 \hline
-\textbf{Reflexi\'on de negocio: Si un empleado de su empresa usa ese mismo correo y contrase\~na para acceder al panel de administraci\'on del e-commerce, \textquestion qu\'e amenaza se materializa?} \\[2.5cm]
+\textbf{Reflexi\'on de negocio: Si un empleado de su empresa usa ese mismo correo y contrase\~na para acceder al panel de administraci\'on del e-commerce, ¿qu\'e amenaza se materializa?} \\[2.5cm]
 \hline
 \end{tabularx}
 \end{cajaActividad}
@@ -267,11 +277,11 @@ En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'ovile
 \renewcommand{\arraystretch}{1.5}
 \begin{tabularx}{\textwidth}{|X|}
 \hline
-\textbf{\textquestion Cu\'antos motores de seguridad marcaron la URL como maliciosa o phishing?} \\[1.5cm]
+\textbf{¿Cu\'antos motores de seguridad marcaron la URL como maliciosa o phishing?} \\[1.5cm]
 \hline
-\textbf{\textquestion Qu\'e categorías o etiquetas le asignaron los antivirus (ej. Phishing, Malware, Suspicious)?} \\[2cm]
+\textbf{¿Qu\'e categor\'ias o etiquetas le asignaron los antivirus (ej. Phishing, Malware, Suspicious)?} \\[2cm]
 \hline
-\textbf{Reflexi\'on de negocio: \textquestion Por qu\'e es \'util integrar una API como la de VirusTotal en el sistema de atenci\'on al cliente de una fintech cuando los usuarios reportan enlaces sospechosos?} \\[2.5cm]
+\textbf{Reflexi\'on de negocio: ¿Por qu\'e es \'util integrar una API como la de VirusTotal en el sistema de atenci\'on al cliente de una fintech cuando los usuarios reportan enlaces sospechosos?} \\[2.5cm]
 \hline
 \end{tabularx}
 \end{cajaActividad}
@@ -280,7 +290,7 @@ En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'ovile
 
 \begin{cajaActividad}[title={Estaci\'on 3: B\'oveda de Credenciales (Gestor)}]
 1. Abran un generador de contrase\~nas (puede ser el de \texttt{bitwarden.com/password-generator/} o uno local).\\
-2. Config\'urenlo para generar una clave de: \textbf{16 caracteres, con may\'usculas, min\'usculas, n\'umeros y símbolos}.\\
+2. Config\'urenlo para generar una clave de: \textbf{16 caracteres, con may\'usculas, min\'usculas, n\'umeros y s\'imbolos}.\\
 3. Respondan:
 \vspace{4pt}
 
@@ -289,9 +299,9 @@ En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'ovile
 \hline
 \textbf{Copien la contrase\~na generada (o una parte de ella):} \\[1.5cm]
 \hline
-\textbf{\textquestion Cu\'anto tiempo estiman que tardar\'ia un ataque de fuerza bruta en adivinar esta clave comparado con la clave ``Empresa123''?} \\[2cm]
+\textbf{¿Cu\'anto tiempo estiman que tardar\'ia un ataque de fuerza bruta en adivinar esta clave comparado con la clave ``Empresa123''?} \\[2cm]
 \hline
-\textbf{Reflexi\'on de negocio: \textquestion Qu\'e pol\'itica de seguridad implantar\'ian en su startup respecto al uso de gestores de contrase\~nas para el equipo?} \\[2.5cm]
+\textbf{Reflexi\'on de negocio: ¿Qu\'e pol\'itica de seguridad implantar\'ian en su startup respecto al uso de gestores de contrase\~nas para el equipo?} \\[2.5cm]
 \hline
 \end{tabularx}
 \end{cajaActividad}
@@ -304,7 +314,7 @@ En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'ovile
 
 A partir de hoy, trabajar\'an en grupos de 4 a 5 personas. Este grupo los acompa\~nar\'a hasta el final de la cursada para desarrollar el \textbf{Trabajo Pr\'actico Integrador: ``Programa de Seguridad para mi Negocio Digital''}.
 
-\subsection{\textquestion En qu\'e consiste el TP Integrador?}
+\subsection{¿En qu\'e consiste el TP Integrador?}
 Elegir\'an (o se les asignar\'a) un negocio digital (e-commerce, fintech, app, marketplace) y construir\'an su dossier de seguridad con 6 entregables:
 \begin{enumerate}[leftmargin=2em]
     \item \textbf{Mapa de activos} y an\'alisis CID (Unidad 1).
@@ -350,12 +360,13 @@ Completen los datos de su equipo y la idea de negocio que intentar\'an desarroll
 \renewcommand{\arraystretch}{1.4}
 \begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
 \toprule
-\textbf{T\'ermino} & \textbf{Definici\'on en una línea} \\
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
 \midrule
 Phishing & Suplantaci\'on de identidad para robar credenciales. \\
 Spear Phishing & Phishing dirigido e hiper-personalizado. \\
 Ransomware & Malware que secuestra datos cifr\'andolos y pide rescate. \\
-Ingeniería Social & Manipulaci\'on psicol\'ogica del factor humano. \\
+Ingenier\'ia Social & Manipulaci\'on psicol\'ogica del factor humano. \\
+BEC (Business Email Compromise) & Fraude mediante suplantaci\'on de correo corporativo. \\
 Credential Stuffing & Ataque automatizado usando contrase\~nas filtradas en otros sitios. \\
 Breach (Brecha) & Incidente donde la informaci\'on confidencial es expuesta. \\
 Sandbox & Entorno aislado para ejecutar archivos sospechosos sin riesgo. \\
@@ -368,7 +379,7 @@ Sandbox & Entorno aislado para ejecutar archivos sospechosos sin riesgo. \\
 \section{Espacio para notas y hallazgos}
 
 \begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=6cm]
-\textcolor{gray}{\itshape Anot\'a aquí los hallazgos m\'as interesantes de las herramientas, ideas para tu TP Integrador o dudas para la pr\'oxima clase sobre gesti\'on de riesgos.}
+\textcolor{gray}{\itshape Anot\'a aqu\'i los hallazgos m\'as interesantes de las herramientas, ideas para tu TP Integrador o dudas para la pr\'oxima clase sobre criptograf\'ia.}
 \end{tcolorbox}
 
 \vfill
