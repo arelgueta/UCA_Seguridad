@@ -4,7 +4,6 @@ on:
   release:
     types: [created]
 
-# ESTO SOLUCIONA EL ERROR: Le da permiso explícito al servidor para escribir la Release
 permissions:
   contents: write
 
@@ -12,11 +11,9 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
-      # 1. Descargar el código del repositorio
       - name: Configurar repositorio Git
         uses: actions/checkout@v4
 
-      # 2. Buscar y compilar CADA archivo .tex dentro de las carpetas C2, C3, etc.
       - name: Compilar todos los documentos LaTeX
         uses: xu-cheng/latex-action@v3
         with:
@@ -24,14 +21,13 @@ jobs:
           glob_root_file: true
           work_in_root_file_dir: true
 
-      # 3. Mover todos los PDFs generados a la raíz para que GitHub los encuentre rápido
       - name: Organizar archivos PDF
         run: |
           find . -name "*.pdf" -exec mv {} . \;
 
-      # 4. Adjuntar de manera masiva todos los PDFs a la lista de la Release
-      - name: Adjuntar cuadernillos a la Release
-        uses: softprops/action-gh-release@v2
+      # CAMBIO AQUÍ: Usamos el sistema nativo de artefactos de GitHub
+      - name: Guardar PDFs como Artefacto de descarga
+        uses: actions/upload-artifact@v4
         with:
-          files: |
-            *.pdf
+          name: Cuadernillos-PDF
+          path: "*.pdf"
