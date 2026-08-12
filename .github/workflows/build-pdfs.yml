@@ -1,36 +1,23 @@
-name: Build PDFs and Upload to Release
+name: Build and Upload PDFs to Release
 
 on:
   push:
     branches:
       - main
     paths:
-      - '**/*.tex'
-      - '**/*.png'
-      - '**/*.jpg'
-      - '**/*.jpeg'
-      - '.github/workflows/build-pdfs.yml'
+      - "**/*.tex"
+      - "**/*.pdf"
+      - ".github/workflows/build-pdfs.yml"
   workflow_dispatch:
 
 jobs:
-  build-latex:
-    name: Compilar Cuadernillos LaTeX
+  upload-pdfs:
+    name: Subir PDFs a la Release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repositorio
         uses: actions/checkout@v4
-
-      - name: Compilar todos los cuadernillos LaTeX
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: "**/*.tex"
-          glob_root_file: true
-          work_in_root_file_dir: true
-
-      - name: Organizar archivos PDF
-        run: |
-          find . -name "*.pdf" -exec mv {} . \;
 
       - name: Obtener información de la última Release
         id: get_release
@@ -43,37 +30,39 @@ jobs:
               per_page: 1
             });
             if (releases.length === 0) {
-              core.setFailed('No hay Releases en este repositorio. Crea una Release primero.');
+              core.setFailed('No hay Releases. Crea una Release primero.');
               return;
             }
             const latestRelease = releases[0];
             core.setOutput('upload_url', latestRelease.upload_url);
-            core.setOutput('tag_name', latestRelease.tag_name);
-            core.info(`Release encontrada: ${latestRelease.tag_name}`);
+            core.info(`📦 Release encontrada: ${latestRelease.tag_name}`);
 
       - name: Subir cada PDF como asset individual
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Obtener la URL de subida de la Release
+          # Obtener la URL de subida
           UPLOAD_URL="${{ steps.get_release.outputs.upload_url }}"
-          
-          # Recorrer todos los archivos PDF en el directorio actual
-          for pdf in *.pdf; do
-            if [ -f "$pdf" ]; then
-              echo "Subiendo: $pdf"
-              # Usar curl para subir cada PDF como asset individual
-              curl -X POST \
-                -H "Authorization: token $GITHUB_TOKEN" \
-                -H "Content-Type: application/pdf" \
-                --data-binary @"$pdf" \
-                "${UPLOAD_URL%\{?name,label\}}?name=$(basename "$pdf")"
-              echo "✅ $pdf subido correctamente"
+          # Eliminar el sufijo de plantilla para usar la URL base
+          BASE_URL="${UPLOAD_URL%\{?name,label\}}"
+
+          echo "📂 Buscando archivos PDF en el repositorio..."
+          # Buscar todos los PDFs en las carpetas C* (C1, C2, ... C15)
+          find . -type f -path "./C*/*.pdf" | while read -r pdf_path; do
+            # Obtener el nombre del archivo
+            pdf_name=$(basename "$pdf_path")
+            echo "⬆️ Subiendo: $pdf_name desde $pdf_path"
+            
+            # Subir el archivo usando curl
+            curl -X POST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/pdf" \
+              --data-binary @"$pdf_path" \
+              "${BASE_URL}?name=${pdf_name}"
+            
+            if [ $? -eq 0 ]; then
+              echo "✅ $pdf_name subido correctamente."
+            else
+              echo "❌ Error al subir $pdf_name"
             fi
           done
-
-      - name: Subir artefacto de PDFs (opcional, para depuración)
-        uses: actions/upload-artifact@v4
-        with:
-          name: Cuadernillos-PDF
-          path: "*.pdf"
