@@ -1,0 +1,28 @@
+name: Compilar TODOS los LaTeX y subir a Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Descargar el código del repositorio
+      - name: Configurar repositorio Git
+        uses: actions/checkout@v4
+
+      # 2. Buscar y compilar CADA archivo .tex que encuentre en el proyecto
+      - name: Compilar todos los documentos LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          # Al usar la expresión asterisco, procesará cada archivo independiente
+          root_file: |
+            *.tex
+
+      # 3. Subir de forma masiva todos los PDFs generados a la Release
+      - name: Adjuntar PDFs a la Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            *.pdf

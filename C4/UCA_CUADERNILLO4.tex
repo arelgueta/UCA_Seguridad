@@ -1,0 +1,603 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 4
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaConcepto}{
+  colback=azulUCA!8, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaEjemplo}{
+  colback=verdeOK!10, colframe=verdeOK,
+  fonttitle=\bfseries\color{verdeOK}, title=Ejemplo, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaIA}{
+  colback=violetaIA!8, colframe=violetaIA,
+  fonttitle=\bfseries\color{violetaIA},
+  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Importante, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCierre}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Cierre de Unidad, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 4}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 4}\\[12pt]
+{\Large\itshape ``Criptografía aplicada\\[2pt] a negocios digitales''}\\[0.8cm]
+{\large\color{violetaIA}\ding{211}\; Incluye actividad con Inteligencia Artificial}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Cierre de Unidad 1 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.85\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[8pt]
+  \begin{tabular}{p{5cm}l p{5cm}l}
+    Nombre y apellido: & \underline{\hspace{4.8cm}} &
+    Grupo N.\textdegree: & \underline{\hspace{4.8cm}} \\[10pt]
+    Correo: & \underline{\hspace{4.8cm}} &
+    Fecha: & \underline{\hspace{4.8cm}} \\
+  \end{tabular}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{¿Por qu\'e la criptograf\'ia sostiene la confianza digital?}
+
+En las clases anteriores vimos \textbf{qu\'e} proteger (activos, pilares CID) y \textbf{contra qu\'e} (amenazas). Hoy vamos a ver \textbf{c\'omo} se protege la informaci\'on en tr\'ansito y en reposo: la \textbf{criptograf\'ia}.
+
+\begin{cajaConcepto}[title={Conexi\'on con lo anterior}]
+Recordemos la demo de la Clase 1: la página accedi\'o a tu cámara y transmiti\'o la imagen a un panel de administraci\'on. Si esa transmisi\'on hubiera estado \textbf{cifrada}, un tercero no habr\'ia podido interceptarla. Si el panel hubiera requerido \textbf{autenticaci\'on fuerte}, no cualquiera habr\'ia podido verla. La criptograf\'ia es la base t\'ecnica que hace posibles esos controles.
+\end{cajaConcepto}
+
+\begin{cajaNota}
+\textbf{Sin criptograf\'ia no hay e-commerce, no hay fintech, no hay home banking.} Cada vez que un cliente ingresa los datos de su tarjeta en tu tienda online, conf\'ia en que esa informaci\'on viaja protegida. Esa protecci\'on es criptograf\'ia.
+\end{cajaNota}
+
+\vspace{6pt}
+\noindent\textbf{Objetivos de esta clase:}
+\begin{enumerate}[leftmargin=2em]
+  \item Comprender qu\'e es \textbf{cifrado} y \textbf{hashing}, y por qu\'e sostienen la confianza digital (HTTPS, contrase\~nas, firma digital).
+  \item Practicar el uso \textbf{cr\'itico} de IA generativa para explicar conceptos t\'ecnicos.
+\end{enumerate}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — CIFRADO SIMÉTRICO VS ASIMÉTRICO
+% ============================================================
+\section{Cifrado sim\'etrico y asim\'etrico}
+
+\begin{cajaDefinicion}
+\textbf{Cifrar} es transformar informaci\'on legible (texto plano) en una forma ilegible (texto cifrado) usando una \textbf{clave}, de modo que solo quien posee la clave adecuada pueda revertir el proceso.
+\end{cajaDefinicion}
+
+% --- 2.1 Simétrico ---
+\subsection{Cifrado sim\'etrico: una sola clave}
+
+\begin{cajaConcepto}[title={Analog\'ia del candado}]
+Imagin\'a una caja fuerte con \textbf{una sola llave}. El que guarda el documento usa esa llave para cerrar la caja. El que necesita leer el documento debe tener \textbf{la misma llave} para abrirla.\\[4pt]
+\textbf{Problema:} ¿C\'omo le hago llegar la llave al destinatario sin que alguien la copie en el camino?
+\end{cajaConcepto}
+
+\textbf{Caracter\'isticas:}
+\begin{itemize}[leftmargin=2em]
+  \item Una \'unica clave para cifrar y descifrar.
+  \item Muy r\'apido y eficiente para grandes vol\'umenes de datos.
+  \item El desaf\'io es la \textbf{distribuci\'on segura de la clave}.
+\end{itemize}
+
+\begin{cajaEjemplo}
+\textbf{En un negocio digital:} Cifrar la base de datos de clientes en el servidor. El servidor cifra al guardar y descifra al leer, usando la misma clave que est\'a almacenada de forma segura (idealmente en un m\'odulo HSM o un gestor de secretos como AWS Secrets Manager).
+\end{cajaEjemplo}
+
+% --- 2.2 Asimétrico ---
+\subsection{Cifrado asim\'etrico: dos claves (p\'ublica y privada)}
+
+\begin{cajaConcepto}[title={Analog\'ia del buz\'on}]
+Imagin\'a un buz\'on p\'ublico en la calle. \textbf{Cualquiera} puede meter una carta por la ranura (usar la \textbf{clave p\'ublica} para cifrar), pero \textbf{solo el due\~no del buz\'on} tiene la llave para abrirlo y sacar las cartas (usar la \textbf{clave privada} para descifrar).\\[4pt]
+\textbf{Ventaja:} No necesito que el remitente tenga una llave secreta; solo necesita saber que el buz\'on existe.
+\end{cajaConcepto}
+
+\textbf{Caracter\'isticas:}
+\begin{itemize}[leftmargin=2em]
+  \item Par de claves: una \textbf{p\'ublica} (se comparte) y una \textbf{privada} (se guarda en secreto).
+  \item Lo que cifra una, solo lo descifra la otra.
+  \item M\'as lento que el sim\'etrico (se usa para establecer la conexi\'on, no para cifrar todo el tr\'afico).
+\end{itemize}
+
+\begin{cajaEjemplo}
+\textbf{En un negocio digital:} Cuando un cliente se conecta a tu e-commerce por HTTPS, su navegador usa la \textbf{clave p\'ublica} de tu servidor para negociar una clave de sesi\'on sim\'etrica. A partir de ah\'i, toda la comunicaci\'on viaja cifrada con esa clave sim\'etrica (r\'apida y segura).
+\end{cajaEjemplo}
+
+% --- Tabla comparativa ---
+\subsection{Comparaci\'on r\'apida}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3cm}|X|X|}
+\hline
+ & \textbf{Sim\'etrico} & \textbf{Asim\'etrico} \\
+\hline
+Claves & Una sola (compartida) & Par: p\'ublica + privada \\
+\hline
+Velocidad & Muy r\'apido & M\'as lento \\
+\hline
+Uso típico & Cifrar datos en reposo, sesiones HTTPS & Establecer conexi\'on, firma digital \\
+\hline
+Desaf\'io & ¿C\'omo comparto la clave de forma segura? & ¿C\'omo s\'e que la clave p\'ublica es realmente de quien dice ser? (certificados) \\
+\hline
+Ejemplo real & AES-256 (base de datos, discos) & RSA, ECC (HTTPS, firma digital) \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}
+\textbf{En la pr\'actica se usan juntos:} HTTPS usa cifrado asim\'etrico para ``presentarse'' y negociar, y luego sim\'etrico para transmitir los datos r\'apido. Es un sistema h\'ibrido.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — HASHING
+% ============================================================
+\section{Hashing: la huella digital de los datos}
+
+\begin{cajaDefinicion}
+Una \textbf{función hash} toma cualquier dato (una contrase\~na, un archivo, un documento) y produce una cadena de caracteres de longitud fija, \'unica para ese dato. Es \textbf{irreversible}: no se puede ``descifrar'' un hash para obtener el dato original.
+\end{cajaDefinicion}
+
+\subsection{¿Por qu\'e no es lo mismo que cifrar?}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.5cm}|X|X|}
+\hline
+ & \textbf{Cifrado} & \textbf{Hash} \\
+\hline
+¿Reversible? & S\'i (con la clave correcta) & No (irreversible) \\
+\hline
+Prop\'osito & Proteger datos que necesito leer despu\'es & Verificar integridad; almacenar contrase\~nas \\
+\hline
+Salida & Texto cifrado de longitud variable & Cadena de longitud fija (ej. 64 chars en SHA-256) \\
+\hline
+Ejemplo & Cifrar un contrato PDF & Guardar la contrase\~na del usuario en la base de datos \\
+\hline
+\end{tabularx}
+
+\subsection{SHA-256 en la pr\'actica}
+
+\begin{cajaEjemplo}
+Si aplico SHA-256 a la palabra \texttt{Hola}:
+\begin{verbatim}
+Hola -> 7426db3a45...
+\end{verbatim}
+Si aplico SHA-256 a \texttt{hola} (min\'uscula):
+\begin{verbatim}
+hola -> 11254a2fc8...
+\end{verbatim}
+\textbf{Un solo bit de diferencia} produce un hash completamente distinto. Eso lo hace ideal para detectar si un archivo fue modificado.
+\end{cajaEjemplo}
+
+\subsection{¿Por qu\'e nunca almacenar contrase\~nas en texto plano?}
+
+\begin{cajaNota}
+Si tu e-commerce guarda las contrase\~nas de los usuarios en texto plano y un atacante roba la base de datos, \textbf{obtiene todas las contrase\~nas directamente}.\\[4pt]
+Si en cambio guard\'as el \textbf{hash} de cada contrase\~na, el atacante obtiene cadenas ilegibles. Para ``adivinar'' la contraseña original tendr\'ia que probar millones de combinaciones una por una (ataque de fuerza bruta o diccionario).\\[4pt]
+\textbf{Regla:} Las contrase\~nas se almacenan hasheadas (idealmente con \emph{salt} y funciones lentas como bcrypt o Argon2). Nunca en texto plano. Nunca con hash simple como MD5.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — HTTPS, CERTIFICADOS Y FIRMA DIGITAL
+% ============================================================
+\section{HTTPS, certificados y firma digital}
+
+% --- HTTPS ---
+\subsection{HTTPS: el candado del navegador}
+
+\begin{cajaConcepto}[title={¿Qu\'e pasa cuando ves el candadito?}]
+Cuando un cliente entra a \texttt{https://mitienda.com}, ocurre esto:
+\begin{enumerate}[leftmargin=2em]
+  \item El navegador pregunta al servidor: ``¿Qui\'en sos?''.
+  \item El servidor responde con su \textbf{certificado digital} (emitido por una Autoridad Certificante como Let's Encrypt, DigiCert, etc.).
+  \item El navegador verifica que el certificado es v\'alido y confiable.
+  \item Se negocia una \textbf{clave de sesi\'on sim\'etrica} usando criptograf\'ia asim\'etrica.
+  \item Toda la comunicaci\'on posterior viaja \textbf{cifrada} con esa clave.
+\end{enumerate}
+\textbf{Resultado:} Nadie en el medio (ni en el WiFi del café) puede leer los datos de la tarjeta del cliente.
+\end{cajaConcepto}
+
+\begin{cajaNota}
+\textbf{Para tu negocio digital:} Si tu e-commerce no tiene HTTPS, los navegadores muestran ``No seguro'' en rojo. Los clientes no compran. Google te penaliza en el ranking. Es el m\'inimo indispensable.
+\end{cajaNota}
+
+% --- Firma digital ---
+\subsection{Firma digital: autenticidad + integridad}
+
+\begin{cajaDefinicion}
+La \textbf{firma digital} es el equivalente criptogr\'afico de una firma manuscrita, pero m\'as poderosa: garantiza \textbf{autenticidad} (qui\'en firm\'o) e \textbf{integridad} (que el documento no fue modificado despu\'es de firmarse).
+\end{cajaDefinicion}
+
+\textbf{¿C\'omo funciona (conceptualmente)?}
+\begin{enumerate}[leftmargin=2em]
+  \item Se calcula el \textbf{hash} del documento.
+  \item Se cifra ese hash con la \textbf{clave privada} del firmante → eso es la firma.
+  \item El receptor calcula el hash del documento recibido y lo compara con el hash descifrado (usando la \textbf{clave p\'ublica} del firmante).
+  \item Si coinciden → el documento es aut\'entico e \'integro.
+\end{enumerate}
+
+\begin{cajaEjemplo}
+\textbf{En fintech:} Un contrato de pr\'estamo digital se firma electr\'onicamente. Si alguien modifica una coma del PDF despu\'es de la firma, la verificaci\'on falla y se detecta la alteraci\'on.
+\end{cajaEjemplo}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — CASOS DE USO EN NEGOCIOS DIGITALES
+% ============================================================
+\section{Casos de uso: ¿d\'onde vive la criptograf\'ia en tu negocio?}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.5cm}|X|>{\centering\arraybackslash}p{2.8cm}|}
+\hline
+\textbf{Escenario} & \textbf{Criptografía aplicada} & \textbf{Pilar CID} \\
+\hline
+Cliente paga con tarjeta en un e-commerce & HTTPS/TLS cifra la conexi\'on; la pasarela de pago tokeniza el n\'umero de tarjeta & Confidencialidad \\
+\hline
+Almacenamiento de contrase\~nas de usuarios & Hash con bcrypt/Argon2 + salt \'unico por usuario & Confidencialidad \\
+\hline
+Factura electr\'onica o contrato digital & Firma digital con clave privada del emisor & Integridad + Autenticidad \\
+\hline
+Backup de la base de datos & Cifrado sim\'etrico (AES-256) del archivo de backup & Confidencialidad \\
+\hline
+Actualizaci\'on de software al cliente & Hash SHA-256 del instalador para verificar que no fue adulterado & Integridad \\
+\hline
+App de mensajer\'ia (WhatsApp, Signal) & Cifrado de extremo a extremo (E2EE): solo emisor y receptor pueden leer & Confidencialidad \\
+\hline
+Login con 2FA & C\'odigo TOTP generado con algoritmo HMAC (basado en hash) & Confidencialidad + Disponibilidad \\
+\hline
+\end{tabularx}
+
+\begin{cajaConcepto}[title={Pregunta para reflexionar}]
+Si tu negocio digital no implementa ninguna de estas medidas, ¿qu\'e pilares CID est\'as dejando desprotegidos? ¿Qu\'e impacto tendr\'ia una brecha?
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — ACTIVIDAD PRÁCTICA: TALLER DE HASHING
+% ============================================================
+\section{Actividad pr\'actica: Taller de Hashing}
+
+\begin{cajaActividad}[title={Generar y analizar hashes SHA-256}]
+
+\textbf{Paso 1:} Ingresen a una herramienta online de hashing, por ejemplo:\\
+\texttt{https://passwordsgenerator.net/sha256-hash-generator/}\\
+(o busquen ``SHA-256 online generator'' en el navegador)
+
+\vspace{6pt}
+\textbf{Paso 2:} Generen el hash de las siguientes tres contrase\~nas y completen la tabla:
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{4cm}|X|}
+\hline
+\textbf{Contrase\~na} & \textbf{Hash SHA-256 resultante} \\
+\hline
+\texttt{123456} & \\[1.5cm]
+\hline
+\texttt{MiEmpresa2024} & \\[1.5cm]
+\hline
+\texttt{Xk9\#mL2\$pQ7@vR} & \\[1.5cm]
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\textbf{Paso 3:} Respondan en grupo:
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{¿Qu\'e observan sobre la longitud de los tres hashes? ¿Son todos iguales en largo? ¿Por qu\'e?} \\[2cm]
+\hline
+\textbf{Si cambio una sola letra de ``MiEmpresa2024'' a ``MiEmpresa2025'', ¿el hash se parece al anterior o es totalmente diferente? ¿Por qu\'e importa esto?} \\[2cm]
+\hline
+\textbf{¿Pueden ``revertir'' el hash para obtener la contrase\~na original? ¿Qu\'e implica esto para el almacenamiento seguro?} \\[2cm]
+\hline
+\textbf{¿Por qu\'e la contraseña ``123456'' sigue siendo vulnerable aunque la guarde hasheada?} \newline
+\footnotesize{(Pista: piensen en ataques de diccionario y rainbow tables)} \\[2cm]
+\hline
+\end{tabularx}
+
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — ACTIVIDAD CON IA
+% ============================================================
+\section{Actividad con IA: Explicar, auditar y verificar}
+
+\begin{cajaIA}
+
+\textbf{Objetivo:} Usar una IA generativa como asistente de estudio y luego \textbf{auditar cr\'iticamente} su respuesta. La IA no reemplaza el criterio; lo complementa.
+
+\vspace{8pt}
+\textbf{Consigna grupal:}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Elijan una IA generativa (ChatGPT, Claude, Gemini, la que prefieran).
+  \item P\'idanle exactamente este prompt (o una versi\'on propia):
+
+  \begin{tcolorbox}[colback=white, colframe=violetaIA!50, arc=2mm]
+  \small\textit{``Explic\'a en lenguaje simple, como si le hablaras a un estudiante de negocios digitales sin conocimientos t\'ecnicos previos, c\'omo funciona el cifrado de extremo a extremo en una app de mensajería como WhatsApp. Despu\'es, gener\'a un mini-glosario de 8 t\'erminos criptogr\'aficos clave con definiciones de una línea cada una.''}
+  \end{tcolorbox}
+
+  \item \textbf{Copien} la respuesta completa de la IA en el espacio de abajo (o impr\'imanla).
+
+  \item \textbf{Auditen} la respuesta contrast\'andola con lo que vieron en clase y con una fuente confiable (material de c\'atedra, ISO/IEC 27000, o una b\'usqueda en sitios como EFF, Cloudflare Learning, etc.).
+
+  \item \textbf{Marquen} con una \ding{51} lo que es correcto, una \ding{55} lo que es impreciso o incorrecto, y una \ding{43} lo que est\'a excesivamente simplificado.
+
+  \item Redacten un \textbf{informe de verificaci\'on de una p\'agina} que incluya:
+  \begin{itemize}[leftmargin=1.5em]
+    \item ¿Qu\'e afirmaciones de la IA eran correctas?
+    \item ¿Qu\'e afirmaciones eran imprecisas o incorrectas?
+    \item ¿Qu\'e simplific\'o de más y perdi\'o matiz importante?
+    \item ¿Qu\'e corregirían o agregarían?
+  \end{itemize}
+\end{enumerate}
+
+\end{cajaIA}
+
+\vspace{10pt}
+
+\begin{cajaActividad}[title={Espacio para pegar la respuesta de la IA y auditarla}]
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Pegar aquí la respuesta de la IA (o resumen):} \\[8cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Hallazgos de la auditoría (¿qu\'e es correcto? ¿qu\'e es impreciso? ¿qu\'e falta?):} \\[6cm]
+\hline
+\end{tabularx}
+
+\end{cajaActividad}
+
+\begin{cajaNota}[title={Reglas del curso para el uso de IA}]
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Transparencia:} declarar qu\'e herramienta usaron, para qu\'e y con qu\'e prompt.
+  \item \textbf{Verificaci\'on obligatoria:} ninguna salida de IA se entrega ``tal cual''.
+  \item \textbf{Responsabilidad:} el grupo es responsable del resultado final, use o no IA.
+\end{enumerate}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — GLOSARIO CRIPTOGRÁFICO
+% ============================================================
+\section{Glosario criptogr\'afico mínimo}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una línea} \\
+\midrule
+Texto plano & Informaci\'on legible antes de ser cifrada. \\
+Texto cifrado & Informaci\'on ilegible resultado del cifrado. \\
+Clave sim\'etrica & \'Unica clave compartida para cifrar y descifrar. \\
+Clave p\'ublica & Parte del par asim\'etrico que se comparte libremente. \\
+Clave privada & Parte del par asim\'etrico que se guarda en secreto. \\
+Hash & Funci\'on irreversible que produce una cadena fija desde cualquier dato. \\
+SHA-256 & Algoritmo hash que produce una cadena de 256 bits (64 caracteres hex). \\
+Sal (salt) & Valor aleatorio agregado antes de hashear para evitar ataques de diccionario. \\
+HTTPS / TLS & Protocolo que cifra la comunicaci\'on entre navegador y servidor. \\
+Certificado digital & Documento que vincula una clave p\'ublica con una identidad verificada. \\
+Firma digital & Hash cifrado con clave privada; garantiza autor\'ia e integridad. \\
+Cifrado E2EE & Cifrado de extremo a extremo: solo emisor y receptor pueden leer. \\
+Rainbow table & Tabla precomputada de hashes usada para revertir hashes d\'ebiles. \\
+bcrypt / Argon2 & Funciones hash lentas diseñadas para almacenar contrase\~nas. \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 9 — CIERRE DE UNIDAD 1
+% ============================================================
+\section{Cierre de Unidad 1: ¿Qu\'e nos llevamos?}
+
+Con esta clase \textbf{cerramos formalmente la Unidad 1}. Hagamos un repaso de todo lo construido:
+
+\begin{cajaCierre}[title={Mapa de la Unidad 1}]
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.2cm and 2cm,
+  box/.style={rectangle, draw=azulUCA, fill=azulUCA!10,
+              text width=3.2cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  boxsmall/.style={rectangle, draw=azulCielo, fill=azulCielo!10,
+              text width=2.8cm, align=center, rounded corners=3pt,
+              font=\scriptsize},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, azulUCA}
+]
+  % Fila 1: Fundamentos
+  \node[box] (cid) {PILARES CID\\Confidencialidad\\Integridad\\Disponibilidad};
+  \node[box, right=2.5cm of cid] (conc) {CONCEPTOS\\Activo, Amenaza,\\Vulnerabilidad,\\Impacto, Riesgo};
+  \node[box, right=2.5cm of conc] (amen) {AMENAZAS\\Phishing, Ransomware,\\Ing. Social, Fraude};
+
+  % Fila 2: Herramientas y cripto
+  \node[boxsmall, below=1.5cm of cid] (herr) {HERRAMIENTAS\\HIBP, VirusTotal,\\Gestores de contrase\~nas};
+  \node[boxsmall, below=1.5cm of conc] (cripto) {CRIPTOGRAFÍA\\Cifrado, Hash,\\HTTPS, Firma digital};
+  \node[boxsmall, below=1.5cm of amen] (caso) {CASOS\\E-commerce,\\Fintech, Apps};
+
+  % Flechas
+  \draw[arr] (cid.south) -- (herr.north);
+  \draw[arr] (conc.south) -- (cripto.north);
+  \draw[arr] (amen.south) -- (caso.north);
+  \draw[arr] (cid.east) -- (conc.west);
+  \draw[arr] (conc.east) -- (amen.west);
+  \draw[arr, dashed] (herr.east) -- (cripto.west);
+  \draw[arr, dashed] (cripto.east) -- (caso.west);
+\end{tikzpicture}
+\end{center}
+
+\vspace{8pt}
+\textbf{En la Unidad 1 aprendimos a:}
+\begin{itemize}[leftmargin=2em]
+  \item Identificar activos y clasificar riesgos usando los pilares CID.
+  \item Reconocer las amenazas m\'as comunes para negocios digitales.
+  \item Usar herramientas gratuitas de verificaci\'on y protecci\'on.
+  \item Comprender c\'omo la criptograf\'ia habilita la confianza digital.
+  \item Usar IA generativa de forma \textbf{cr\'itica y verificada}.
+\end{itemize}
+
+\vspace{6pt}
+\textbf{Lo que viene (Unidad 2):} Gesti\'on de riesgos formal. Vamos a pasar de ``entender las amenazas'' a \textbf{medirlas, priorizarlas y tratarlas} con metodología (matriz P$\times$I, BIA, controles, ISO 27001).
+\end{cajaCierre}
+
+\newpage
+% ============================================================
+%  SECCIÓN 10 — NOTAS
+% ============================================================
+\section{Espacio para notas y reflexiones}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Us\'a este espacio para anotar dudas, ideas para tu TP Integrador, o conexiones entre la criptograf\'ia y el negocio digital que eligi\'o tu grupo.}
+\end{tcolorbox}
+
+\vspace{12pt}
+
+\begin{cajaConcepto}[title={Puente hacia la Clase 5}]
+La pr\'oxima clase arrancamos la \textbf{Unidad 2: Gesti\'on de Riesgos}.\\[4pt]
+Pregunta disparadora para pensar antes de la pr\'oxima clase:\\
+\emph{Si tuvieras que proteger tu negocio digital con presupuesto para solo 3 controles de seguridad, ¿cu\'ales elegir\'ias y por qu\'e?}
+\end{cajaConcepto}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

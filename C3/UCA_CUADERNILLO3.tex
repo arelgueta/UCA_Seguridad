@@ -1,0 +1,382 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 3
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaAmenaza}{
+  colback=naranjaAmenaza!10, colframe=naranjaAmenaza,
+  fonttitle=\bfseries\color{naranjaAmenaza},
+  title={\ding{55}\; Amenaza}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaHerramienta}{
+  colback=verdeOK!10, colframe=verdeOK,
+  fonttitle=\bfseries\color{verdeOK},
+  title={\ding{45}\; Herramienta}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCaso}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Caso de Estudio, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Nota Importante, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 3}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkboxes ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 3}\\[12pt]
+{\Large\itshape ``Panorama de amenazas y\\[2pt] primeras herramientas de ciberseguridad''}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Unidad 1 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.85\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[8pt]
+  \begin{tabular}{p{5cm}l p{5cm}l}
+    Nombre y apellido: & \underline{\hspace{4.8cm}} &
+    Grupo N.\textdegree: & \underline{\hspace{4.8cm}} \\[10pt]
+    Correo: & \underline{\hspace{4.8cm}} &
+    Fecha: & \underline{\hspace{4.8cm}} \\
+  \end{tabular}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — PANORAMA DE AMENAZAS
+% ============================================================
+\section{Panorama de amenazas para negocios digitales}
+
+En la clase anterior definimos qu\'e es una \textbf{amenaza}: un evento o actor potencial que puede causar da\~no a un activo. Hoy vamos a conocer a los ``villanos'' m\'as comunes que enfrentan los e-commerce, fintech y startups en la actualidad.
+
+% --- 1.1 Phishing ---
+\subsection{Phishing y Spear Phishing}
+\begin{cajaAmenaza}
+El \textbf{Phishing} es el env\'io de comunicaciones masivas (correos, SMS, WhatsApp) que suplantan la identidad de una entidad confiable (un banco, Mercado Pago, Netflix) para robar credenciales o datos financieros.\\[4pt]
+El \textbf{Spear Phishing} es su versi\'on dirigida: el atacante investiga a la v\'ictima en redes sociales (LinkedIn, Instagram) para crear un mensaje hiper-personalizado y mucho m\'as difícil de detectar.
+\end{cajaAmenaza}
+
+\textbf{Pilar CID m\'as afectado:} Confidencialidad (robo de credenciales).
+
+% --- 1.2 Ransomware ---
+\subsection{Ransomware}
+\begin{cajaAmenaza}
+Un software malicioso que \textbf{cifra los archivos} del servidor o las bases de datos de la empresa y exige un rescate (generalmente en criptomonedas) para devolver la clave de descifrado. Hoy suele incluir la amenaza de publicar los datos robados si no se paga (doble extorsi\'on).
+\end{cajaAmenaza}
+
+\textbf{Pilar CID m\'as afectado:} Disponibilidad (el negocio se detiene) e Integridad/Confidencialidad (si hay fuga de datos).
+
+% --- 1.3 Ingeniería Social ---
+\subsection{Ingeniería Social}
+\begin{cajaAmenaza}
+El arte de manipular a las personas para que revelen informaci\'on confidencial o realicen acciones que comprometan la seguridad. No ataca a la m\'aquina, \textbf{ataca al eslab\'on m\'as d\'ebil: el humano}.\\[4pt]
+\emph{Ejemplo:} Llamar por tel\'efono hac\'i\'endose pasar por ``Soporte T\'ecnico de AWS'' y pedirle a un empleado junior que le dicte el c\'odigo de autenticaci\'on de dos factores (2FA).
+\end{cajaAmenaza}
+
+% --- 1.4 Caso de Estudio ---
+\begin{cajaCaso}[title={Caso: La caída de ``FintechYa''}]
+\textbf{Contexto:} Una fintech argentina de 20 empleados sufre un ataque de \emph{Spear Phishing}. El atacante envía un correo al Gerente de RR.HH. con un PDF adjunto llamado ``Recibos\_Sueldo\_Actualizados.pdf.exe''.\\[4pt]
+\textbf{El error:} Windows ocultaba la extensi\'on real ``.exe'' y el gerente hizo doble clic.\\[4pt]
+\textbf{El impacto:} Se instal\'o un \emph{Ransomware}. La base de datos de clientes qued\'o cifrada. La empresa estuvo 5 días sin poder procesar transacciones.\\[4pt]
+\textbf{Consecuencias:}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Econ\'omico:} P\'erdida de u\$s 50.000 en ingresos no percibidos.
+    \item \textbf{Reputacional:} Tendencia negativa en redes sociales por falta de respuesta.
+    \item \textbf{Legal:} Denuncia ante la AAIP por no proteger los datos personales.
+\end{itemize}
+\end{cajaCaso}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — HERRAMIENTAS DE CIBERSEGURIDAD
+% ============================================================
+\section{Herramientas gratuitas de verificaci\'on}
+
+La seguridad no es solo teor\'ia; requiere herramientas. Hoy vamos a probar tres recursos gratuitos que todo profesional de negocios digitales debe conocer.
+
+% --- HIBP ---
+\subsection{Have I Been Pwned (HIBP)}
+\begin{cajaHerramienta}
+\textbf{Web:} \texttt{haveibeenpwned.com}\\[4pt]
+Creada por el experto Troy Hunt, esta base de datos recopila miles de millones de cuentas comprometidas en brechas de seguridad p\'ublicas. Te permite ingresar un correo electr\'onico o tel\'efono y saber si tu informaci\'on estuvo expuesta en alguna filtraci\'on hist\'orica (ej. LinkedIn, Adobe, Canva).
+\end{cajaHerramienta}
+
+% --- VirusTotal ---
+\subsection{VirusTotal}
+\begin{cajaHerramienta}
+\textbf{Web:} \texttt{virustotal.com}\\[4pt]
+Servicio propiedad de Google que analiza archivos y URLs sospechosas utilizando \textbf{m\'as de 70 motores de antivirus} simult\'aneamente (Kaspersky, Symantec, Microsoft, etc.) y servicios de sandboxing. Es ideal para verificar un enlace antes de hacer clic o un adjunto antes de abrirlo.
+\end{cajaHerramienta}
+
+% --- Gestores de Contraseñas ---
+\subsection{Gestores de Contrase\~nas}
+\begin{cajaHerramienta}
+\textbf{Ejemplos:} Bitwarden, 1Password, KeePass.\\[4pt]
+El cerebro humano no puede recordar 50 contrase\~nas distintas, complejas y \'unicas. Un gestor genera, almacena y autocompleta contrase\~nas robustas en una b\'oveda cifrada. Solo necesitas recordar \textbf{una} contrase\~na maestra.
+\end{cajaHerramienta}
+
+\begin{cajaNota}
+\textbf{Regla de oro:} Nunca uses la misma contrase\~na para tu correo corporativo/personal y para un servicio de terceros (ej. un foro o un e-commerce). Si el servicio de terceros es hackeado, los atacantes probar\'an esa misma clave en tu correo (t\'ecnica de \emph{Credential Stuffing}).
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — ACTIVIDAD PRÁCTICA (ESTACIONES)
+% ============================================================
+\section{Estaciones Rotativas: Manos a la obra}
+
+En grupos, van a rotar por tres ``estaciones'' (o usar sus dispositivos m\'oviles/notebooks si el aula lo permite). En cada estaci\'on deben completar el siguiente registro.
+
+\begin{cajaActividad}[title={Estaci\'on 1: Radiografía de Brechas (HIBP)}]
+1. Ingresen a \texttt{haveibeenpwned.com}.\\
+2. Busquen un correo electr\'onico antiguo o secundario (por privacidad, eviten usar su correo institucional principal en la pantalla compartida).\\
+3. Respondan:
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{\textquestion En cu\'antas brechas de datos (``pwned'') apareci\'o el correo?} \\[1.5cm]
+\hline
+\textbf{Mencionen una de las empresas filtradas y qu\'e tipo de datos se robaron (ej. contrase\~nas, tel\'efonos, direcciones).} \\[2.5cm]
+\hline
+\textbf{Reflexi\'on de negocio: Si un empleado de su empresa usa ese mismo correo y contrase\~na para acceder al panel de administraci\'on del e-commerce, \textquestion qu\'e amenaza se materializa?} \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\vspace{8pt}
+
+\begin{cajaActividad}[title={Estaci\'on 2: El Esc\'aner (VirusTotal)}]
+1. Ingresen a \texttt{virustotal.com}.\\
+2. Vayan a la pesta\~na ``URL''.\\
+3. Analicen el siguiente enlace de prueba (simulado por la c\'atedra) o uno provisto por el docente:\\
+\texttt{http://testsafebrowsing.appspot.com/apiv4/ANY/https/}\\
+\texttt{malware.testing.google.test/testing/phishing/}\\
+4. Respondan:
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{\textquestion Cu\'antos motores de seguridad marcaron la URL como maliciosa o phishing?} \\[1.5cm]
+\hline
+\textbf{\textquestion Qu\'e categorías o etiquetas le asignaron los antivirus (ej. Phishing, Malware, Suspicious)?} \\[2cm]
+\hline
+\textbf{Reflexi\'on de negocio: \textquestion Por qu\'e es \'util integrar una API como la de VirusTotal en el sistema de atenci\'on al cliente de una fintech cuando los usuarios reportan enlaces sospechosos?} \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\vspace{8pt}
+
+\begin{cajaActividad}[title={Estaci\'on 3: B\'oveda de Credenciales (Gestor)}]
+1. Abran un generador de contrase\~nas (puede ser el de \texttt{bitwarden.com/password-generator/} o uno local).\\
+2. Config\'urenlo para generar una clave de: \textbf{16 caracteres, con may\'usculas, min\'usculas, n\'umeros y símbolos}.\\
+3. Respondan:
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Copien la contrase\~na generada (o una parte de ella):} \\[1.5cm]
+\hline
+\textbf{\textquestion Cu\'anto tiempo estiman que tardar\'ia un ataque de fuerza bruta en adivinar esta clave comparado con la clave ``Empresa123''?} \\[2cm]
+\hline
+\textbf{Reflexi\'on de negocio: \textquestion Qu\'e pol\'itica de seguridad implantar\'ian en su startup respecto al uso de gestores de contrase\~nas para el equipo?} \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — TP INTEGRADOR
+% ============================================================
+\section{Conformaci\'on de Grupos y TP Integrador}
+
+A partir de hoy, trabajar\'an en grupos de 4 a 5 personas. Este grupo los acompa\~nar\'a hasta el final de la cursada para desarrollar el \textbf{Trabajo Pr\'actico Integrador: ``Programa de Seguridad para mi Negocio Digital''}.
+
+\subsection{\textquestion En qu\'e consiste el TP Integrador?}
+Elegir\'an (o se les asignar\'a) un negocio digital (e-commerce, fintech, app, marketplace) y construir\'an su dossier de seguridad con 6 entregables:
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Mapa de activos} y an\'alisis CID (Unidad 1).
+    \item \textbf{Matriz de riesgos} y BIA simplificado (Unidad 2).
+    \item Evaluaci\'on de seguridad en la \textbf{nube}.
+    \item Cumplimiento normativo y \textbf{pol\'itica de privacidad} (Unidad 3).
+    \item \textbf{Pol\'itica de Seguridad Aceptable (PSA)} (Unidad 4).
+    \item \textbf{Plan de respuesta a incidentes} (verificado con IA).
+\end{enumerate}
+Adem\'as, un \textbf{Anexo ``Uso de IA''} documentando qu\'e partes se apoyaron en IA generativa y c\'omo se verific\'o.
+
+\begin{cajaActividad}[title={Registro del Grupo}]
+Completen los datos de su equipo y la idea de negocio que intentar\'an desarrollar (sujeta a aprobaci\'on del docente).
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{4.5cm}|X|}
+\hline
+\textbf{Nombre del Grupo / Empresa:} & \hrulefill \\[6pt]
+\hline
+\textbf{Integrante 1:} & \hrulefill \\[6pt]
+\hline
+\textbf{Integrante 2:} & \hrulefill \\[6pt]
+\hline
+\textbf{Integrante 3:} & \hrulefill \\[6pt]
+\hline
+\textbf{Integrante 4:} & \hrulefill \\[6pt]
+\hline
+\textbf{Integrante 5 (si aplica):} & \hrulefill \\[6pt]
+\hline
+\textbf{Idea de Negocio Digital:} & \\
+\multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth}|}{\vspace{0.3cm} \hrulefill \vspace{0.3cm} \hrulefill \vspace{0.3cm} \hrulefill \vspace{0.3cm}} \\[6pt]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — GLOSARIO Y CIERRE
+% ============================================================
+\section{Glosario de la Clase 3}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una línea} \\
+\midrule
+Phishing & Suplantaci\'on de identidad para robar credenciales. \\
+Spear Phishing & Phishing dirigido e hiper-personalizado. \\
+Ransomware & Malware que secuestra datos cifr\'andolos y pide rescate. \\
+Ingeniería Social & Manipulaci\'on psicol\'ogica del factor humano. \\
+Credential Stuffing & Ataque automatizado usando contrase\~nas filtradas en otros sitios. \\
+Breach (Brecha) & Incidente donde la informaci\'on confidencial es expuesta. \\
+Sandbox & Entorno aislado para ejecutar archivos sospechosos sin riesgo. \\
+2FA / MFA & Autenticaci\'on de dos o m\'ultiples factores (algo que s\'e + algo que tengo). \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=6cm]
+\textcolor{gray}{\itshape Anot\'a aquí los hallazgos m\'as interesantes de las herramientas, ideas para tu TP Integrador o dudas para la pr\'oxima clase sobre gesti\'on de riesgos.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}
