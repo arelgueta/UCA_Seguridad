@@ -1,4 +1,4 @@
-name: Build PDFs
+name: Build PDFs and Upload to Release
 
 on:
   push:
@@ -32,8 +32,18 @@ jobs:
         run: |
           find . -name "*.pdf" -exec mv {} . \;
 
-      - name: Subir artefacto de PDFs
+      - name: Subir artefacto de PDFs (opcional, para depuración)
         uses: actions/upload-artifact@v4
         with:
           name: Cuadernillos-PDF
           path: "*.pdf"
+
+      - name: Subir PDFs a la Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./*.pdf
+          asset_name: Cuadernillos.zip
+          asset_content_type: application/zip
