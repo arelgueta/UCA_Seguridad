@@ -4,9 +4,6 @@ on:
   release:
     types: [created]
 
-permissions:
-  contents: write
-
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -14,6 +11,7 @@ jobs:
       - name: Configurar repositorio Git
         uses: actions/checkout@v4
 
+      # Compila todos los .tex dentro de las carpetas C2, C3, etc.
       - name: Compilar todos los documentos LaTeX
         uses: xu-cheng/latex-action@v3
         with:
@@ -21,11 +19,12 @@ jobs:
           glob_root_file: true
           work_in_root_file_dir: true
 
+      # Mueve los PDFs a la raíz para empaquetarlos
       - name: Organizar archivos PDF
         run: |
           find . -name "*.pdf" -exec mv {} . \;
 
-      # CAMBIO AQUÍ: Usamos el sistema nativo de artefactos de GitHub
+      # Guarda los PDFs de forma nativa sin usar la API de Releases bloqueada
       - name: Guardar PDFs como Artefacto de descarga
         uses: actions/upload-artifact@v4
         with:
