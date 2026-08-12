@@ -1,0 +1,402 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 15
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{doradoFinal}{HTML}{7D6608}
+\definecolor{azulExamen}{HTML}{154360}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefensa}[1][]{
+  colback=doradoFinal!10, colframe=doradoFinal,
+  fonttitle=\bfseries\color{doradoFinal},
+  title={\ding{73}\; Defensa Oral}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaExamen}[1][]{
+  colback=azulExamen!8, colframe=azulExamen,
+  fonttitle=\bfseries\color{azulExamen},
+  title={\ding{115}\; Evaluaci\'on Final}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaActividad}[1][]{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaNota}[1][]{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaCierre}[1][]{
+  colback=verdeOK!10, colframe=verdeOK,
+  fonttitle=\bfseries\color{verdeOK}, title=Cierre del Curso, arc=3mm, breakable, #1
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 15 (Defensa Final)}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ---------- Reducir padding de tablas ----------
+\setlength{\tabcolsep}{5pt}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 15}\\[12pt]
+{\Large\itshape ``Presentaci\'on y defensa del\\[2pt] Trabajo Pr\'actico Integrador''}\\[6pt]
+{\large\color{doradoFinal}\ding{73}\; El d\'ia de la verdad}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Eje:}        & Cierre de curso y Evaluaci\'on Final \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{El gran d\'ia: Defensa del TP Integrador}
+
+Bienvenidos a la \'ultima clase del cuatrimestre. Hoy no hay exposici\'on te\'orica del docente, ni talleres guiados. Hoy los protagonistas son ustedes. 
+
+\begin{cajaExamen}[title={Esta clase reemplaza el examen final}]
+Seg\'un el programa de la materia, la defensa oral de hoy \textbf{reemplaza la instancia tradicional de examen final}.\\[4pt]
+\textbf{Formato:}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{10 minutos} de exposici\'on grupal ininterrumpida.
+    \item \textbf{5 minutos} de preguntas individuales cruzadas por parte del docente (y el evaluador invitado, si lo hay).
+\end{itemize}
+\textbf{Nota:} 1 a 10. Se aprueba con 4.
+\end{cajaExamen}
+
+\begin{cajaNota}[title={El cambio de rol}]
+Durante 14 clases, el docente fue su gu\'ia. Hoy, el docente (y la audiencia) son \textbf{clientes, directivos o auditores}. Ustedes son los consultores senior de ciberseguridad que vienen a presentar el ``Programa de Seguridad'' para el negocio digital que eligieron. V\'endanlo, defi\'endanlo y demuestren que dominan el tablero completo.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — LA RÚBRICA OFICIAL
+% ============================================================
+\section{La R\'ubrica Oficial de Evaluaci\'on}
+
+Esta es la r\'ubrica con la que ser\'an calificados hoy. T\'enganla a la vista mientras preparan su exposici\'on y mientras escuchan a sus compa\~neros.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{1.5cm}|}
+\hline
+\rowcolor{doradoFinal!20}
+\textbf{Dimensi\'on evaluada} & \textbf{Peso} \\
+\hline
+\textbf{1. Comprensi\'on conceptual}\\
+Aplican correctamente los pilares CID, la gesti\'on de riesgos, el marco legal y el gobierno de la seguridad al caso elegido. Demuestran que entienden el ``por qu\'e'' de cada decisi\'on. & \textbf{25\%} \\
+\hline
+\textbf{2. Viabilidad y aplicaci\'on pr\'actica}\\
+Las propuestas (controles, PSA, plan de incidentes) son concretas, realistas y adecuadas al tama\~no y contexto del negocio elegido (no proponen controles de multinacional para una pyme). & \textbf{25\%} \\
+\hline
+\textbf{3. Pensamiento cr\'itico sobre el uso de IA}\\
+El Anexo de IA documenta con honestidad qu\'e se us\'o, y muestra evidencia real de verificaci\'on y correcci\'on humana (no es una copia acr\'itica de la salida de la m\'aquina). & \textbf{20\%} \\
+\hline
+\textbf{4. Trabajo en equipo y proceso}\\
+Evidencia de avances consistentes a lo largo del cuatrimestre y participaci\'on equilibrada de todos los integrantes del grupo. & \textbf{15\%} \\
+\hline
+\textbf{5. Comunicaci\'on y defensa oral}\\
+Claridad expositiva, manejo del tiempo y calidad de las respuestas individuales durante la sesi\'on de preguntas. & \textbf{15\%} \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & \textbf{100\%} \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — GUÍA PARA LA EXPOSICIÓN (10 MIN)
+% ============================================================
+\section{Gu\'ia para los 10 minutos de exposici\'on}
+
+Diez minutos pasan volando. No intenten leer el dossier de 15 p\'aginas; tienen que \textbf{contar la historia} de c\'omo protegieron su negocio.
+
+\begin{cajaDefensa}[title={Estructura sugerida (Cronometrada)}]
+\renewcommand{\arraystretch}{1.4}
+\small
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{doradoFinal}}p{2.2cm}|X|>{\centering\arraybackslash}p{1.2cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Bloque} & \textbf{Qu\'e mostrar / Qu\'e decir} & \textbf{Tiempo} \\
+\hline
+1. El Negocio & Presentar la empresa, su modelo de negocio y sus activos m\'as cr\'iticos. & 1.5 min \\
+\hline
+2. El Riesgo & Mostrar el ``Mapa de Calor'' (Matriz P$\times$I). ¿Cu\'ales son los 2 o 3 riesgos que podr\'ian destruir el negocio? & 2 min \\
+\hline
+3. La Soluci\'on & Los controles priorizados (t\'ecnicos, humanos, legales). Conectar el BIA con la Continuidad. & 2.5 min \\
+\hline
+4. Gobierno y Ley & C\'omo se ordenan internamente (PSA) y c\'omo respetan al usuario (Privacidad / ARCO). & 2 min \\
+\hline
+5. El factor IA & Qu\'e aprendieron al auditar la IA generativa en su Plan de Incidentes. & 1 min \\
+\hline
+6. Cierre & La conclusi\'on ejecutiva: ¿Por qu\'e este negocio ahora es confiable? & 1 min \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & & \textbf{10 min} \\
+\hline
+\end{tabularx}
+\end{cajaDefensa}
+
+\begin{cajaNota}[title={Consejos de oro para la presentaci\'on}]
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Hablen en idioma ``negocio'', no solo en idioma ``t\'ecnico''}: al directivo le importa el impacto econ\'omico y reputacional, no solo el algoritmo de cifrado.
+    \item \textbf{No lean diapositivas}: usen esquemas visuales, matrices de calor, diagramas.
+    \item \textbf{Repartan el tiempo equitativamente}: todos los integrantes deben hablar.
+    \item \textbf{Si se pasan de tiempo, el docente los cortar\'a}: practiquen con cron\'ometro.
+\end{itemize}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — GUÍA PARA LAS PREGUNTAS (5 MIN)
+% ============================================================
+\section{Gu\'ia para los 5 minutos de preguntas individuales}
+
+Terminada la exposici\'on, el docente (y el jurado) har\'a preguntas \textbf{dirigidas a integrantes espec\'ificos}. El objetivo no es ``tomar examen de memoria'', sino verificar que \textbf{todos} participaron y comprenden la l\'ogica detr\'as del trabajo.
+
+\subsection{¿Qu\'e se eval\'ua en esta instancia?}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Agilidad mental:} ¿Pueden justificar una decisi\'on sobre la marcha?
+    \item \textbf{Honestidad intelectual:} Si no saben algo, es mejor decir ``Ese punto lo investig\'o mi compa\~nero, pero mi lectura es...'' o ``No lo contemplamos, pero hoy lo resolver\'ia as\'i...''.
+    \item \textbf{Criterio propio:} Especialmente en las preguntas sobre el uso de IA y el marco legal.
+\end{itemize}
+
+\subsection{Preguntas ``comod\'in'' que pueden aparecer}
+\begin{cajaExamen}[title={Prep\'arense para estas preguntas}]
+\begin{itemize}[leftmargin=2em]
+    \item \emph{``Si ma\~nana tienen un presupuesto de solo \$1.000 para seguridad, ¿en qu\'e lo gastan y por qu\'e?''}
+    \item \emph{``Un cliente ejerce su derecho de supresi\'on (ARCO), pero nos pide que borremos sus facturas de los \'ultimos 5 a\~nos. ¿Qu\'e le responden?''}
+    \item \emph{``En su Anexo de IA, corrigieron una recomendaci\'on de la m\'aquina. ¿Por qu\'e la IA se equivoc\'o en ese contexto?''}
+    \item \emph{``¿Qu\'e pasa si el proveedor de nube donde est\'an alojados sufre un ransomware? ¿Qu\'e dice su BIA al respecto?''}
+    \item \emph{``¿C\'omo convencen al CEO de que firmar la Pol\'itica de Seguridad Aceptable (PSA) no es solo un tr\'amite burocr\'atico?''}
+\end{itemize}
+\end{cajaExamen}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — FICHA DE EVALUACIÓN (DOCENTE / JURADO)
+% ============================================================
+\section{Ficha de Evaluaci\'on (Uso del Docente / Jurado)}
+
+\begin{cajaNota}[title={Para la c\'atedra}]
+Esta ficha puede ser utilizada por el docente o por el evaluador invitado para calificar a cada grupo en tiempo real durante la defensa.
+\end{cajaNota}
+
+\vspace{6pt}
+\noindent\textbf{Grupo / Empresa Evaluada:} \hrulefill\\[6pt]
+\noindent\textbf{Integrantes presentes:} \hrulefill
+
+\vspace{8pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{2.5cm}|}
+\hline
+\rowcolor{azulExamen!15}
+\textbf{Dimensi\'on} & \textbf{Puntaje (0 a 10)} \\
+\hline
+\textbf{1. Comprensi\'on conceptual} (CID, riesgos, ley, gobierno) & \hrulefill \\
+\hline
+\textbf{2. Viabilidad pr\'actica} (realismo para el tama\~no del negocio) & \hrulefill \\
+\hline
+\textbf{3. Pensamiento cr\'itico IA} (Anexo de IA, auditor\'ia humana) & \hrulefill \\
+\hline
+\textbf{4. Trabajo en equipo} (participaci\'on equilibrada, proceso) & \hrulefill \\
+\hline
+\textbf{5. Comunicaci\'on y defensa} (exposici\'on + preguntas individuales) & \hrulefill \\
+\hline
+\rowcolor{grisClaro}
+\textbf{PROMEDIO FINAL (Nota 1-10)} & \textbf{\hrulefill} \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Comentarios / Devoluci\'on cualitativa principal:} \\[4cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — ENCUESTA DE SATISFACCIÓN FINAL
+% ============================================================
+\section{Encuesta de satisfacci\'on final}
+
+El programa de esta materia fue dise\~no en base a una encuesta de expectativas que ustedes respondieron en la Clase 1 (donde pidieron m\'as nube, hacking \'etico, IA y menos examen tradicional). Hoy, al cerrar el c\'irculo, necesitamos su feedback honesto para mejorar la materia para las pr\'oximas cohortes.
+
+\begin{cajaActividad}[title={Reflexi\'on individual y an\'onima}]
+Respondan con sinceridad. El docente leer\'a estas encuestas una vez cargadas las notas finales.
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. Sobre los contenidos: ¿Qu\'e tema de los que pedimos en la encuesta inicial (nube, IA, hacking, cookies) les pareci\'o m\'as \'util para su perfil de negocios digitales?} \\[2.5cm]
+\hline
+\textbf{2. Sobre la metodolog\'ia: Reemplazamos el examen final tradicional por este TP Integrador con defensa oral. ¿Sienten que evalu\'o mejor sus conocimientos? ¿Qu\'e le cambiar\'ian?} \\[3cm]
+\hline
+\textbf{3. Sobre el uso de IA: ¿C\'omo cambi\'o su forma de ver la Inteligencia Artificial al tener que ``auditarla'' en lugar de solo usarla como un buscador glorificado?} \\[3cm]
+\hline
+\textbf{4. El momento ``Aha!'': ¿En qu\'e clase o actividad espec\'ifica hicieron ``clic'' y entendieron por qu\'e la seguridad es un habilitador de negocios y no solo un problema de inform\'aticos?} \\[2.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — CIERRE Y DESPEDIDA
+% ============================================================
+\section{Reflexi\'on Final: De la Clase 1 a hoy}
+
+\begin{cajaCierre}[title={El c\'irculo se cierra}]
+Hagamos un viaje en el tiempo de apenas 15 semanas.\\[6pt]
+En la \textbf{Clase 1}, entraron a un link desde sus celulares. Una p\'agina aparentemente inocua accedi\'o a la c\'amara de sus dispositivos y los expuso en un panel de administraci\'on. En ese momento, la mayor\'ia sinti\'o incomodidad, sorpresa o miedo. Eran \textbf{usuarios vulnerables} en un mundo digital que no terminaban de entender.\\[6pt]
+Hoy, en la \textbf{Clase 15}, ustedes son los que dise\~nan la arquitectura de ese negocio.\\[4pt]
+\ding{51}\; Ustedes saben \textbf{por qu\'e} esa c\'amara se activ\'o (falta de consentimiento, violaci\'on del pilar de Confidencialidad).\\
+\ding{51}\; Ustedes saben \textbf{qu\'e riesgo} corre la empresa que hizo eso (multas de la Ley 25.326, p\'erdida de reputaci\'on).\\
+\ding{51}\; Ustedes saben \textbf{c\'omo prevenirlo} (Privacy by Design, cifrado, pol\'iticas de IAM, auditor\'ias).\\
+\ding{51}\; Y ustedes saben \textbf{c\'omo responder} si, a\'un con todas las defensas, un incidente ocurre (Junta de Crisis, BIA, Plan de Continuidad).
+\end{cajaCierre}
+
+\vspace{6pt}
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={rectangle, draw=azulUCA, fill=azulUCA!10,
+              text width=4.5cm, align=center, rounded corners=4pt,
+              font=\small\bfseries, minimum height=2cm},
+  arr/.style={-{Stealth[length=4mm]}, thick, doradoFinal, line width=1.5pt}
+]
+  \node[box, fill=rojoAlerta!15, draw=rojoAlerta, text width=5cm] (c1) 
+    {CLASE 1\\``¿C\'omo me hackearon la c\'amara sin que me d\'e cuenta?''\\{\scriptsize (El usuario vulnerable)}};
+  
+  \node[box, fill=verdeOK!20, draw=verdeOK, text width=5cm, right=3cm of c1] (c15) 
+    {CLASE 15\\``Este es nuestro Programa de Seguridad, nuestros Controles y nuestra Gobernanza.''\\{\scriptsize (El profesional de negocios digitales)}};
+
+  \draw[arr] (c1) -- node[above, font=\small\itshape, text=doradoFinal] {15 semanas de cursada} (c15);
+\end{tikzpicture}
+\end{center}
+
+\vspace{10pt}
+
+\begin{cajaNota}[title={Palabras finales del docente}]
+La seguridad de la informaci\'on ya no es una ``caja negra'' delegada al departamento de IT. Para ustedes, futuros l\'ideres de negocios digitales, la seguridad es \textbf{confianza}, es \textbf{supervivencia} y es \textbf{ventaja competitiva}.\\[6pt]
+El tablero est\'a completo. Tienen los fundamentos, la matriz de riesgos, la ley, la nube, la criptograf\'ia y el gobierno. Ahora, salgan a construir negocios digitales que sean no solo rentables, sino \textbf{robustos, \'eticos y confiables}.\\[6pt]
+¡Muchas gracias por el cuatrimestre y mucho \'exito en lo que viene!
+\end{cajaNota}
+
+\vfill
+\begin{center}
+\Large\bfseries\color{azulUCA}
+¡FELICITACIONES!\\[6pt]
+\normalsize\color{gray}
+Han completado Seguridad de la Informaci\'on y de Sistemas.\\
+Licenciatura en Gesti\'on de Negocios Digitales --- UCA.
+\end{center}
+
+\end{document}

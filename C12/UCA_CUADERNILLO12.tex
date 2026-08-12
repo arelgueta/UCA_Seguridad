@@ -1,0 +1,611 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 12
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{rojoCrisis}{HTML}{922B21}
+\definecolor{azulGobierno}{HTML}{1B4F72}
+
+% Colores para los roles de la Junta de Crisis
+\definecolor{rolGerente}{HTML}{D4AC0D}
+\definecolor{rolLegal}{HTML}{2E4053}
+\definecolor{rolComunicaciones}{HTML}{C0392B}
+\definecolor{rolTI}{HTML}{1A5276}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCrisis}{
+  colback=rojoCrisis!8, colframe=rojoCrisis,
+  fonttitle=\bfseries\color{rojoCrisis},
+  title={\ding{55}\; JUNTA DE CRISIS}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaInyeccion}{
+  colback=naranjaAmenaza!12, colframe=naranjaAmenaza,
+  fonttitle=\bfseries\color{naranjaAmenaza},
+  title={\ding{115}\; Punto de inyecci\'on}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaRolGerente}{
+  colback=rolGerente!10, colframe=rolGerente,
+  fonttitle=\bfseries\color{rolGerente},
+  title={Rol: GERENCIA GENERAL}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaRolLegal}{
+  colback=rolLegal!10, colframe=rolLegal,
+  fonttitle=\bfseries\color{rolLegal},
+  title={Rol: LEGAL / CUMPLIMIENTO}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaRolComunicaciones}{
+  colback=rolComunicaciones!10, colframe=rolComunicaciones,
+  fonttitle=\bfseries\color{rolComunicaciones},
+  title={Rol: COMUNICACIONES}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaRolTI}{
+  colback=rolTI!10, colframe=rolTI,
+  fonttitle=\bfseries\color{rolTI},
+  title={Rol: TI / SEGURIDAD}, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 12}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 12}\\[12pt]
+{\Large\itshape ``Factor humano y gesti\'on de incidentes:\\[2pt] Junta de Crisis''}\\[6pt]
+{\large\color{rojoCrisis}\ding{55}\; Incluye simulaci\'on de filtraci\'on de datos}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Unidad 4 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — EL FACTOR HUMANO
+% ============================================================
+\section{El factor humano: el eslab\'on m\'as d\'ebil y el m\'as fuerte}
+
+En la Clase 3 vimos que el \textbf{phishing}, el \textbf{ransomware} y la \textbf{ingenier\'ia social} son las amenazas m\'as comunes para los negocios digitales. En la Clase 10, practicamos c\'omo dise\~nar campa\~nas de concientizaci\'on. Hoy vamos a ver c\'omo \textbf{todo eso se pone a prueba} cuando las cosas salen mal.
+
+\begin{cajaDefinicion}
+El \textbf{factor humano} se refiere al rol de las personas dentro del ecosistema de seguridad de una organizaci\'on. Los empleados son simult\'aneamente:
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{El eslab\'on m\'as d\'ebil:} un clic en un enlace de phishing puede comprometer toda la organizaci\'on.
+    \item \textbf{La primera l\'inea de defensa:} un empleado bien capacitado puede detectar y reportar un ataque antes de que cause da\~no.
+\end{itemize}
+\end{cajaDefinicion}
+
+\subsection{¿Por qu\'e las personas son cr\'iticas en seguridad?}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulUCA}}p{3.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Realidad} & \textbf{Implicancia} \\
+\hline
+95\% de los incidentes de seguridad tienen un componente humano (error, negligencia, manipulación) & Ninguna tecnología por sí sola puede proteger si las personas no saben cómo actuar. \\
+\hline
+Los atacantes prefieren el camino más fácil: engañar a una persona en lugar de hackear un sistema & La ingeniería social es más barata y efectiva que el hacking técnico. \\
+\hline
+Las políticas y controles existen, pero requieren que las personas las cumplan & Una PSA (Clase 11) no sirve si nadie la conoce o no hay capacitación. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={La conexión con lo anterior}]
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Clase 10:} las campañas de concientización y los simulacros de phishing son \textbf{controles humanos} que reducen la probabilidad de incidentes.
+    \item \textbf{Clase 11:} la PSA y el gobierno de la seguridad definen las \textbf{reglas del juego} que las personas deben seguir.
+    \item \textbf{Clase 12 (hoy):} cuando todo lo anterior falla y ocurre un incidente real, la organizaci\'on necesita un \textbf{proceso de respuesta} y personas capacitadas para ejecutarlo.
+\end{itemize}
+\end{cajaNota}
+
+\subsection{Programas de concientizaci\'on y capacitaci\'on}
+
+Un programa efectivo de concientizaci\'on no es un evento \'unico (``una charla de una hora al a\~no''). Es un \textbf{proceso continuo} que incluye:
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Capacitaci\'on inicial} al ingreso (PSA, pol\'iticas, expectativas).
+    \item \textbf{Actualizaciones peri\'odicas} (mensuales o trimestrales).
+    \item \textbf{Simulacros de phishing} (Clase 10) para medir efectividad.
+    \item \textbf{Micro-learning:} videos cortos, infograf\'ias, casos reales.
+    \item \textbf{M\'etricas:} tasa de reporte de phishing, tiempo de respuesta, incidentes evitados.
+\end{itemize}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — GESTIÓN DE INCIDENTES
+% ============================================================
+\section{Gesti\'on de incidentes de seguridad}
+
+\begin{cajaDefinicion}
+Un \textbf{incidente de seguridad} es cualquier evento que compromete la confidencialidad, integridad o disponibilidad de los activos de informaci\'on. La \textbf{gesti\'on de incidentes} es el proceso estructurado para detectarlos, contenerlos, erradicarlos, recuperar la normalidad y aprender de lo ocurrido.
+\end{cajaDefinicion}
+
+\subsection{El ciclo de vida de un incidente}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.8cm,
+  box/.style={rectangle, draw=rojoCrisis, fill=rojoCrisis!10,
+              text width=2.8cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  arr/.style={-{Stealth[length=3mm]}, thick, rojoCrisis}
+]
+  \node[box] (prep) {PREPARACI\'ON\\{\scriptsize Antes del incidente}};
+  \node[box, right=1.5cm of prep] (det) {DETECCI\'ON\\{\scriptsize ¿C\'omo lo descubrimos?}};
+  \node[box, right=1.5cm of det] (cont) {CONTENCI\'ON\\{\scriptsize Evitar que se expanda}};
+  \node[box, right=1.5cm of cont] (err) {ERRADICACI\'ON\\{\scriptsize Eliminar la causa}};
+  \node[box, below=1.5cm of err] (rec) {RECUPERACI\'ON\\{\scriptsize Volver a operar}};
+  \node[box, left=1.5cm of rec] (lec) {LECCIONES\\{\scriptsize ¿Qu\'e aprendimos?}};
+
+  \draw[arr] (prep) -- (det);
+  \draw[arr] (det) -- (cont);
+  \draw[arr] (cont) -- (err);
+  \draw[arr] (err) -- (rec);
+  \draw[arr] (rec) -- (lec);
+  \draw[arr, dashed] (lec) -- (prep);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Las 4 fases en detalle}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoCrisis}}p{3cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Fase} & \textbf{¿Qu\'e se hace?} & \textbf{¿Qui\'en lidera?} \\
+\hline
+\textbf{Detecci\'on} & Identificar el incidente, evaluar su alcance y severidad. & TI / Seguridad \\
+\hline
+\textbf{Respuesta} & Contener el da\~no, erradicar la amenaza, preservar evidencia. & TI / Seguridad + Legal \\
+\hline
+\textbf{Comunicaci\'on} & Informar a empleados, clientes, reguladores, medios. & Comunicaciones + Legal \\
+\hline
+\textbf{Recuperaci\'on} & Restaurar sistemas, monitorear, aprender del incidente. & Todos los roles \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={La diferencia entre un incidente y una crisis}]
+Un \textbf{incidente} es un evento de seguridad que puede ser manejado por el equipo operativo. Una \textbf{crisis} es un incidente que \textbf{escala}: afecta la reputaci\'on, requiere comunicaci\'on externa, involucra a reguladores o tiene impacto financiero significativo. Hoy vamos a simular una \textbf{crisis}.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — LOS ROLES EN UNA CRISIS
+% ============================================================
+\section{Los 4 roles de la Junta de Crisis}
+
+En la simulaci\'on de hoy, cada integrante del grupo asumir\'a uno de estos roles. Cada rol tiene responsabilidades espec\'ificas y debe tomar decisiones bajo presi\'on de tiempo.
+
+\subsection{Resumen de roles}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Rol} & \textbf{Responsabilidad principal} \\
+\hline
+\textbf{Gerencia General} & Toma las decisiones estrat\'egicas finales. Aprueba presupuesto de emergencia. Decide el nivel de comunicaci\'on p\'ublica. \\
+\hline
+\textbf{Legal / Cumplimiento} & Asegura el cumplimiento normativo (Ley 25.326, GDPR). Eval\'ua responsabilidades legales. Coordina con abogados externos. \\
+\hline
+\textbf{Comunicaciones} & Gestiona la comunicaci\'on interna y externa. Redacta comunicados. Maneja redes sociales y prensa. \\
+\hline
+\textbf{TI / Seguridad} & Contiene t\'ecnicamente el incidente. Coordina la investigaci\'on forense. Restaura sistemas. \\
+\hline
+\end{tabularx}
+
+\newpage
+\subsection{Tarjetas de rol}
+
+Cada estudiante debe recibir (o recortar) una tarjeta de rol antes de comenzar la simulaci\'on.
+
+\begin{cajaRolGerente}
+\textbf{Tu misi\'on:} Proteger el negocio a largo plazo.\\[4pt]
+\textbf{Tus decisiones clave:}
+\begin{itemize}[leftmargin=1.5em]
+    \item ¿Cu\'anto presupuesto de emergencia aprob\'as para contener el incidente?
+    \item ¿Notificamos a los clientes ahora o esperamos a tener m\'as informaci\'on?
+    \item ¿Hacemos declaraci\'on p\'ublica o esperamos a que la prensa nos contacte?
+    \item ¿Contratamos un equipo forense externo?
+\end{itemize}
+\textbf{Tu pregunta recurrente:} ``¿Cu\'al es el impacto financiero y reputacional de cada opci\'on?''
+\end{cajaRolGerente}
+
+\vspace{6pt}
+
+\begin{cajaRolLegal}
+\textbf{Tu misi\'on:} Minimizar la responsabilidad legal y cumplir la ley.\\[4pt]
+\textbf{Tus decisiones clave:}
+\begin{itemize}[leftmargin=1.5em]
+    \item ¿Cu\'ando hay que notificar a la AAIP (Agencia de Acceso a la Informaci\'on P\'ublica)?
+    \item ¿La Ley 25.326 exige notificaci\'on a los titulares de los datos?
+    \item ¿Hay clientes en Europa? ¿Aplica el GDPR?
+    \item ¿Qu\'e evidencias hay que preservar para una eventual investigaci\'on judicial?
+\end{itemize}
+\textbf{Tu pregunta recurrente:} ``¿Qu\'e dice la ley y cu\'ales son los plazos?''
+\end{cajaRolLegal}
+
+\vspace{6pt}
+
+\begin{cajaRolComunicaciones}
+\textbf{Tu misi\'on:} Proteger la reputaci\'on y la confianza de los clientes.\\[4pt]
+\textbf{Tus decisiones clave:}
+\begin{itemize}[leftmargin=1.5em]
+    \item ¿Qu\'e decimos en el comunicado interno a los empleados?
+    \item ¿Qu\'e decimos en el comunicado externo a los clientes?
+    \item ¿C\'omo respondemos si la prensa nos contacta?
+    \item ¿Publicamos algo en redes sociales antes de que se viralice?
+\end{itemize}
+\textbf{Tu pregunta recurrente:} ``¿Qu\'e van a pensar los clientes y c\'omo van a reaccionar?''
+\end{cajaRolComunicaciones}
+
+\vspace{6pt}
+
+\begin{cajaRolTI}
+\textbf{Tu misi\'on:} Contener t\'ecnicamente el incidente y restaurar la operaci\'on.\\[4pt]
+\textbf{Tus decisiones clave:}
+\begin{itemize}[leftmargin=1.5em]
+    \item ¿Desconectamos el servidor afectado de la red?
+    \item ¿Apagamos los sistemas comprometidos o los aislamos?
+    \item ¿Preservamos evidencia forense (logs, im\'agenes de disco)?
+    \item ¿Cu\'anto tiempo estimamos para restaurar la operaci\'on normal?
+\end{itemize}
+\textbf{Tu pregunta recurrente:} ``¿Cu\'al es el alcance t\'ecnico del incidente y c\'omo evitamos que se expanda?''
+\end{cajaRolTI}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — LA SIMULACIÓN: JUNTA DE CRISIS
+% ============================================================
+\section{La simulaci\'on: Junta de Crisis}
+
+\begin{cajaCrisis}[title={Instrucciones de la simulaci\'on}]
+\textbf{Duraci\'on total:} 75 minutos de simulaci\'on + 15 minutos de debrief.\\[4pt]
+\textbf{Mec\'anica:}
+\begin{enumerate}[leftmargin=2em]
+    \item El docente presenta el escenario inicial (la ``bomba'' cae).
+    \item Cada grupo se re\'une como Junta de Crisis y trabaja en tiempo real.
+    \item El docente introduce \textbf{puntos de inyecci\'on} (eventos sorpresa) en momentos espec\'ificos para forzar decisiones.
+    \item Cada grupo completa las plantillas de respuesta de su rol.
+    \item Al final, cada grupo presenta sus decisiones y se hace el debrief.
+\end{enumerate}
+\end{cajaCrisis}
+
+\subsection{Escenario inicial: ``DataShop''}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=rojoCrisis, arc=3mm]
+\textbf{Contexto:} ``DataShop'' es un e-commerce de electr\'onica con programa de fidelidad. Tiene 8.000 clientes activos y una base de datos con nombres, emails, tel\'efonos e historial de compras.\\[4pt]
+\textbf{Lunes 9:15 AM:} El equipo de TI detecta tr\'afico de salida inusual desde el servidor de la base de datos.\\[4pt]
+\textbf{Investigaci\'on inicial (9:15-9:30):}
+\begin{itemize}[leftmargin=1.5em]
+    \item La base de datos de clientes fue accedida desde una IP externa.
+    \item Se encontr\'o un archivo ejecutable sospechoso en la PC de un empleado del \'area de Finanzas.
+    \item El empleado recuerda haber abierto un adjunto en un email que parec\'ia ser de un proveedor.
+    \item El adjunto instal\'o software de acceso remoto.
+\end{itemize}
+\textbf{Datos potencialmente comprometidos:}
+\begin{itemize}[leftmargin=1.5em]
+    \item Nombres, emails, tel\'efonos, historial de compras (8.000 clientes).
+    \item Datos de pago (cifrados, pero no se sabe si la clave de cifrado fue comprometida).
+\end{itemize}
+\textbf{Situaci\'on adicional:} Un foro de hackers public\'o una muestra de datos de DataShop y el atacante est\'a exigiendo un rescate.
+\end{tcolorbox}
+
+\newpage
+\subsection{Cronograma de la simulaci\'on y puntos de inyecci\'on}
+
+La simulaci\'on se desarrolla en tiempo real. El docente introduce \textbf{puntos de inyecci\'on} (eventos sorpresa) en los momentos indicados para forzar decisiones.
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoCrisis}}p{2cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Tiempo} & \textbf{Evento / Punto de inyecci\'on} \\
+\hline
+T = 0 min & Se presenta el escenario inicial. La Junta de Crisis se re\'une. \\
+\hline
+T = 10 min & \textbf{Inyecci\'on 1:} Un periodista env\'ia un email preguntando si DataShop sufri\'o una filtraci\'on de datos. \\
+\hline
+T = 25 min & \textbf{Inyecci\'on 2:} Un cliente publica en redes sociales que recibi\'o un email sospechoso a nombre de DataShop. \\
+\hline
+T = 40 min & \textbf{Inyecci\'on 3:} El atacante env\'ia una nota de rescate con un plazo de 48 horas para pagar. \\
+\hline
+T = 55 min & \textbf{Inyecci\'on 4:} La AAIP env\'ia una notificaci\'on solicitando informaci\'on sobre una posible brecha de datos. \\
+\hline
+T = 70 min & Cierre de la simulaci\'on. Cada grupo presenta sus decisiones finales. \\
+\hline
+T = 75-90 min & Debrief grupal: ¿qu\'e funcion\'o, qu\'e no, qu\'e aprendimos? \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — PLANTILLAS DE RESPUESTA
+% ============================================================
+\section{Plantillas de respuesta por rol}
+
+Durante la simulaci\'on, cada rol debe completar estas plantillas. Al final, se presentan al docente y al resto de la clase.
+
+\subsection{Plantilla del Gerente General}
+
+\begin{cajaRolGerente}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Decisi\'on 1: Presupuesto de emergencia}\\[2pt]
+?Cu\'anto presupuesto aprueban para contener el incidente? (forense externo, consultor\'ia legal, etc.)\\[1.5cm]
+\hline
+\textbf{Decisi\'on 2: Notificaci\'on a clientes}\\[2pt]
+?Notificamos a los 8.000 clientes ahora o esperamos? Justificaci\'on:\\[1.5cm]
+\hline
+\textbf{Decisi\'on 3: Comunicaci\'on p\'ublica}\\[2pt]
+?Hacemos declaraci\'on p\'ublica proactiva o esperamos a que la prensa nos contacte? Justificaci\'on:\\[1.5cm]
+\hline
+\textbf{Decisi\'on 4: Rescate}\\[2pt]
+?Pagamos el rescate al atacante? ?Por qu\'e s\'i o por qu\'e no? (Considerar implicancias legales y \'eticas):\\[1.5cm]
+\hline
+\end{tabularx}
+\end{cajaRolGerente}
+
+\newpage
+\subsection{Plantilla del Legal / Cumplimiento}
+
+\begin{cajaRolLegal}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Cuesti\'on 1: Obligaci\'on de notificaci\'on a la AAIP}\\[2pt]
+?Qu\'e dice la Ley 25.326 sobre la notificaci\'on de brechas de datos? ?Cu\'al es el plazo?\\[1.5cm]
+\hline
+\textbf{Cuesti\'on 2: Notificaci\'on a los titulares de datos}\\[2pt]
+?Los 8.000 clientes deben ser notificados? ?Qu\'e tipo de datos se vieron comprometidos?\\[1.5cm]
+\hline
+\textbf{Cuesti\'on 3: Aplicabilidad del GDPR}\\[2pt]
+?Hay clientes en Europa? ?Aplica el GDPR? ?Hay obligaciones adicionales?\\[1.5cm]
+\hline
+\textbf{Cuesti\'on 4: Preservaci\'on de evidencia}\\[2pt]
+?Qu\'e evidencias deben preservarse para una eventual investigaci\'on judicial?\\[1.5cm]
+\hline
+\end{tabularx}
+\end{cajaRolLegal}
+
+\newpage
+\subsection{Plantilla de Comunicaciones}
+
+\begin{cajaRolComunicaciones}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Comunicado interno a empleados}\\[2pt]
+Redacten el comunicado interno (2-3 p\'arrafos):\\[3cm]
+\hline
+\textbf{Comunicado externo a clientes}\\[2pt]
+Redacten el comunicado externo (2-3 p\'arrafos):\\[3cm]
+\hline
+\textbf{Respuesta a prensa}\\[2pt]
+Redacten una respuesta de 2-3 oraciones para el periodista que envi\'o el email:\\[2cm]
+\hline
+\textbf{Redes sociales}\\[2pt]
+?Publican algo en redes sociales antes de que se viralice? ?Qu\'e y cu\'ando?\\[1.5cm]
+\hline
+\end{tabularx}
+\end{cajaRolComunicaciones}
+
+\newpage
+\subsection{Plantilla de TI / Seguridad}
+
+\begin{cajaRolTI}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Acci\'on 1: Contenci\'on inmediata}\\[2pt]
+?Desconectan el servidor afectado de la red? ?Apagan los sistemas comprometidos? Justifiquen:\\[2cm]
+\hline
+\textbf{Acci\'on 2: Preservaci\'on de evidencia}\\[2pt]
+?Qu\'e evidencias t\'ecnicas deben preservar? (logs, im\'agenes de disco, capturas de red):\\[2cm]
+\hline
+\textbf{Acci\'on 3: An\'alisis forense}\\[2pt]
+?Contratan un equipo forense externo? ?Qu\'e esperan que determinen?\\[2cm]
+\hline
+\textbf{Acci\'on 4: Restauraci\'on}\\[2pt]
+?Cu\'anto tiempo estiman para restaurar la operaci\'on normal? ?Qu\'e sistemas se restauran primero?\\[2cm]
+\hline
+\end{tabularx}
+\end{cajaRolTI}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — DEBRIEF Y LECCIONES
+% ============================================================
+\section{Debrief y lecciones aprendidas}
+
+Al final de la simulaci\'on, cada grupo presenta sus decisiones y se hace un debrief grupal. Este es el momento de reflexionar sobre lo que funcion\'o, lo que no, y qu\'e habr\'ian hecho diferente.
+
+\begin{cajaActividad}[title={Reflexi\'on grupal}]
+Respondan como grupo:
+\end{cajaActividad}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. ?Qu\'e decisi\'on fue la m\'as dif\'icil de tomar? ?Por qu\'e?}\\[2.5cm]
+\hline
+\textbf{2. ?Qu\'e rol tuvo m\'as presi\'on durante la simulaci\'on? ?C\'omo lo manejaron?}\\[2.5cm]
+\hline
+\textbf{3. ?Qu\'e habr\'ian hecho diferente si hubieran tenido m\'as tiempo o m\'as informaci\'on?}\\[2.5cm]
+\hline
+\textbf{4. ?Qu\'e elemento de la PSA (Clase 11) habr\'ia ayudado a prevenir o manejar mejor esta crisis?}\\[2.5cm]
+\hline
+\textbf{5. ?Qu\'e incluir\'ian en su Plan de Respuesta a Incidentes del TP Integrador a partir de esta experiencia?}\\[3cm]
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Conexi\'on con el TP Integrador}]
+Lo que aprendan hoy en la Junta de Crisis es el \textbf{insumo directo} para el Entregable 6 del TP Integrador: \textbf{Plan de respuesta a incidentes y de continuidad de negocio}. Cada decisi\'on que tomaron hoy es una pieza de ese plan. Guarden las plantillas completadas.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 12}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Incidente de seguridad & Evento que compromete la CID de los activos de informaci\'on. \\
+Crisis & Incidente que escala y requiere comunicaci\'on externa o tiene impacto significativo. \\
+Junta de Crisis & Equipo multidisciplinario que gestiona la respuesta a un incidente grave. \\
+Detecci\'on & Fase de identificaci\'on del incidente. \\
+Contenci\'on & Fase de limitar el da\~no y evitar que el incidente se expanda. \\
+Erradicaci\'on & Fase de eliminar la causa ra\'iz del incidente. \\
+Recuperaci\'on & Fase de restaurar la operaci\'on normal. \\
+Lecciones aprendidas & An\'alisis posterior al incidente para mejorar futuros procesos. \\
+Concientizaci\'on & Capacitaci\'on para que las personas reconozcan y eviten amenazas. \\
+Inyecci\'on & Evento sorpresa introducido durante una simulaci\'on para forzar decisiones. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y preparaci\'on}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Us\'a este espacio para anotar decisiones clave de la simulaci\'on, ideas para tu Plan de Respuesta a Incidentes del TP, o dudas sobre la gesti\'on de crisis.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

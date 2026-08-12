@@ -1,0 +1,698 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 14
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{azulMentoring}{HTML}{1A5276}
+\definecolor{verdeFeedback}{HTML}{1E8449}
+\definecolor{doradoFinal}{HTML}{7D6608}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaMentoring}[1][]{
+  colback=azulMentoring!8, colframe=azulMentoring,
+  fonttitle=\bfseries\color{azulMentoring},
+  title={\ding{211}\; Mentoring docente}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaFeedback}[1][]{
+  colback=verdeFeedback!8, colframe=verdeFeedback,
+  fonttitle=\bfseries\color{verdeFeedback},
+  title={\ding{51}\; Coevaluaci\'on entre pares}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaDefensa}[1][]{
+  colback=doradoFinal!10, colframe=doradoFinal,
+  fonttitle=\bfseries\color{doradoFinal},
+  title={\ding{73}\; Ensayo de defensa oral}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaActividad}[1][]{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaNota}[1][]{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaChecklist}[1][]{
+  colback=verdeFeedback!12, colframe=verdeFeedback,
+  fonttitle=\bfseries\color{verdeFeedback},
+  title={Checklist del dossier}, arc=3mm, breakable, #1
+}
+
+\newtcolorbox{cajaCierre}[1][]{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Camino a la Clase 15, arc=3mm, breakable, #1
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 14}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ---------- Reducir padding de tablas para evitar overfull ----------
+\setlength{\tabcolsep}{5pt}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 14}\\[12pt]
+{\Large\itshape ``Taller de integraci\'on:\\[2pt] feedback y ensayo del TP Integrador''}\\[6pt]
+{\large\color{doradoFinal}\ding{73}\; \'Ultima escala antes de la defensa final}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Eje:}        & Integraci\'on final \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{El momento de integrar: de las piezas al dossier}
+
+En las 13 clases anteriores fueron construyendo el \textbf{Trabajo Pr\'actico Integrador} de forma incremental, entrega por entrega. Hoy es el d\'ia de \textbf{ensamblar todo} en un dossier coherente y recibir feedback antes de la defensa final.
+
+\begin{cajaNota}[title={¿Por qu\'e es cr\'itica esta clase?}]
+Un TP Integrador no es la suma de 7 entregables sueltos. Es un \textbf{dossier profesional} donde cada pieza se conecta con las dem\'as:
+\begin{itemize}[leftmargin=2em]
+    \item La \textbf{PSA} (Clase 11) debe reflejar los controles que definieron en la matriz de riesgos (Clase 5).
+    \item El \textbf{plan de incidentes} (Clase 13) debe usar los mismos RTO/RPO que definieron en el BIA (Clase 6).
+    \item La \textbf{pol\'itica de privacidad} (Clase 8) debe estar alineada con el mapa de activos (Clase 2).
+\end{itemize}
+Hoy van a verificar esa coherencia, con ayuda del docente y de los otros grupos.
+\end{cajaNota}
+
+\vspace{6pt}
+\noindent\textbf{Objetivos de esta clase:}
+\begin{enumerate}[leftmargin=2em]
+  \item Consolidar el TP Integrador con \textbf{retroalimentaci\'on docente} y \textbf{entre pares}.
+  \item \textbf{Ensayar la defensa oral} con la r\'ubrica oficial y las preguntas individuales t\'ipicas.
+  \item Entregar la \textbf{versi\'on pre-final} del dossier para devoluci\'on escrita.
+\end{enumerate}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — EL DOSSIER FINAL
+% ============================================================
+\section{Estructura del dossier final: los 7 componentes}
+
+El TP Integrador se entrega como un dossier \'unico con estos componentes. Cada uno viene de una clase espec\'ifica y debe integrarse de forma coherente.
+
+\begin{cajaChecklist}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{1.5cm}|}
+\hline
+\rowcolor{azulUCA!20}
+\textbf{\#} & \textbf{Componente del dossier} & \textbf{Insumo de clase} & \textbf{Estado} \\
+\hline
+1 & \textbf{Mapa de activos y an\'alisis CID} & Clases 2--4 & \checkboxVacio \\
+\hline
+2 & \textbf{Matriz de riesgos + BIA + controles priorizados} (con costo-beneficio) & Clases 5--6 & \checkboxVacio \\
+\hline
+3 & \textbf{Evaluaci\'on de seguridad en la nube} (checklist de la Clase 7) & Clase 7 & \checkboxVacio \\
+\hline
+4 & \textbf{Cumplimiento normativo y pol\'itica de privacidad propia} & Clases 8--9 & \checkboxVacio \\
+\hline
+5 & \textbf{Pol\'itica de Seguridad Aceptable (PSA)} & Clase 11 & \checkboxVacio \\
+\hline
+6 & \textbf{Plan de respuesta a incidentes y continuidad} (auditado con IA) & Clase 13 & \checkboxVacio \\
+\hline
+7 & \textbf{Anexo ``Uso de IA''} (herramientas, prompts, verificaci\'on) & Transversal & \checkboxVacio \\
+\hline
+\end{tabularx}
+\end{cajaChecklist}
+
+\subsection{Requisitos formales del dossier}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulUCA}}p{3.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Aspecto} & \textbf{Requisito} \\
+\hline
+Extensi\'on & 10 a 15 p\'aginas (sin contar anexos). \\
+\hline
+Formato & PDF \'unico, con portada, \'indice y los 7 componentes en orden. \\
+\hline
+Coherencia interna & Los mismos activos, riesgos y controles deben aparecer de forma consistente en todas las secciones. \\
+\hline
+Lenguaje & Profesional pero accesible, orientado a un directivo no t\'ecnico del negocio elegido. \\
+\hline
+Anexo de IA & Declaraci\'on transparente de qu\'e partes usaron IA, c\'omo se us\'o y c\'omo se verific\'o. \\
+\hline
+Entrega & Versi\'on pre-final \textbf{hoy} (Clase 14); versi\'on final antes de la Clase 15. \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — MENTORING ROTATIVO
+% ============================================================
+\section{Mentoring rotativo con el docente}
+
+Durante esta clase, el docente pasar\'a por cada grupo durante \textbf{10-12 minutos} para revisar el avance del dossier y dar feedback espec\'ifico. Mientras tanto, los dem\'as grupos trabajan en la coevaluaci\'on cruzada (Secci\'on 4).
+
+\subsection{¿Qu\'e revisa el docente en cada entregable?}
+
+\begin{cajaMentoring}
+Esta es la \textbf{mirada del docente} sobre cada componente. \'Usenla como checklist de auto-revisi\'on antes de que llegue su turno de mentor\'ia.
+\end{cajaMentoring}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulMentoring}}p{3.2cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Entregable} & \textbf{¿Qu\'e busca el docente?} \\
+\hline
+1. Mapa de activos & ¿Identificaron activos clave del negocio (datos, software, reputaci\'on, personas)? ¿Clasificaron bien los pilares CID? \\
+\hline
+2. Matriz de riesgos + BIA & ¿Los riesgos est\'an bien ubicados en la matriz P$\times$I? ¿Los controles propuestos tienen costo-beneficio realista? ¿El BIA define RTO/RPO coherentes? \\
+\hline
+3. Seguridad en la nube & ¿La checklist cubre los 5 ejes (configuraci\'on, IAM, cifrado, backups, monitoreo)? ¿Es realista para el tama\~no del negocio? \\
+\hline
+4. Normativa + privacidad & ¿La pol\'itica de privacidad respeta Ley 25.326 / GDPR? ¿Cubre los derechos ARCO? ¿Es clara para el usuario? \\
+\hline
+5. PSA & ¿La pol\'itica es corta, clara y espec\'ifica? ¿Cubre BYOD, trabajo remoto, contrase\~nas, incidentes? \\
+\hline
+6. Plan de incidentes & ¿Cubre las fases NIST SP 800-61? ¿Incluye los 3 escenarios (ransomware, filtraci\'on, ca\'ida)? ¿Los RTO/RPO coinciden con el BIA? \\
+\hline
+7. Anexo de IA & ¿Hay transparencia real? ¿Muestran verificaci\'on cr\'itica (no copia acr\'itica)? ¿Adaptaron al tama\~no del negocio? \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\begin{cajaActividad}[title={Registro del feedback docente}]
+Cuando el docente pase por su grupo, anoten aqu\'i las observaciones clave y los ajustes pendientes:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Fortalezas que destac\'o el docente:} \\[2.5cm]
+\hline
+\textbf{Ajustes prioritarios a hacer antes de la Clase 15:} \\[4cm]
+\hline
+\textbf{Preguntas o dudas que quedaron pendientes:} \\[2cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — COEVALUACIÓN CRUZADA
+% ============================================================
+\section{Coevaluaci\'on cruzada entre grupos}
+
+La mirada de un par es distinta a la del docente: detecta problemas de \textbf{claridad, coherencia y presentaci\'on} que el autor ya no ve. Hoy cada grupo eval\'ua el dossier pre-final de otro grupo usando esta r\'ubrica breve.
+
+\begin{cajaFeedback}
+\textbf{Mec\'anica:}
+\begin{enumerate}[leftmargin=2em]
+    \item El docente asigna a cada grupo un grupo ``par'' para evaluar.
+    \item Cada grupo tiene \textbf{15 minutos} para leer el dossier del par y completar la r\'ubrica.
+    \item Luego, \textbf{10 minutos} de devoluci\'on oral entre los dos grupos.
+    \item La r\'ubrica firmada se entrega al grupo evaluado para que la use en los ajustes finales.
+\end{enumerate}
+\end{cajaFeedback}
+
+\subsection{R\'ubrica breve de coevaluaci\'on (sobre 5 puntos)}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{1.8cm}|}
+\hline
+\rowcolor{verdeFeedback!20}
+\textbf{¿Qu\'e eval\'uan?} & \textbf{Puntaje (0-1)} \\
+\hline
+\textbf{Coherencia interna:} los mismos activos, riesgos y controles aparecen de forma consistente en todo el dossier. & \hrulefill \\
+\hline
+\textbf{Realismo para el tama\~no del negocio:} las propuestas son adecuadas a una pyme/startup, no a una multinacional. & \hrulefill \\
+\hline
+\textbf{Claridad del lenguaje:} un directivo no t\'ecnico del negocio podr\'ia entender el dossier. & \hrulefill \\
+\hline
+\textbf{Calidad del Anexo de IA:} hay transparencia y evidencia real de verificaci\'on cr\'itica. & \hrulefill \\
+\hline
+\textbf{Presentaci\'on general:} portada, \'indice, formato, ortograf\'ia, extensi\'on (10-15 p\'ag.). & \hrulefill \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & \textbf{\hrulefill /5} \\
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{cajaActividad}[title={Devoluci\'on cualitativa al grupo evaluado}]
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Grupo evaluado:} \hrulefill \\[4pt]
+\hline
+\textbf{Lo mejor del dossier (fortalezas):} \\[2.5cm]
+\hline
+\textbf{Los 3 ajustes m\'as importantes que les sugerimos antes de la Clase 15:} \\[4cm]
+\hline
+\textbf{Una pregunta que les har\'ia un evaluador en la defensa oral:} \\[2cm]
+\hline
+\textbf{Firmas del grupo evaluador:} \hrulefill \\[4pt]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — ENSAYO DE DEFENSA ORAL
+% ============================================================
+\section{Ensayo de la defensa oral (Clase 15)}
+
+La defensa final de la Clase 15 tiene \textbf{10 minutos de exposici\'on grupal + 5 minutos de preguntas individuales}. Hoy es el momento de ensayar con la r\'ubrica oficial en la mano.
+
+\begin{cajaDefensa}[title={La estructura recomendada de los 10 minutos}]
+\renewcommand{\arraystretch}{1.4}
+\small
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{doradoFinal}}p{2.2cm}|X|>{\centering\arraybackslash}p{1.2cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Bloque} & \textbf{¿Qu\'e incluir?} & \textbf{Tiempo} \\
+\hline
+1. Presentaci\'on & Nombre del grupo, negocio digital elegido, tama\~no y contexto. & 1 min \\
+\hline
+2. Mapa de riesgos & Los 2-3 riesgos m\'as cr\'iticos que identificaron y c\'omo los priorizaron (matriz P$\times$I, BIA). & 2 min \\
+\hline
+3. Controles clave & Los controles priorizados con costo-beneficio; c\'omo se conectan con la PSA y el plan de incidentes. & 2 min \\
+\hline
+4. Cumplimiento normativo & C\'omo el negocio respeta la Ley 25.326 / GDPR y los derechos ARCO. & 1 min \\
+\hline
+5. Continuidad & RTO/RPO definidos y c\'omo responder\'ian a un incidente grave. & 1 min \\
+\hline
+6. Uso de IA & Qu\'e partes del trabajo usaron IA generativa, c\'omo la auditaron y qu\'e aprendieron. & 2 min \\
+\hline
+7. Cierre & Reflexi\'on final: ¿qu\'e es lo m\'as importante que se llevan del curso? & 1 min \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & & \textbf{10 min} \\
+\hline
+\end{tabularx}
+\end{cajaDefensa}
+
+\subsection{R\'ubrica oficial del TP Integrador (sobre 10 puntos)}
+
+Esta es la r\'ubrica que usar\'a el docente en la Clase 15. Ens\'ayenla hoy.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\rowcolor{doradoFinal!20}
+\textbf{Dimensi\'on} & \textbf{Ponderaci\'on} \\
+\hline
+\textbf{Comprensi\'on conceptual:} aplica correctamente CID, gesti\'on de riesgos, marco legal y gobierno de la seguridad al caso. & 25\% \\
+\hline
+\textbf{Viabilidad y aplicaci\'on pr\'actica:} las propuestas son concretas, realistas y adecuadas al tama\~no del negocio. & 25\% \\
+\hline
+\textbf{Pensamiento cr\'itico sobre el uso de IA:} el anexo documenta con honestidad qu\'e se us\'o y muestra verificaci\'on real. & 20\% \\
+\hline
+\textbf{Trabajo en equipo y proceso:} evidencia de avances consistentes y participaci\'on equilibrada. & 15\% \\
+\hline
+\textbf{Comunicaci\'on y defensa oral:} claridad expositiva y calidad de las respuestas individuales. & 15\% \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & \textbf{100\%} \\
+\hline
+\end{tabularx}
+
+\newpage
+\subsection{Preguntas individuales t\'ipicas para preparar}
+
+El docente har\'a \textbf{5 minutos de preguntas individuales} a cada integrante. Todos deben poder responder sobre cualquier parte del dossier. Estas son preguntas frecuentes de cohortes anteriores:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Sobre el caso elegido:}\\[2pt]
+--- ¿Por qu\'e eligieron este negocio digital y no otro?\\
+--- ¿Cu\'al es el activo m\'as cr\'itico del negocio y por qu\'e?\\
+--- ¿Cu\'al es el riesgo m\'as subestimado que detectaron?\\
+\hline
+\textbf{Sobre la matriz de riesgos y controles:}\\[2pt]
+--- ¿Por qu\'e ubicaron ese riesgo en ``Alto'' y no en ``Medio''?\\
+--- Si tuvieran presupuesto para un solo control, ¿cu\'al elegir\'ian y por qu\'e?\\
+--- ¿C\'omo justifican el costo-beneficio del control m\'as caro que propusieron?\\
+\hline
+\textbf{Sobre el BIA y la continuidad:}\\[2pt]
+--- ¿C\'omo definieron el RTO del proceso cr\'itico?\\
+--- ¿Qu\'e pasar\'ia si el RTO no se puede cumplir?\\
+--- ¿D\'onde est\'an los backups y c\'omo los probar\'ian?\\
+\hline
+\textbf{Sobre normativa y gobierno:}\\[2pt]
+--- ¿Su pol\'itica de privacidad respeta los derechos ARCO? ¿C\'omo?\\
+--- ¿C\'omo manejar\'ian una solicitud de cancelaci\'on de un cliente?\\
+--- ¿Qui\'en es el responsable \'ultimo de la seguridad en el negocio?\\
+\hline
+\textbf{Sobre la nube y temas transversales:}\\[2pt]
+--- ¿Qu\'e parte de la seguridad es responsabilidad del proveedor cloud y cu\'al de ustedes?\\
+--- ¿C\'omo se conecta la PSA con el plan de incidentes?\\
+--- ¿Qu\'e se\~nales de phishing deber\'ian reconocer los empleados?\\
+\hline
+\textbf{Sobre el uso de IA:}\\[2pt]
+--- ¿Qu\'e parte del TP generaron con IA y c\'omo la auditaron?\\
+--- ¿Qu\'e recomendaci\'on de la IA corrigieron y por qu\'e?\\
+--- ¿Qu\'e aprendieron sobre los l\'imites de la IA en seguridad?\\
+\hline
+\end{tabularx}
+
+\begin{cajaActividad}[title={Ensayo grupal de la defensa}]
+Hagan un ensayo cronometrado de 10 minutos. Al terminar, respondan:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{¿Qu\'e bloques quedaron claros y cu\'ales necesitan ajustar?} \\[2cm]
+\hline
+\textbf{¿Qu\'e integrante presenta cada bloque? (distribuci\'on equitativa)} \\[2cm]
+\hline
+\textbf{¿Qu\'e preguntas individuales los ponen m\'as nerviosos y c\'omo las preparan?} \\[2.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — AUTOEVALUACIÓN FINAL
+% ============================================================
+\section{Autoevaluaci\'on final del grupo}
+
+Antes de irse, hagan una autoevaluaci\'on honesta del trabajo en equipo a lo largo del cuatrimestre. Esta reflexi\'on forma parte de la dimensi\'on ``Trabajo en equipo y proceso'' de la r\'ubrica final (15\%).
+
+\begin{cajaActividad}[title={Reflexi\'on grupal}]
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. ¿C\'omo se distribuyeron el trabajo a lo largo del cuatrimestre? ¿Fue equilibrada la participaci\'on?} \\[2.5cm]
+\hline
+\textbf{2. ¿Cu\'al fue el entregable m\'as dif\'icil de construir y por qu\'e? ¿C\'omo lo resolvieron?} \\[2.5cm]
+\hline
+\textbf{3. ¿Qu\'e aprendieron como grupo sobre la seguridad en negocios digitales que no sab\'ian al empezar?} \\[2.5cm]
+\hline
+\textbf{4. Si pudieran rehacer un entregable, ¿cu\'al ser\'ia y qu\'e har\'ian distinto?} \\[2cm]
+\hline
+\textbf{5. ¿C\'omo usaron la IA generativa y qu\'e les ense\~n\'o eso sobre el criterio profesional?} \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — REPASO TRANSVERSAL
+% ============================================================
+\section{Mapa integrador de todo el curso}
+
+Este es el mapa conceptual que conecta las 4 unidades y los temas transversales pedidos por ustedes. \textbf{Todo el dossier debe poder leerse dentro de este mapa.}
+
+\begin{center}
+\small
+\begin{tikzpicture}[
+  node distance=0.8cm and 1.2cm,
+  box/.style={rectangle, draw=azulUCA, fill=azulUCA!10,
+              text width=2.8cm, align=center, rounded corners=3pt,
+              font=\scriptsize\bfseries},
+  boxsmall/.style={rectangle, draw=azulCielo, fill=azulCielo!10,
+              text width=2.4cm, align=center, rounded corners=3pt,
+              font=\tiny},
+  boxtrans/.style={rectangle, draw=violetaIA, fill=violetaIA!10,
+              text width=2.6cm, align=center, rounded corners=3pt,
+              font=\tiny},
+  arr/.style={-{Stealth[length=2mm]}, thick, azulUCA}
+]
+  % Unidad 1
+  \node[box] (u1) {UNIDAD 1\\Fundamentos\\CID, activos,\\amenazas, cripto};
+  \node[boxsmall, below=0.5cm of u1] (u1a) {Clases 1--4};
+
+  % Unidad 2
+  \node[box, right=1.6cm of u1] (u2) {UNIDAD 2\\Gesti\'on de\\Riesgos, BIA,\\ISO 27001};
+  \node[boxsmall, below=0.5cm of u2] (u2a) {Clases 5--6};
+
+  % Unidad 3
+  \node[box, right=1.6cm of u2] (u3) {UNIDAD 3\\Marco legal,\\ARCO, \'etica,\\cookies};
+  \node[boxsmall, below=0.5cm of u3] (u3a) {Clases 8--9};
+
+  % Unidad 4
+  \node[box, right=1.6cm of u3] (u4) {UNIDAD 4\\Gobierno,\\PSA, incidentes,\\continuidad};
+  \node[boxsmall, below=0.5cm of u4] (u4a) {Clases 11--13};
+
+  % Temas transversales
+  \node[boxtrans, below=1.2cm of u1a, xshift=3.2cm] (trans) {TRANSVERSALES\\Nube, hacking \'etico,\\IA generativa,\\concientizaci\'on};
+
+  % Dossier
+  \node[box, below=1.2cm of trans, fill=doradoFinal!20, draw=doradoFinal,
+        text width=9cm, minimum height=1cm] (tp)
+    {DOSSIER FINAL --- TP INTEGRADOR\\``Programa de Seguridad para mi Negocio Digital''\\(defensa oral en Clase 15)};
+
+  \draw[arr] (u1a) -- (trans.north west);
+  \draw[arr] (u2a) -- (trans.north);
+  \draw[arr] (u3a) -- (trans.north);
+  \draw[arr] (u4a) -- (trans.north east);
+  \draw[arr] (trans) -- (tp);
+\end{tikzpicture}
+\end{center}
+
+\begin{cajaNota}[title={La coherencia es la prueba de fuego}]
+Un dossier s\'olido es aquel donde \textbf{todas las piezas se hablan entre s\'i}:
+\begin{itemize}[leftmargin=2em]
+    \item Los \textbf{activos} del mapa (Unidad 1) son los mismos que eval\'uan en la matriz (Unidad 2).
+    \item Los \textbf{controles} priorizados en la matriz (Unidad 2) aparecen luego en la PSA (Unidad 4) y en la checklist de nube (Clase 7).
+    \item El \textbf{BIA} (Clase 6) define los RTO/RPO que usa el plan de incidentes (Clase 13).
+    \item La \textbf{pol\'itica de privacidad} (Clase 8) respeta los derechos ARCO que la PSA menciona.
+    \item El \textbf{Anexo de IA} muestra verificaci\'on real en cada parte donde usaron IA generativa.
+\end{itemize}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — PLAN DE TRABAJO FINAL
+% ============================================================
+\section{Plan de trabajo hacia la Clase 15}
+
+\begin{cajaCierre}[title={Checklist final antes de la defensa}]
+Marquen cada item a medida que lo van completando entre hoy y la Clase 15:
+\end{cajaCierre}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|}
+\hline
+\rowcolor{rojoAlerta!20}
+\textbf{\#} & \textbf{Tarea pendiente} \\
+\hline
+1 & Incorporar el feedback del docente (anotado en la Secci\'on 3 de este cuadernillo). \\
+\hline
+2 & Incorporar el feedback de la coevaluaci\'on cruzada (Secci\'on 4). \\
+\hline
+3 & Verificar la coherencia interna del dossier (mapa $\leftrightarrow$ matriz $\leftrightarrow$ controles $\leftrightarrow$ PSA $\leftrightarrow$ plan). \\
+\hline
+4 & Unificar formato: portada, \'indice, tipograf\'ia, extensi\'on 10-15 p\'ag. \\
+\hline
+5 & Completar el Anexo de IA con todos los prompts y verificaciones. \\
+\hline
+6 & Ensayar la defensa oral cronometrada (10 min) al menos 2 veces. \\
+\hline
+7 & Repartir los bloques de la defensa entre los integrantes (todos hablan). \\
+\hline
+8 & Preparar respuestas a las preguntas individuales t\'ipicas (Secci\'on 5). \\
+\hline
+9 & Preparar el material de apoyo de la presentaci\'on (diapositivas, si aplican). \\
+\hline
+10 & Enviar la versi\'on final del dossier al docente antes de la Clase 15. \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\begin{cajaActividad}[title={Cronograma del grupo}]
+Definan c\'omo se van a organizar en los d\'ias que quedan:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{¿Qui\'en es responsable de cada ajuste pendiente?} \\[3cm]
+\hline
+\textbf{¿Cu\'ando se re\'unen para ensayar la defensa oral?} \\[2cm]
+\hline
+\textbf{¿Cu\'ando env\'ian la versi\'on final al docente?} \\[1.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 9 — GLOSARIO INTEGRADOR
+% ============================================================
+\section{Glosario integrador del curso}
+
+Un resumen de los t\'erminos clave que deben dominar para la defensa oral. Si pueden explicar cada uno con un ejemplo del negocio elegido, est\'an listos.
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+\multicolumn{2}{l}{\cellcolor{azulUCA!10}\textbf{Unidad 1 --- Fundamentos}} \\
+Activo de informaci\'on & Todo lo que tiene valor para el negocio y debe protegerse. \\
+Pilar CID & Confidencialidad, Integridad, Disponibilidad. \\
+Amenaza & Evento o actor que \emph{puede} causar da\~no. \\
+Vulnerabilidad & Debilidad que la amenaza puede explotar. \\
+Riesgo & Probabilidad $\times$ Impacto. \\
+Hashing & Funci\'on irreversible para verificar integridad y almacenar contrase\~nas. \\
+\midrule
+\multicolumn{2}{l}{\cellcolor{azulCielo!10}\textbf{Unidad 2 --- Gesti\'on de riesgos}} \\
+Matriz P$\times$I & Herramienta visual para priorizar riesgos. \\
+BIA & An\'alisis de Impacto al Negocio; define MTD, RTO, RPO. \\
+Tratar un riesgo & Mitigar, transferir, aceptar o evitar. \\
+ISO/IEC 27001 & Norma internacional de Sistemas de Gesti\'on de Seguridad. \\
+\midrule
+\multicolumn{2}{l}{\cellcolor{violetaIA!10}\textbf{Unidad 3 --- Marco legal}} \\
+Ley 25.326 & Protecci\'on de datos personales en Argentina. \\
+GDPR & Reglamento europeo de protecci\'on de datos. \\
+Derechos ARCO & Acceso, Rectificaci\'on, Cancelaci\'on, Oposici\'on. \\
+Privacidad por dise\~no & Integrar la protecci\'on desde la arquitectura inicial. \\
+Ley 26.388 & Delitos inform\'aticos en el C\'odigo Penal argentino. \\
+\midrule
+\multicolumn{2}{l}{\cellcolor{doradoFinal!10}\textbf{Unidad 4 --- Gobierno}} \\
+PSA / AUP & Pol\'itica de Seguridad Aceptable. \\
+Junta de Crisis & Equipo multidisciplinario que gestiona una crisis. \\
+BCP / DRP & Planes de continuidad y recuperaci\'on ante desastres. \\
+Auditor\'ia & Examen sistem\'atico para mejorar la seguridad. \\
+Ciclo PHVA & Planificar, Hacer, Verificar, Actuar. \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 10 — NOTAS
+% ============================================================
+\section{Espacio para notas y preparaci\'on final}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=10cm]
+\textcolor{gray}{\itshape Us\'a este espacio para anotar el feedback del docente, las sugerencias del grupo par, dudas pendientes, ideas para la defensa oral, o cualquier cosa que necesites recordar antes de la Clase 15.}
+\end{tcolorbox}
+
+\vfill
+\begin{cajaCierre}[title={¡\'Ultima etapa!}]
+En la \textbf{Clase 15} van a defender oralmente el TP Integrador:\\[4pt]
+\ding{51}\; 10 minutos de exposici\'on grupal.\\
+\ding{51}\; 5 minutos de preguntas individuales por grupo.\\
+\ding{51}\; Nota 1-10, aprueba con 4.\\
+\ding{51}\; \textbf{Reemplaza el examen final.}\\[4pt]
+Llegan con todo el recorrido hecho. Conf\'ien en el trabajo de estos meses. ¡\'Exito!
+\end{cajaCierre}
+
+\vspace{6pt}
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

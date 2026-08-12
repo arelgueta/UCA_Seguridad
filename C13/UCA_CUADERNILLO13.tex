@@ -1,0 +1,706 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 13
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{azulContinuidad}{HTML}{154360}
+\definecolor{verdeAuditoria}{HTML}{1E8449}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaContinuidad}{
+  colback=azulContinuidad!8, colframe=azulContinuidad,
+  fonttitle=\bfseries\color{azulContinuidad},
+  title={\ding{211}\; Continuidad de Negocio}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaAuditoria}{
+  colback=verdeAuditoria!8, colframe=verdeAuditoria,
+  fonttitle=\bfseries\color{verdeAuditoria},
+  title={\ding{52}\; Auditor\'ia de Seguridad}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaIA}{
+  colback=violetaIA!8, colframe=violetaIA,
+  fonttitle=\bfseries\color{violetaIA},
+  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaChecklist}{
+  colback=verdeAuditoria!12, colframe=verdeAuditoria,
+  fonttitle=\bfseries\color{verdeAuditoria},
+  title={Checklist de auditor\'ia (NIST SP 800-61 + ISO 27001)}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCierre}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Cierre de Unidad 4, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 13}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.2cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 13}\\[10pt]
+{\Large\itshape ``Continuidad de negocio, auditor\'ia\\[2pt] y cierre de contenidos''}\\[6pt]
+{\large\color{violetaIA}\ding{211}\; Cuarta actividad con IA del cuatrimestre}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Cierre de Unidad 4 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — CONTINUIDAD DE NEGOCIO
+% ============================================================
+\section{Continuidad del negocio y recuperaci\'on ante desastres}
+
+En la Clase 12 vimos c\'omo gestionar un \textbf{incidente} mientras ocurre. Hoy damos el siguiente paso: ¿c\'omo nos aseguramos de que el negocio \textbf{sobreviva} al incidente y pueda volver a operar?
+
+\begin{cajaDefinicion}
+La \textbf{Continuidad del Negocio (BCP - Business Continuity Plan)} es el conjunto de procesos y procedimientos dise\~nados para garantizar que las funciones cr\'iticas de una organizaci\'on puedan continuar o reanudarse r\'apidamente tras una interrupci\'on significativa.
+\end{cajaDefinicion}
+
+\begin{cajaDefinicion}
+El \textbf{Plan de Recuperaci\'on ante Desastres (DRP - Disaster Recovery Plan)} es un subconjunto del BCP, enfocado espec\'ificamente en la recuperaci\'on de los \textbf{sistemas de informaci\'on y tecnolog\'ia} tras un desastre (natural, humano o t\'ecnico).
+\end{cajaDefinicion}
+
+\subsection{Diferencia entre BCP y DRP}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulContinuidad}}p{2.5cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+ & \textbf{BCP (Continuidad del Negocio)} & \textbf{DRP (Recuperaci\'on ante Desastres)} \\
+\hline
+\textbf{Alcance} & Todo el negocio: personas, procesos, f\'isico, tecnol\'ogico. & S\'olo los sistemas de informaci\'on y tecnolog\'ia. \\
+\hline
+\textbf{Pregunta clave} & ¿C\'omo sigue operando el negocio? & ¿C\'omo recuperamos los sistemas? \\
+\hline
+\textbf{Ejemplo} & Mudar la atenci\'on al cliente a una oficina alternativa tras un incendio. & Restaurar la base de datos desde el backup tras un ransomware. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Regla pr\'actica}]
+Un buen BCP \textbf{incluye} un DRP. Para un negocio digital, el DRP suele ser la pieza m\'as cr\'itica del BCP porque la operaci\'on depende casi 100\% de sistemas tecnol\'ogicos.
+\end{cajaNota}
+
+\subsection{Repaso: RTO, RPO y MTD (Clase 6)}
+
+Estos tres indicadores, que vimos en el BIA, son la \textbf{columna vertebral} del DRP:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulContinuidad}}p{2.5cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Sigla} & \textbf{Significado} & \textbf{Impacto en el DRP} \\
+\hline
+\textbf{MTD} & M\'aximo tiempo tolerable de interrupci\'on & Define cu\'anto puede estar ca\'ido un proceso antes de que el negocio muera. \\
+\hline
+\textbf{RTO} & Objetivo de tiempo de recuperaci\'on & Define qu\'e tan r\'apido deben restaurarse los sistemas (gu\'ia la infraestructura). \\
+\hline
+\textbf{RPO} & P\'erdida m\'axima de datos aceptable & Define la frecuencia m\'inima de backups y la arquitectura de replicaci\'on. \\
+\hline
+\end{tabularx}
+
+\begin{cajaContinuidad}[title={Ejemplo pr\'actico: e-commerce de indumentaria}]
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Proceso cr\'itico:} Pasarela de pago.
+    \item \textbf{MTD:} 2 horas (m\'as que eso, se pierden ventas y confianza).
+    \item \textbf{RTO:} 1 hora (los sistemas deben estar operativos en 60 min).
+    \item \textbf{RPO:} 5 minutos (no se puede perder ninguna transacci\'on).
+\end{itemize}
+Estos n\'umeros definen \textbf{qu\'e infraestructura necesita el negocio}: backups cada 5 min, replicaci\'on en dos regiones, failover autom\'atico, etc.
+\end{cajaContinuidad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — COMPONENTES DE UN PLAN DE CONTINUIDAD
+% ============================================================
+\section{Componentes de un Plan de Continuidad}
+
+Un BCP/DRP profesional tiene, como m\'inimo, estas piezas:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulContinuidad}}p{4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Componente} & \textbf{¿Qu\'e incluye?} \\
+\hline
+1. Alcance y objetivos & ¿Qu\'e procesos cubre el plan? ¿Cu\'ales son las prioridades? \\
+\hline
+2. Roles y responsabilidades & ¿Qui\'en declara la crisis? ¿Qui\'en ejecuta cada parte del plan? \\
+\hline
+3. Criterios de activaci\'on & ¿Qu\'e eventos disparan el plan? (ej. ca\'ida $>$ 1h, ransomware confirmado, desastre natural) \\
+\hline
+4. Plan de comunicaci\'on & ¿A qui\'en y c\'omo se informa? (empleados, clientes, proveedores, reguladores, prensa) \\
+\hline
+5. Procedimientos de recuperaci\'on & Pasos t\'ecnicos detallados para restaurar cada sistema. \\
+\hline
+6. Sitio alternativo & Si el sitio principal no est\'a disponible, ¿desde d\'onde se opera? \\
+\hline
+7. Pruebas y simulacros & ¿Cada cu\'anto se prueba el plan? ¿C\'omo se mejora? \\
+\hline
+8. Mantenimiento del plan & ¿Qui\'en lo actualiza? ¿Cada cu\'anto? \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={El plan que nunca se prueba, no es un plan}]
+Muchas empresas redactan un plan de continuidad y lo guardan en un caj\'on. El d\'ia que ocurre el desastre real, nadie sabe d\'onde est\'a ni c\'omo usarlo. Un plan v\'alido se \textbf{prueba al menos una vez al a\~no} con un simulacro (como la Junta de Crisis de la Clase 12).
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — LA AUDITORÍA DE SEGURIDAD
+% ============================================================
+\section{La auditor\'ia de seguridad como mejora continua}
+
+Hasta ahora vimos c\'omo construir un programa de seguridad (Unidades 1 a 4). Pero, ¿c\'omo sabemos que funciona, que se cumple y que mejora con el tiempo? La respuesta es la \textbf{auditor\'ia}.
+
+\begin{cajaDefinicion}
+Una \textbf{auditor\'ia de seguridad de la informaci\'on} es un examen sistem\'atico, independiente y documentado para determinar si las actividades y resultados de seguridad cumplen con los planes establecidos, y si estos se implementan eficazmente y son adecuados para alcanzar los objetivos.
+\end{cajaDefinicion}
+
+\subsection{Tipos de auditor\'ia}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{verdeAuditoria}}p{3.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Tipo} & \textbf{Caracter\'isticas} \\
+\hline
+\textbf{Interna (primera parte)} & La realiza la propia organizaci\'on (equipo interno o auditor\'ia interna). Objetivo: mejorar procesos. \\
+\hline
+\textbf{Externa (segunda parte)} & La realiza un cliente o partner con inter\'es en la organizaci\'on. Objetivo: verificar cumplimiento contractual. \\
+\hline
+\textbf{De certificaci\'on (tercera parte)} & La realiza un organismo independiente. Objetivo: certificar cumplimiento de un est\'andar (ej. ISO 27001). \\
+\hline
+\end{tabularx}
+
+\subsection{El ciclo PHVA / PDCA de mejora continua}
+
+La auditor\'ia alimenta el ciclo cl\'asico de mejora continua que sostiene ISO 27001:
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.3cm,
+  box/.style={rectangle, draw=verdeAuditoria, fill=verdeAuditoria!10,
+              text width=3cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  arr/.style={-{Stealth[length=3mm]}, thick, verdeAuditoria}
+]
+  \node[box] (plan) {PLANIFICAR\\{\scriptsize (Plan)}};
+  \node[box, right=1.2cm of plan] (hacer) {HACER\\{\scriptsize (Do)}};
+  \node[box, below=0.8cm of hacer] (verif) {VERIFICAR\\{\scriptsize (Check)}};
+  \node[box, left=1.2cm of verif] (actuar) {ACTUAR\\{\scriptsize (Act)}};
+
+  \draw[arr] (plan) -- (hacer);
+  \draw[arr] (hacer) -- (verif);
+  \draw[arr] (verif) -- (actuar);
+  \draw[arr] (actuar) -- (plan);
+\end{tikzpicture}
+\end{center}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{verdeAuditoria}}p{2.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Fase} & \textbf{¿Qu\'e se hace?} \\
+\hline
+\textbf{Planificar} & Definir pol\'iticas, riesgos, controles. \\
+\hline
+\textbf{Hacer} & Implementar los controles. \\
+\hline
+\textbf{Verificar} & Auditar, medir, monitorear. (¡Esto es la auditor\'ia!) \\
+\hline
+\textbf{Actuar} & Corregir y mejorar lo que no funcion\'o. \\
+\hline
+\end{tabularx}
+
+\begin{cajaAuditoria}[title={La auditor\'ia no es una ``polic\'ia''}]
+Una cultura sana ve la auditor\'ia como una \textbf{herramienta de mejora}, no como una inspecci\'on punitiva. Las organizaciones maduras buscan auditor\'ias porque les revelan d\'onde mejorar antes de que un atacante o un incidente lo hagan por ellas.
+\end{cajaAuditoria}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — ACTIVIDAD CON IA
+% ============================================================
+\section{Actividad con IA: Plan de Respuesta a Incidentes}
+
+\begin{cajaIA}
+Esta es la \textbf{cuarta y \'ultima} actividad con IA del cuatrimestre. Consolida todo lo aprendido: el Plan de Respuesta a Incidentes es el \textbf{Entregable 6} de su TP Integrador, y debe estar verificado por ustedes antes de la entrega final.
+\end{cajaIA}
+
+\vspace{8pt}
+
+\subsection{Paso 1: Generar el borrador con IA}
+
+\begin{cajaIA}
+\textbf{Consigna:} En grupos, usen una IA generativa (ChatGPT, Claude, Gemini, etc.) para producir un \textbf{borrador de Plan de Respuesta a Incidentes} para el negocio digital de su TP Integrador.\\[4pt]
+\textbf{Prompt sugerido:}
+\begin{tcolorbox}[colback=white, colframe=violetaIA!50, arc=2mm]
+\small\textit{``Act\'ua como un consultor senior en ciberseguridad y continuidad de negocio. Redact\'a un Plan de Respuesta a Incidentes (IRP) para [TIPO DE NEGOCIO DIGITAL] con [TAMA\~NO / EMPLEADOS / PRODUCTO PRINCIPAL]. El plan debe incluir: alcance, roles (Junta de Crisis), criterios de activaci\'on, fases de respuesta (detecci\'on, contenci\'on, erradicaci\'on, recuperaci\'on, lecciones aprendidas), plan de comunicaci\'on interna y externa, y procedimientos b\'asicos ante los tres escenarios m\'as probables: (1) ransomware, (2) filtraci\'on de datos de clientes, (3) ca\'ida prolongada del servicio principal. Basate en buenas pr\'acticas de NIST SP 800-61 e ISO/IEC 27001.''}
+\end{tcolorbox}
+\textbf{Entrega:} el borrador generado (puede pegarse en la Secci\'on 6 de este cuadernillo o en un documento aparte).
+\end{cajaIA}
+
+\newpage
+\subsection{Paso 2: Auditar el borrador contra el checklist de referencia}
+
+\begin{cajaChecklist}
+A continuaci\'on, el \textbf{checklist de referencia} basado en \textbf{NIST SP 800-61} (gu\'ia de manejo de incidentes de seguridad) e \textbf{ISO/IEC 27001} (Anexo A, control A.16 Gesti\'on de Incidentes). Usen este checklist para auditar el borrador que gener\'o la IA.
+\end{cajaChecklist}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|>{\centering\arraybackslash}p{1cm}|>{\centering\arraybackslash}p{1cm}|}
+\hline
+\rowcolor{verdeAuditoria!20}
+\textbf{\#} & \textbf{Punto a verificar} & \textbf{S\'i} & \textbf{No} \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Estructura general}} \\
+\hline
+1 & El plan tiene un \textbf{alcance} claramente definido (qu\'e sistemas y procesos cubre). & \checkboxVacio & \checkboxVacio \\
+\hline
+2 & Hay una lista clara de \textbf{roles y responsabilidades} (Junta de Crisis, TI, Legal, Comunicaciones). & \checkboxVacio & \checkboxVacio \\
+\hline
+3 & Existen \textbf{criterios de activaci\'on} (¿qu\'e eventos disparan el plan?). & \checkboxVacio & \checkboxVacio \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Fases de respuesta (NIST SP 800-61)}} \\
+\hline
+4 & El plan cubre las 4 fases: \textbf{Detecci\'on, Contenci\'on, Erradicaci\'on, Recuperaci\'on}. & \checkboxVacio & \checkboxVacio \\
+\hline
+5 & Incluye una fase de \textbf{Lecciones Aprendidas} posterior al incidente. & \checkboxVacio & \checkboxVacio \\
+\hline
+6 & Define procedimientos para \textbf{preservar evidencia} forense. & \checkboxVacio & \checkboxVacio \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Comunicaci\'on (ISO 27001 A.16.1.2)}} \\
+\hline
+7 & Hay un plan de \textbf{comunicaci\'on interna} (empleados). & \checkboxVacio & \checkboxVacio \\
+\hline
+8 & Hay un plan de \textbf{comunicaci\'on externa} (clientes, prensa, reguladores). & \checkboxVacio & \checkboxVacio \\
+\hline
+9 & Se especifican los \textbf{plazos legales} de notificaci\'on (Ley 25.326, GDPR si aplica). & \checkboxVacio & \checkboxVacio \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Escenarios espec\'ificos}} \\
+\hline
+10 & El plan incluye procedimientos para \textbf{ransomware}. & \checkboxVacio & \checkboxVacio \\
+\hline
+11 & El plan incluye procedimientos para \textbf{filtraci\'on de datos}. & \checkboxVacio & \checkboxVacio \\
+\hline
+12 & El plan incluye procedimientos para \textbf{ca\'ida prolongada del servicio}. & \checkboxVacio & \checkboxVacio \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Mejora continua (ISO 27001)}} \\
+\hline
+13 & El plan define \textbf{pruebas y simulacros peri\'odicos}. & \checkboxVacio & \checkboxVacio \\
+\hline
+14 & Existe una frecuencia definida de \textbf{revisi\'on y actualizaci\'on} del plan. & \checkboxVacio & \checkboxVacio \\
+\hline
+\multicolumn{4}{|l|}{\cellcolor{grisClaro}\textbf{Conexi\'on con la continuidad (DRP/BCP)}} \\
+\hline
+15 & Se define el \textbf{RTO} (objetivo de tiempo de recuperaci\'on) de los sistemas cr\'iticos. & \checkboxVacio & \checkboxVacio \\
+\hline
+16 & Se define el \textbf{RPO} (p\'erdida m\'axima de datos) de los sistemas cr\'iticos. & \checkboxVacio & \checkboxVacio \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — REPORTE DE AUDITORÍA
+% ============================================================
+\section{Reporte de auditor\'ia (verificaci\'on cr\'itica de la IA)}
+
+\begin{cajaActividad}[title={Documentando la verificaci\'on humana}]
+Este reporte es el \textbf{Anexo ``Uso de IA''} de su TP Integrador. Debe mostrar evidencia real de pensamiento cr\'itico, no solo una copia acr\'itica de la salida de la IA.
+\end{cajaActividad}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Herramienta de IA utilizada:} \hrulefill \\[4pt]
+\textbf{Prompt exacto utilizado:} \hrulefill \\[4pt]
+\hrulefill \\[4pt]
+\hline
+\textbf{¿Cu\'antos de los 16 puntos del checklist cumpli\'o el borrador de la IA?} \hrulefill /16 \\[8pt]
+\hline
+\textbf{Puntos que la IA OMITI\'O y ustedes agregaron manualmente (m\'inimo 3):} \\[3cm]
+\hline
+\textbf{Puntos donde la IA era IMPRECISA o EXCESIVAMENTE GEN\'ERICA y ustedes corrigieron:} \\[3cm]
+\hline
+\textbf{¿Hay recomendaciones de la IA que NO aplican a su negocio elegido? ¿Cu\'ales y por qu\'e?} \\[3cm]
+\hline
+\textbf{¿Qu\'e adaptaron al tama\~no real del negocio digital (pyme vs multinacional)?} \\[3cm]
+\hline
+\textbf{Conclusi\'on final: ¿conf\'ian en el plan generado con IA como entregable del TP? ¿Qu\'e m\'as necesitan revisar antes de la defensa?} \\[3cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — PLANTILLA DEL PLAN (ENTREGABLE 6 DEL TP)
+% ============================================================
+\section{Plantilla del Plan de Respuesta a Incidentes}
+
+\begin{cajaNota}[title={Entrega obligatoria de hoy}]
+Este es el \textbf{Entregable 6 del TP Integrador}. Debe entregarse al final de esta clase como \textbf{avance obligatorio} (aprobado/desaprobado, condiciona la regularidad). La versi\'on final se incorpora al dossier que defienden en la Clase 15.
+\end{cajaNota}
+
+\vspace{6pt}
+
+\begin{center}
+\Large\bfseries\color{azulContinuidad}
+PLAN DE RESPUESTA A INCIDENTES\\[4pt]
+\normalsize [Nombre del Negocio Digital] --- Versi\'on 1.0
+\end{center}
+
+\vspace{8pt}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{1. Alcance y objetivos} \\[2pt]
+\hline
+\\[1.5cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{2. Roles y Junta de Crisis} \\[2pt]
+\hline
+\\[1.5cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{3. Criterios de activaci\'on} \\[2pt]
+\hline
+\\[1.5cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{4. Fases de respuesta (NIST SP 800-61)} \\[2pt]
+\hline
+\textbf{Detecci\'on:} \hrulefill \\[6pt]
+\textbf{Contenci\'on:} \hrulefill \\[6pt]
+\textbf{Erradicaci\'on:} \hrulefill \\[6pt]
+\textbf{Recuperaci\'on:} \hrulefill \\[6pt]
+\textbf{Lecciones aprendidas:} \hrulefill \\[1cm]
+\hline
+\end{tabularx}
+
+\newpage
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{5. Plan de comunicaci\'on} \\[2pt]
+\hline
+\textbf{Interna (empleados):} \hrulefill \\[6pt]
+\textbf{Externa (clientes, prensa):} \hrulefill \\[6pt]
+\textbf{Reguladores (AAIP / GDPR):} \hrulefill \\[1.5cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{6. Escenarios espec\'ificos} \\[2pt]
+\hline
+\textbf{Escenario A --- Ransomware:} \hrulefill \\[6pt]
+\textbf{Escenario B --- Filtraci\'on de datos de clientes:} \hrulefill \\[6pt]
+\textbf{Escenario C --- Ca\'ida prolongada del servicio principal:} \hrulefill \\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{7. RTO, RPO y MTD de los procesos cr\'iticos} \\[2pt]
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\rowcolor{azulContinuidad!15}
+\textbf{8. Pruebas, simulacros y mantenimiento} \\[2pt]
+\hline
+\\[1.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — CIERRE DE UNIDAD 4
+% ============================================================
+\section{Cierre de Unidad 4 y del cuatrimestre}
+
+Con esta clase completamos el tablero de la \textbf{Unidad 4: Gobierno de la Seguridad, Factor Humano, Incidentes y Continuidad}.
+
+\begin{cajaCierre}[title={Mapa integrador de Unidad 4}]
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.1cm and 1.6cm,
+  box/.style={rectangle, draw=azulUCA, fill=azulUCA!10,
+              text width=3.2cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  boxsmall/.style={rectangle, draw=azulCielo, fill=azulCielo!10,
+              text width=2.8cm, align=center, rounded corners=3pt,
+              font=\scriptsize},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, azulUCA}
+]
+  \node[box] (gob) {GOBIERNO\\Pol\'iticas\\PSA (Clase 11)};
+  \node[box, right=2.5cm of gob] (hum) {FACTOR HUMANO\\Concientizaci\'on\\(Clase 10 y 12)};
+  
+  \node[boxsmall, below=1.5cm of gob] (inc) {GESTI\'ON DE\\INCIDENTES\\(Clase 12)};
+  \node[boxsmall, below=1.5cm of hum] (cont) {CONTINUIDAD\\BCP / DRP\\(Clase 13)};
+  
+  \node[box, below=1.5cm of inc, fill=verdeAuditoria!15, draw=verdeAuditoria,
+        text width=6cm] (aud) {AUDITOR\'IA Y MEJORA CONTINUA\\(Clase 13 --- cierra el ciclo PHVA)};
+
+  \draw[arr] (gob.south) -- (inc.north);
+  \draw[arr] (hum.south) -- (cont.north);
+  \draw[arr] (inc.south) -- (aud.north west);
+  \draw[arr] (cont.south) -- (aud.north east);
+\end{tikzpicture}
+\end{center}
+\end{cajaCierre}
+
+\begin{cajaNota}[title={Lo que nos llevamos de la Unidad 4}]
+\begin{itemize}[leftmargin=2em]
+    \item Construir un \textbf{gobierno} de la seguridad (pol\'iticas, normas, procedimientos, roles).
+    \item Redactar una \textbf{Pol\'itica de Seguridad Aceptable} realista (Clase 11 / Parcial 2).
+    \item Dise\~nar campa\~nas de \textbf{concientizaci\'on} y simulacros de phishing (Clase 10).
+    \item Gestionar una \textbf{crisis} en tiempo real con roles de Junta (Clase 12).
+    \item Planificar la \textbf{continuidad del negocio} y recuperaci\'on ante desastres (Clase 13).
+    \item Usar la \textbf{auditor\'ia} como herramienta de mejora continua.
+\end{itemize}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — PUENTE A LAS CLASES FINALES
+% ============================================================
+\section{Pr\'oximos pasos: Clases 14 y 15}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulUCA}}p{3cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Clase} & \textbf{¿Qu\'e haremos?} \\
+\hline
+\textbf{Clase 14} (Taller integraci\'on) & 
+Mentor\'ia rotativa: el docente revisa el avance de cada grupo.\\
+Coevaluaci\'on cruzada entre grupos con r\'ubrica breve (ensayo general).\\
+Entrega de la versi\'on pre-final del TP Integrador. \\
+\hline
+\textbf{Clase 15} (Defensa final) & 
+Presentaci\'on final de los 4-5 grupos ante el docente y evaluador invitado.\\
+10 minutos de exposici\'on + 5 minutos de preguntas individuales por grupo.\\
+Encuesta de satisfacci\'on final.\\
+\textbf{Nota 1-10, aprueba con 4 (reemplaza el examen final).} \\
+\hline
+\end{tabularx}
+
+\begin{cajaActividad}[title={Autoevaluaci\'on grupal para llegar a la Clase 14}]
+Antes de irse, revisen el avance de su TP Integrador y marquen qu\'e les falta:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Entregable del TP} & \textbf{Listo} & \textbf{Falta} \\
+\hline
+1. Mapa de activos y an\'alisis CID & \checkboxVacio & \checkboxVacio \\
+\hline
+2. Matriz de riesgos + BIA + controles & \checkboxVacio & \checkboxVacio \\
+\hline
+3. Evaluaci\'on de seguridad en la nube & \checkboxVacio & \checkboxVacio \\
+\hline
+4. Cumplimiento normativo y pol\'itica de privacidad & \checkboxVacio & \checkboxVacio \\
+\hline
+5. Pol\'itica de Seguridad Aceptable (PSA) & \checkboxVacio & \checkboxVacio \\
+\hline
+6. Plan de Respuesta a Incidentes (hoy) & \checkboxVacio & \checkboxVacio \\
+\hline
+7. Anexo ``Uso de IA'' & \checkboxVacio & \checkboxVacio \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 9 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 13}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+BCP (Business Continuity Plan) & Plan para que el negocio siga operando tras una interrupci\'on. \\
+DRP (Disaster Recovery Plan) & Plan para recuperar los sistemas de informaci\'on tras un desastre. \\
+RTO & Objetivo de tiempo de recuperaci\'on de un sistema. \\
+RPO & P\'erdida m\'axima de datos aceptable (define frecuencia de backup). \\
+MTD & M\'aximo tiempo tolerable de interrupci\'on de un proceso. \\
+Auditor\'ia de seguridad & Examen sistem\'atico e independiente de los controles de seguridad. \\
+PHVA / PDCA & Ciclo Planificar-Hacer-Verificar-Actuar de mejora continua. \\
+ISO/IEC 27001 & Norma internacional de Sistemas de Gesti\'on de Seguridad de la Informaci\'on. \\
+NIST SP 800-61 & Gu\'ia del NIST para el manejo de incidentes de seguridad. \\
+Simulacro & Prueba controlada de un plan de respuesta o continuidad. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y preparaci\'on del TP final}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Us\'a este espacio para anotar hallazgos de la auditor\'ia al borrador de IA, dudas pendientes para la mentor\'ia de la Clase 14, o ideas para la defensa oral de la Clase 15.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

@@ -1,0 +1,582 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 11
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaParcial}{HTML}{6C3483}
+\definecolor{azulGobierno}{HTML}{1B4F72}
+\definecolor{verdePSA}{HTML}{117A65}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaGobierno}{
+  colback=azulGobierno!8, colframe=azulGobierno,
+  fonttitle=\bfseries\color{azulGobierno},
+  title={\ding{211}\; Gobierno de la Seguridad}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaPSA}{
+  colback=verdePSA!8, colframe=verdePSA,
+  fonttitle=\bfseries\color{verdePSA},
+  title={\ding{45}\; Pol\'itica de Seguridad Aceptable}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaParcial}{
+  colback=violetaParcial!8, colframe=violetaParcial,
+  fonttitle=\bfseries\color{violetaParcial},
+  title={\ding{115}\; PARCIAL 2}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 11}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.2cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 11}\\[10pt]
+{\Large\itshape ``Gobierno de la seguridad:\\[2pt] Pol\'itica de Seguridad Aceptable''}\\[6pt]
+{\large\color{violetaParcial}\ding{115}\; Incluye PARCIAL 2}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Unidad 4 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{De la t\'ecnica al gobierno: el tablero de la seguridad}
+
+En las unidades anteriores aprendimos a proteger sistemas (Unidad 1 y 2), a cumplir la ley (Unidad 3) y a concientizar personas (Clase 10). Pero todo eso puede quedar como acciones aisladas si la organizaci\'on no tiene \textbf{reglas claras del juego}.
+
+\begin{cajaDefinicion}
+El \textbf{Gobierno de la Seguridad} es el conjunto de pol\'iticas, normas, procedimientos, roles y responsabilidades que una organizaci\'on establece para dirigir, controlar y mejorar continuamente su seguridad de la informaci\'on.
+\end{cajaDefinicion}
+
+\begin{cajaNota}[title={La diferencia fundamental}]
+La \textbf{seguridad t\'ecnica} dice \emph{c\'omo} se protegen los sistemas (firewalls, cifrado, MFA). El \textbf{gobierno de la seguridad} dice \emph{qui\'en decide qu\'e se protege, por qu\'e, y qu\'e pasa si no se cumple}. Sin gobierno, la seguridad es un conjunto de herramientas sin estrategia.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — PIRÁMIDE DOCUMENTAL
+% ============================================================
+\section{La pir\'amide documental: pol\'iticas, normas y procedimientos}
+
+El gobierno de la seguridad se materializa en documentos organizados jer\'arquicamente. Cada nivel tiene un prop\'osito distinto.
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={rectangle, draw=azulGobierno, align=center, rounded corners=3pt},
+]
+  % Pirámide desde arriba (más estratégico) a abajo (más operativo)
+  \node[box, fill=azulGobierno!60, text=white, minimum width=3cm, minimum height=1.4cm, font=\small\bfseries] (pol)
+    {POL\'ITICAS\\{\scriptsize ¿QU\'E y POR QU\'E?}};
+
+  \node[box, fill=azulGobierno!40, text=white, minimum width=6cm, minimum height=1.4cm, font=\small\bfseries, below=0.4cm of pol] (nor)
+    {NORMAS\\{\scriptsize Reglas espec\'ificas y obligatorias}};
+
+  \node[box, fill=azulGobierno!25, minimum width=9cm, minimum height=1.4cm, font=\small\bfseries, below=0.4cm of nor] (pro)
+    {PROCEDIMIENTOS\\{\scriptsize Pasos detallados, c\'omo se ejecuta}};
+
+  \node[box, fill=grisClaro, draw=gray, minimum width=11.5cm, minimum height=1.2cm, font=\small, below=0.4cm of pro] (gui)
+    {GU\'IAS / INSTRUCTIVOS / PLANTILLAS (opcional)};
+
+  \draw[-Stealth, thick, azulGobierno] (pol.south) -- (nor.north);
+  \draw[-Stealth, thick, azulGobierno] (nor.south) -- (pro.north);
+  \draw[-Stealth, thick, gray] (pro.south) -- (gui.north);
+\end{tikzpicture}
+\end{center}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulGobierno}}p{2.8cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Nivel} & \textbf{¿Qu\'e es?} & \textbf{Ejemplo} \\
+\hline
+\textbf{Pol\'itica} & Declaraci\'on de intenci\'on de la direcci\'on. Establece el ``qu\'e'' y el ``por qu\'e''. Es estable en el tiempo. & ``Todos los datos de clientes se cifran en reposo y tr\'ansito.'' \\
+\hline
+\textbf{Norma} & Regla obligatoria y espec\'ifica que desarrolla la pol\'itica. & ``Se usa AES-256 para datos en reposo; TLS 1.2 o superior para datos en tr\'ansito.'' \\
+\hline
+\textbf{Procedimiento} & Pasos detallados para cumplir la norma. Es operativo. & ``Paso 1: generar clave en el KMS. Paso 2: configurar el bucket S3 con SSE-KMS. Paso 3: auditar trimestralmente.'' \\
+\hline
+\end{tabularx}
+
+\begin{cajaGobierno}[title={Por qu\'e importa el orden}]
+Si una empresa solo tiene \textbf{procedimientos} sin pol\'iticas, nadie sabe \emph{por qu\'e} se hacen las cosas y todo depende de personas espec\'ificas. Si solo tiene \textbf{pol\'iticas} sin procedimientos, las buenas intenciones no se ejecutan. El equilibrio entre los tres niveles es lo que hace que la seguridad sea \textbf{sostenible}.
+\end{cajaGobierno}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — PSA
+% ============================================================
+\section{La Pol\'itica de Seguridad Aceptable (PSA)}
+
+\begin{cajaDefinicion}
+La \textbf{Pol\'itica de Seguridad Aceptable} (en ingl\'es, Acceptable Use Policy, AUP) es el documento que establece \textbf{qu\'e pueden y qu\'e no pueden hacer los empleados y usuarios} con los recursos tecnol\'ogicos de la organizaci\'on (equipos, red, internet, correo, aplicaciones, datos).
+\end{cajaDefinicion}
+
+\subsection{¿Por qu\'e es tan importante?}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Legal:} da respaldo para aplicar sanciones ante incumplimientos (un empleado que usa la notebook de la empresa para minar criptomonedas, por ejemplo).
+    \item \textbf{Claridad:} elimina zonas grises; todo el mundo sabe qu\'e est\'a permitido.
+    \item \textbf{Cultura:} instala la seguridad como parte del contrato laboral, no como una molestia externa.
+\end{itemize}
+
+\subsection{Estructura m\'inima de una PSA}
+
+Una PSA profesional suele tener estos bloques:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{verdePSA}}p{3.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Secci\'on} & \textbf{¿Qu\'e contiene?} \\
+\hline
+1. Prop\'osito y alcance & ¿Para qu\'e existe la pol\'itica? ¿A qui\'en aplica? (empleados, contractors, terceros). \\
+\hline
+2. Uso aceptable de los recursos & Qu\'e usos est\'an permitidos (trabajo, uso personal razonable) y cu\'ales prohibidos. \\
+\hline
+3. Contrase\~nas y accesos & Requisitos m\'inimos de contrase\~nas, uso de gestores, MFA, prohibici\'on de compartir credenciales. \\
+\hline
+4. Correo e internet & Uso aceptable del correo corporativo y la conexi\'on a internet; sitios prohibidos; manejo de adjuntos. \\
+\hline
+5. Dispositivos & Uso de equipos corporativos, BYOD (``tra\'e tu propio dispositivo''), p\'erdida o robo. \\
+\hline
+6. Informaci\'on y datos confidenciales & Clasificaci\'on de datos, manejo, prohibici\'on de fugas, redes sociales. \\
+\hline
+7. Incidentes & Obligaci\'on de reportar incidentes de seguridad. \\
+\hline
+8. Cumplimiento y sanciones & Qu\'e pasa si no se cumple (desde advertencia hasta despido o acciones legales). \\
+\hline
+9. Firmas y vigencia & Firma del empleado, firma del responsable, fecha de vigencia y revisi\'on. \\
+\hline
+\end{tabularx}
+
+\begin{cajaPSA}[title={Regla de oro de una buena PSA}]
+Una PSA debe ser \textbf{corta, clara y espec\'ifica}. Si es un documento de 40 p\'aginas en lenguaje legal, nadie la lee y no sirve. Las mejores PSA caben en 2-4 p\'aginas y se firman al ingresar a la empresa.
+\end{cajaPSA}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — ROLES Y RESPONSABILIDADES
+% ============================================================
+\section{Roles y responsabilidades en seguridad}
+
+El gobierno tambi\'en define \textbf{qui\'en es responsable de qu\'e}. Los roles m\'as comunes en una organizaci\'on digital son:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulGobierno}}p{3.2cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Rol} & \textbf{Responsabilidad principal} \\
+\hline
+\textbf{Direcci\'on / CEO} & Aprueba la pol\'itica y asigna presupuesto. Es el responsable \'ultimo. \\
+\hline
+\textbf{CISO} (Chief Information Security Officer) & Lidera la estrategia de seguridad, reporta a la direcci\'on. \\
+\hline
+\textbf{DPO} (Data Protection Officer) & Vela por el cumplimiento de la normativa de datos personales (Ley 25.326 / GDPR). \\
+\hline
+\textbf{Due\~no del activo (Asset Owner)} & Responsable de un activo espec\'ifico (ej. el Gerente Comercial es due\~no de la base de clientes). \\
+\hline
+\textbf{\'Area de TI / Seguridad} & Implementa controles t\'ecnicos, monitorea, responde incidentes. \\
+\hline
+\textbf{Todos los empleados} & Cumplen la PSA, reportan incidentes, protegen sus credenciales. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={El error frecuente en las pymes]}
+En empresas chicas no suele haber un CISO ni un DPO dedicados. Pero \textbf{los roles deben existir aunque los ocupe la misma persona}. Lo importante es que alguien sea formalmente responsable de la seguridad, de los datos personales y del cumplimiento. Si ``todos son responsables'', nadie lo es.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — PARCIAL 2: CASO Y RÚBRICA
+% ============================================================
+\section{PARCIAL 2: caso, formato y r\'ubrica}
+
+\begin{cajaParcial}[title={Ficha t\'ecnica del Parcial 2}]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4cm}X}
+\textbf{Modalidad:} & Grupal (mismos grupos del TP Integrador), en clase. \\
+\textbf{Duraci\'on:} & 60 minutos de redacci\'on + 5 minutos de defensa oral por grupo. \\
+\textbf{Cobertura:} & Unidades 3 y 4 + temas transversales (nube, criptograf\'ia, hacking \'etico). \\
+\textbf{Entregable:} & Una Pol\'itica de Seguridad Aceptable (PSA) para el caso dado. \\
+\textbf{Nota:} & 1 a 10. Se aprueba con 4. \\
+\end{tabularx}
+\end{cajaParcial}
+
+\subsection{Caso del Parcial 2: ``DevCraft''}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulGobierno, arc=3mm]
+\textbf{Contexto:} ``DevCraft'' es una empresa de desarrollo de software con 40 empleados. Hace aplicaciones a medida para clientes (bancos, retailers, startups).\\[4pt]
+\textbf{Equipo:}
+\begin{itemize}[leftmargin=1.5em]
+    \item 25 desarrolladores (muchos trabajan remoto o h\'ibrido, usan notebooks propias y corporativas).
+    \item 5 dise\~nadores UX/UI.
+    \item 3 project managers.
+    \item 2 personas en RRHH.
+    \item 2 en administraci\'on/finanzas.
+    \item 1 gerente general.
+    \item 2 personas en ``infraestructura/DevOps'' (manejan la nube de la empresa).
+\end{itemize}
+\textbf{Situaci\'on:} La empresa creci\'o r\'apido y nunca tuvo una pol\'itica formal. Recientemente un desarrollador subi\'o c\'odigo con credenciales de AWS a un repositorio p\'ublico de GitHub, y un cliente se quej\'o de que su inform\'on confidencial podr\'ia haber quedado expuesta. El director decidi\'o que \textbf{es hora de tener una PSA formal}.
+\end{tcolorbox}
+
+\subsection{¿Qu\'e deben entregar?}
+
+Cada grupo debe redactar una \textbf{PSA completa para DevCraft}, con las 9 secciones vistas en la Secci\'on 3, adaptadas al caso. Debe ser:
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Realista} para una empresa de 40 personas (no pedir controles de multinacional).
+    \item \textbf{Espec\'ifica} sobre los riesgos reales del caso: trabajo remoto/h\'ibrido, BYOD, c\'odigo con credenciales, datos de clientes bancarios.
+    \item \textbf{Coherente} con el marco normativo (Ley 25.326, derechos ARCO) y los temas transversales vistos (nube, criptograf\'ia, hacking \'etico).
+\end{itemize}
+
+\newpage
+\subsection{R\'ubrica oficial del Parcial 2 (sobre 10 puntos)}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{3cm}|}
+\hline
+\rowcolor{violetaParcial!20}
+\textbf{¿Qu\'e se eval\'ua?} & \textbf{Puntos} \\
+\hline
+Completitud y pertinencia de la PSA para el caso dado & hasta 3 \\
+\hline
+Alineaci\'on con el marco normativo y de gobierno visto en clase & hasta 2 \\
+\hline
+Calidad de la defensa oral grupal (claridad, argumentaci\'on) & hasta 2 \\
+\hline
+Calidad de las respuestas individuales a las preguntas del docente & hasta 3 \\
+\hline
+\rowcolor{grisClaro}
+\textbf{TOTAL} & \textbf{10} \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Atenci\'on: las preguntas individuales valen 30\%}]
+El Parcial 2 no solo eval\'ua el documento escrito, sino la \textbf{comprensi\'on individual}. El docente har\'a preguntas cruzadas a cada integrante del grupo. Todos deben poder explicar cualquier parte de la PSA.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — PLANTILLA DE REDACCIÓN
+% ============================================================
+\section{Plantilla de redacci\'on para el Parcial 2}
+
+\begin{cajaParcial}[title={Instrucciones}]
+Durante el Parcial 2 van a redactar la PSA de DevCraft en esta plantilla. Pueden usar el reverso o hojas adicionales si es necesario. Al terminar, la firman como grupo y la entregan al docente.
+\end{cajaParcial}
+
+\vspace{6pt}
+
+\begin{center}
+\Large\bfseries\color{azulGobierno}
+POL\'ITICA DE SEGURIDAD ACEPTABLE\\[4pt]
+\normalsize DevCraft --- Versi\'on 1.0
+\end{center}
+
+\vspace{8pt}
+\renewcommand{\arraystretch}{1.6}
+
+\noindent\textbf{1. Prop\'osito y alcance}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{2. Uso aceptable de los recursos}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{3. Contrase\~nas y accesos}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\newpage
+\noindent\textbf{4. Correo e internet}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{5. Dispositivos (incluye BYOD y trabajo remoto)}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2.5cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{6. Informaci\'on y datos confidenciales (incluye c\'odigo fuente)}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+\noindent\textbf{7. Reporte de incidentes}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{8. Cumplimiento y sanciones}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[2cm]
+\hline
+\end{tabularx}
+
+\vspace{6pt}
+\noindent\textbf{9. Vigencia y firmas}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\\[1.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — PREPARACIÓN DEFENSA ORAL
+% ============================================================
+\section{Preparaci\'on para la defensa oral}
+
+Al terminar la redacci\'on, cada grupo tiene \textbf{5 minutos} para presentar su PSA al resto de la clase y al docente. Luego, el docente har\'a preguntas individuales.
+
+\subsection{Estructura recomendada de la presentaci\'on (5 min)}
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{1 minuto} — Contexto: por qu\'e DevCraft necesitaba una PSA (el incidente del repositorio).
+    \item \textbf{2 minutos} — Los 3-4 puntos m\'as importantes de su PSA (los que priorizaron).
+    \item \textbf{1 minuto} — C\'omo van a lograr que los empleados la conozcan y la cumplan (capacitaci\'on, firma al ingreso, recordatorios).
+    \item \textbf{1 minuto} — C\'omo se revisar\'a y actualizar\'a la pol\'itica en el tiempo.
+\end{enumerate}
+
+\subsection{Preguntas individuales t\'ipicas del docente}
+
+Estas son \textbf{ejemplos reales} de preguntas que el docente puede hacer a cada integrante del grupo. Pract\'iquenlas antes de la defensa:
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Sobre el caso:}\\[2pt]
+--- ¿Por qu\'e incluyeron esta regla sobre c\'odigo fuente y repositorios?\\
+--- ¿C\'omo manejar\'ian el hecho de que muchos desarrolladores trabajan con notebooks propias?\\
+--- ¿Qu\'e hacen si un empleado se niega a firmar la PSA?\\
+\hline
+\textbf{Sobre el marco normativo:}\\[2pt]
+--- ¿Su PSA respeta la Ley 25.326? ¿C\'omo?\\
+--- ¿Qu\'e derechos ARCO deber\'ia conocer cada empleado?\\
+--- ¿C\'omo se relaciona esta PSA con la pol\'itica de privacidad de la empresa?\\
+\hline
+\textbf{Sobre temas transversales:}\\[2pt]
+--- Si DevCraft usa AWS, ¿qu\'e parte de la seguridad es responsabilidad de la empresa y cu\'al de AWS?\\
+--- ¿C\'omo se conecta esta PSA con lo que vieron de hashing y criptograf\'ia?\\
+--- ¿Qu\'e rol tiene la concientizaci\'on (clase 10) para que la PSA se cumpla?\\
+\hline
+\textbf{Sobre gobierno:}\\[2pt]
+--- ¿Qui\'en es el responsable \'ultimo de la seguridad en DevCraft?\\
+--- ¿C\'omo se revisa y actualiza esta pol\'itica?\\
+--- ¿Qu\'e pasa si un gerente incumple la pol\'itica?\\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Consejos para la defensa}]
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Distribuyan roles} para la presentaci\'on: qui\'en introduce, qui\'en explica los puntos clave, qui\'en cierra.
+    \item \textbf{Todos deben estar listos para responder} preguntas individuales. Repasen la PSA juntos antes de presentar.
+    \item \textbf{Sean honestos} si no saben algo: es mejor decir ``lo discutimos pero no lo resolvimos'' que inventar.
+    \item \textbf{Usen ejemplos concretos} del caso DevCraft, no generalidades.
+\end{enumerate}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — GLOSARIO Y CIERRE
+% ============================================================
+\section{Glosario de la Clase 11}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Gobierno de la seguridad & Estructura de pol\'iticas, roles y procesos que dirigen la seguridad. \\
+Pol\'itica & Declaraci\'on de intenci\'on de la direcci\'on (el ``qu\'e'' y el ``por qu\'e''). \\
+Norma & Regla espec\'ifica y obligatoria que desarrolla la pol\'itica. \\
+Procedimiento & Pasos operativos detallados para cumplir una norma. \\
+PSA / AUP & Pol\'itica de Seguridad Aceptable (Acceptable Use Policy). \\
+CISO & Director de Seguridad de la Informaci\'on (rol ejecutivo). \\
+DPO & Delegado de Protecci\'on de Datos. \\
+Due\~no del activo & Persona responsable de un activo espec\'ifico. \\
+BYOD & ``Bring Your Own Device''; empleados usan dispositivos propios. \\
+Vigencia & Fecha desde la cual una pol\'itica es v\'alida. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Cierre y puente hacia la Clase 12}
+
+\begin{cajaGobierno}[title={Lo que nos llevamos de la Clase 11}]
+\begin{itemize}[leftmargin=2em]
+    \item La diferencia entre \textbf{seguridad t\'ecnica} y \textbf{gobierno de la seguridad}.
+    \item La \textbf{pir\'amide documental}: pol\'iticas $\rightarrow$ normas $\rightarrow$ procedimientos.
+    \item La estructura de una \textbf{PSA} completa y su importancia legal y cultural.
+    \item Los \textbf{roles} clave en seguridad (CISO, DPO, due\~nos de activos).
+    \item Experiencia real de redactar y defender una PSA (Parcial 2).
+\end{itemize}
+\end{cajaGobierno}
+
+\begin{cajaNota}[title={Puente hacia la Clase 12: Factor humano e incidentes}]
+Una PSA es el \textbf{piso} del gobierno. Pero ni la mejor pol\'itica evita que los incidentes ocurran. La pr\'oxima clase vamos a ver qu\'e hacer \textbf{cuando algo sale mal}: c\'omo gestionar un incidente, c\'omo reacciona la organizaci\'on, y por qu\'e el factor humano es a la vez el eslab\'on m\'as d\'ebil y el m\'as importante.\\[4pt]
+Adem\'as, prepararemos la \textbf{Junta de Crisis} de la Clase 12 (un juego de roles donde cada integrante toma un papel durante una filtraci\'on de datos).
+\end{cajaNota}
+
+\vspace{1cm}
+
+\section{Espacio para notas y preparaci\'on del Parcial 2}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Us\'a este espacio para anotar ideas para la PSA, dudas sobre el caso DevCraft, o posibles respuestas a las preguntas individuales del docente.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}
