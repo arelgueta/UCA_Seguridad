@@ -1,0 +1,510 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 7
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor} % Necesario para \cellcolor en tablas
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{azulNube}{HTML}{1A5276}
+
+% Colores para el modelo de responsabilidad compartida
+\definecolor{respProv}{HTML}{A9DFBF}  % Verde = Proveedor
+\definecolor{respCli}{HTML}{F5CBA7}   % Naranja = Cliente
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNube}{
+  colback=azulNube!8, colframe=azulNube,
+  fonttitle=\bfseries\color{azulNube},
+  title={\ding{41}\; En la nube}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaConcepto}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCaso}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Caso real, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=naranjaAmenaza!10, colframe=naranjaAmenaza,
+  fonttitle=\bfseries\color{naranjaAmenaza}, title=Para tu TP Integrador, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 7}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 7}\\[12pt]
+{\Large\itshape ``Seguridad en la nube''}\\[6pt]
+{\large\color{azulNube}\ding{41}\; El tema m\'as pedido por ustedes en la encuesta}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Eje:}        & Extensi\'on aplicada de la Unidad 2 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{¿Por qu\'e esta clase es especial?}
+
+En la encuesta de expectativas, \textbf{``seguridad en la nube''} fue el tema m\'as pedido fuera del programa original (8 menciones). Y no es casualidad: hoy, pr\'acticamente \textbf{todo negocio digital nace en la nube}.
+
+\begin{cajaConcepto}[title={La realidad}]
+Un e-commerce, una fintech o una app rara vez tienen servidores propios en un cuarto con aire acondicionado. Usan AWS, Azure, Google Cloud o servicios gestionados. Eso baja barreras de entrada y acelera el negocio\ldots{} pero \textbf{no elimina la responsabilidad de proteger los datos}. Solo la cambia de lugar.
+\end{cajaConcepto}
+
+\begin{cajaNube}
+Esta clase es una \textbf{extensi\'on aplicada de la Unidad 2} (Gesti\'on de Riesgos). Todo lo que aprendimos ---activos, amenazas, matriz P$\times$I, controles, BIA--- se aplica igual en la nube. Lo que cambia es \textbf{d\'onde} termina tu responsabilidad y empieza la del proveedor.
+\end{cajaNube}
+
+\vspace{6pt}
+\noindent\textbf{Objetivos de esta clase:}
+\begin{enumerate}[leftmargin=2em]
+  \item Comprender el \textbf{modelo de responsabilidad compartida} en la nube.
+  \item Identificar \textbf{riesgos t\'ipicos de mala configuraci\'on} en servicios cloud usados por negocios digitales.
+\end{enumerate}
+
+\begin{cajaNota}
+\textbf{Entregable directo para tu TP:} la actividad de hoy (la \textbf{checklist m\'inima de seguridad en la nube}) es el insumo del \textbf{Entregable 3} de tu Trabajo Pr\'actico Integrador: ``Evaluaci\'on de seguridad en la nube si el negocio opera sobre servicios cloud''. Lo que hagas hoy, lo reutiliz\'as.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — MODELO DE RESPONSABILIDAD COMPARTIDA
+% ============================================================
+\section{El modelo de responsabilidad compartida}
+
+\begin{cajaDefinicion}
+El \textbf{modelo de responsabilidad compartida} establece que la seguridad en la nube es una tarea dividida: el \textbf{proveedor} (AWS, Azure, GCP) protege la infraestructura, y el \textbf{cliente} (tu negocio) protege lo que pone encima de esa infraestructura: sus datos, sus accesos y su configuraci\'on.
+\end{cajaDefinicion}
+
+\subsection{La regla de oro}
+\begin{cajaConcepto}[title={``Seguridad DE la nube'' vs ``Seguridad EN la nube''}]
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Seguridad \emph{DE} la nube (proveedor):} el hardware, los data centers, la red f\'isica, el hipervisor. Es responsabilidad del proveedor.
+    \item \textbf{Seguridad \emph{EN} la nube (cliente):} tus datos, tus identidades (IAM), la configuraci\'on de tus servicios, el cifrado de tu informaci\'on. Es \textbf{tu} responsabilidad.
+\end{itemize}
+\end{cajaConcepto}
+
+\begin{cajaNota}[title={El error m\'as com\'un}]
+Muchos negocios asumen que ``si est\'a en AWS/Azure/Google, ya est\'a seguro''. \textbf{Falso.} El proveedor garantiza que \emph{su} infraestructura es segura; pero si vos dej\'as un bucket p\'ublico o una contrase\~na d\'ebil, la brecha es \textbf{tuya}, no del proveedor.
+\end{cajaNota}
+
+\subsection{¿C\'omo se reparte seg\'un el tipo de servicio?}
+
+La frontera de responsabilidad \textbf{se mueve} seg\'un el modelo de servicio contratado:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{2.6cm}|}
+\hline
+\rowcolor{azulUCA!20}
+\textbf{Capa de responsabilidad} & \textbf{IaaS} & \textbf{PaaS} & \textbf{SaaS} \\
+\hline
+Infraestructura f\'isica & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor \\
+\hline
+Red & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor \\
+\hline
+Hipervisor & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor \\
+\hline
+Sistema operativo & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor \\
+\hline
+Middleware / runtime & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respProv} Proveedor & \cellcolor{respProv} Proveedor \\
+\hline
+Aplicaci\'on & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respProv} Proveedor \\
+\hline
+Datos & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} \\
+\hline
+Identidades y accesos (IAM) & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\fcolorbox{verdeOK}{respProv}{\hspace{2em}Responsabilidad del proveedor\hspace{2em}}
+\qquad
+\fcolorbox{naranjaAmenaza}{respCli}{\hspace{2em}Responsabilidad del cliente\hspace{2em}}
+\end{center}
+
+\subsection{Los tres modelos de servicio}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulNube}}p{2cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Modelo} & \textbf{¿Qu\'e es?} & \textbf{Ejemplo} \\
+\hline
+\textbf{IaaS} (Infraestructura como Servicio) & Te alquilan m\'aquinas virtuales; vos gestion\'as el SO y todo lo de arriba. & AWS EC2, Azure VMs \\
+\hline
+\textbf{PaaS} (Plataforma como Servicio) & El proveedor gestiona SO y plataforma; vos solo sub\'is tu aplicaci\'on y datos. & AWS Elastic Beanstalk, Azure App Service \\
+\hline
+\textbf{SaaS} (Software como Servicio) & Us\'as un software ya hecho; solo gestion\'as tus datos y accesos. & Gmail, Office 365, Slack \\
+\hline
+\end{tabularx}
+
+\begin{cajaConcepto}[title={Lo que nunca cambia}]
+Sin importar si us\'as IaaS, PaaS o SaaS, \textbf{los datos y las identidades (IAM) siempre son responsabilidad tuya}. Esa es la constante del modelo: mientras m\'as ``arriba'' vas, el proveedor gestiona m\'as cosas, pero \textbf{tu informaci\'on y qui\'en accede a ella siguen siendo tu problema}.
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — RIESGOS DE MALA CONFIGURACIÓN
+% ============================================================
+\section{Riesgos t\'ipicos de mala configuraci\'on}
+
+La gran mayor\'ia de las brechas en la nube \textbf{no son ataques sofisticados}; son errores de configuraci\'on evitables.
+
+\subsection{Los 5 errores m\'as frecuentes}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoAlerta}}p{4.2cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Error} & \textbf{¿Por qu\'e es grave?} \\
+\hline
+Buckets / almacenamiento p\'ublico & Cualquiera en internet puede leer o descargar tus datos sin autenticarse. \\
+\hline
+IAM con permisos excesivos & Un empleado o servicio comprometido tiene acceso a mucho m\'as de lo que necesita. \\
+\hline
+Claves de acceso (access keys) hardcodeadas & Claves de API escritas en el c\'odigo o en repositorios p\'ublicos. \\
+\hline
+Sin MFA en cuentas administradoras & Basta una contrase\~na robada para tomar control de toda la cuenta cloud. \\
+\hline
+Sin backups (o sin probarlos) & Ante un ransomware o un borrado accidental, no hay forma de recuperar los datos. \\
+\hline
+\end{tabularx}
+
+\subsection{Gesti\'on de Identidades y Accesos (IAM)}
+
+\begin{cajaDefinicion}
+\textbf{IAM (Identity and Access Management)} es el conjunto de pol\'iticas y herramientas que controla \textbf{qui\'en} (identidad) puede hacer \textbf{qu\'e} (permisos) sobre \textbf{qu\'e recurso} en la nube.
+\end{cajaDefinicion}
+
+\begin{cajaConcepto}[title={El principio de menor privilegio}]
+Cada usuario, servicio o aplicaci\'on debe tener \textbf{solo los permisos m\'inimos necesarios} para hacer su trabajo, y nada m\'as. Si un componente es comprometido, el da\~no queda limitado a esos permisos mínimos, no a toda la cuenta.
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — CASOS REALES
+% ============================================================
+\section{Casos reales: cuando la nube se configura mal}
+
+\begin{cajaCaso}[title={Caso 1: Capital One (2019) --- 100 millones de registros}]
+\textbf{Qu\'e pas\'o:} Un atacante explot\'o una \textbf{mala configuraci\'on en el firewall de una aplicaci\'on web (WAF)} para acceder a un servidor en AWS. Desde ah\'i, aprovech\'o un \textbf{rol IAM con permisos excesivos} para leer buckets S3 con datos de aproximadamente \textbf{100 millones de solicitantes de tarjetas de cr\'edito}.\\[4pt]
+\textbf{Lecciones:}
+\begin{itemize}[leftmargin=1.5em]
+    \item Un solo punto mal configurado (el WAF) abri\'o la puerta.
+    \item El \textbf{exceso de permisos IAM} amplific\'o el da\~no: el atacante accedi\'o a mucho m\'as de lo necesario.
+    \item La brecha fue de \textbf{configuraci\'on y permisos}, no de la infraestructura de AWS.
+\end{itemize}
+\end{cajaCaso}
+
+\begin{cajaCaso}[title={Caso 2: Buckets S3 p\'ublicos (patr\'on recurrente)}
+\textbf{Qu\'e pas\'o:} En m\'ultiples incidentes documentados (empresas de tecnolog\'ia, consultoras y hasta organismos p\'ublicos), investigadores encontraron \textbf{buckets de almacenamiento S3 configurados como p\'ublicos}, exponiendo contrase\~nas, claves privadas, datos de clientes y documentos internos.\\[4pt]
+\textbf{Lecciones:}
+\begin{itemize}[leftmargin=1.5em]
+    \item El almacenamiento en la nube \textbf{no es privado por defecto}; hay que configurarlo expl\'icitamente.
+    \item Un bucket mal configurado puede pasar \textbf{meses} expuesto antes de que alguien lo note.
+    \item Falta de \textbf{monitoreo y alertas} que detecten configuraciones inseguras.
+\end{itemize}
+\end{cajaCaso}
+
+\begin{cajaConcepto}[title={El patr\'on com\'un}]
+En ambos casos, el problema \textbf{no fue la nube en s\'i}, sino \textbf{c\'omo se configur\'o}. La nube es tan segura como la configuraci\'on que le pongas. Por eso la actividad de hoy es construir una \textbf{checklist} que prevenga exactamente estos errores.
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — BACKUPS Y CONTINUIDAD EN LA NUBE
+% ============================================================
+\section{Backups y continuidad en la nube}
+
+\begin{cajaDefinicion}
+En la nube, el proveedor garantiza la \textbf{durabilidad de la infraestructura} (que los discos no fallen), pero \textbf{el backup de tus datos es tu responsabilidad}. Si borr\'as un archivo por error o un ransomware lo cifra, el proveedor no lo recupera autom\'aticamente.
+\end{cajaDefinicion}
+
+\subsection{La regla 3-2-1 de backups}
+\begin{cajaConcepto}[title={Regla 3-2-1}]
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{3} copias de tus datos (la original + 2 backups).
+    \item \textbf{2} soportes o medios distintos.
+    \item \textbf{1} copia fuera del sitio principal (en otra regi\'on o cuenta).
+\end{itemize}
+\end{cajaConcepto}
+
+\subsection{Conexi\'on con el BIA (Clase 6)}
+Los backups en la nube se definen con los mismos conceptos del BIA:
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{RPO} (cu\'antos datos puedo perder) define \textbf{cada cu\'anto hago backup}.
+    \item \textbf{RTO} (cu\'anto tardo en recuperar) define \textbf{qu\'e tan r\'apido debo restaurar}.
+\end{itemize}
+
+\begin{cajaNota}[title={Ojo: un backup que no se prueba, no es un backup}]
+De nada sirve tener backups si nunca verificaste que se puedan \textbf{restaurar}. Una buena pr\'actica es hacer \textbf{simulacros peri\'odicos de restauraci\'on} (lo que en la Unidad 4 veremos como parte de la continuidad de negocio).
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — ACTIVIDAD PRÁCTICA
+% ============================================================
+\section{Actividad pr\'actica: an\'alisis de caso y checklist}
+
+\subsection{Parte 1: An\'alisis del caso real}
+
+\begin{cajaActividad}[title={Analizando una brecha en la nube}]
+Elijan uno de los casos de la Secci\'on 5 (o el que proponga el docente) y respondan:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{¿Cu\'al fue la vulnerabilidad principal (la mala configuraci\'on)?} \\[1.8cm]
+\hline
+\textbf{¿Era responsabilidad del proveedor o del cliente? Justifiquen con el modelo de responsabilidad compartida.} \\[2cm]
+\hline
+\textbf{¿Qu\'e control concreto habr\'ia prevenido o mitigado la brecha?} \\[1.8cm]
+\hline
+\textbf{¿C\'omo lo ubicar\'ian en la matriz P$\times$I (probabilidad e impacto)?} \\[1.8cm]
+\hline
+\end{tabularx}
+
+\newpage
+\subsection{Parte 2: Dise\~nar la checklist m\'inima de seguridad en la nube}
+
+\begin{cajaActividad}[title={Construyendo la checklist para una pyme digital}]
+En grupos, dise\~nen una \textbf{checklist m\'inima de seguridad en la nube de 5 a 8 puntos}, pensada para una pyme digital. Esta checklist es el \textbf{Entregable 3} de su TP Integrador.\\[4pt]
+\textbf{Criterios:}
+\begin{itemize}[leftmargin=1.5em]
+    \item Cada punto debe ser \textbf{concreto y accionable} (no ``ser seguros'', sino ``habilitar MFA en cuentas admin'').
+    \item Debe cubrir, como m\'inimo: \textbf{configuraci\'on, IAM, cifrado, backups y monitoreo}.
+    \item Debe ser \textbf{realista} para una pyme (no exigir controles de una multinacional).
+\end{itemize}
+\end{cajaActividad}
+
+\begin{cajaConcepto}[title={Ejemplo de checklist (para inspirarse, no copiar)}]
+\begin{enumerate}[leftmargin=2em]
+    \item Almacenamiento (buckets) \textbf{privado por defecto}; acceso p\'ublico bloqueado a nivel de cuenta.
+    \item \textbf{MFA habilitado} en todas las cuentas root y administradoras.
+    \item IAM con \textbf{menor privilegio}; sin claves compartidas; rotaci\'on peri\'odica de claves de acceso.
+    \item \textbf{Cifrado} de datos en reposo y en tr\'ansito (TLS).
+    \item \textbf{Backups autom\'aticos} con regla 3-2-1 y pruebas peri\'odicas de restauraci\'on.
+    \item \textbf{Logging y monitoreo} habilitados, con alertas ante configuraciones inseguras.
+    \item \textbf{Parcheo} y actualizaci\'on de sistemas operativos y servicios gestionados.
+\end{enumerate}
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — PLANTILLA DE CHECKLIST PARA EL TP
+% ============================================================
+\section{Plantilla de checklist para tu TP Integrador}
+
+\begin{cajaNota}
+Complet\'a esta plantilla con la checklist de tu grupo. Es el borrador directo del \textbf{Entregable 3} del TP Integrador. Adapten cada punto al negocio digital que eligieron.
+\end{cajaNota}
+
+\vspace{6pt}
+\noindent\textbf{Negocio digital:} \hrulefill\\[4pt]
+\textbf{Proveedor/es cloud que usa (o usar\'ia):} \hrulefill\\[4pt]
+\textbf{Modelo de servicio predominante (IaaS / PaaS / SaaS):} \hrulefill
+
+\vspace{10pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|>{\centering\arraybackslash}p{3.5cm}|}
+\hline
+\rowcolor{azulUCA!20}
+\textbf{\#} & \textbf{Control / punto de la checklist} & \textbf{¿Qu\'e riesgo mitiga?} \\
+\hline
+1 & & \\
+\hline
+2 & & \\
+\hline
+3 & & \\
+\hline
+4 & & \\
+\hline
+5 & & \\
+\hline
+6 & & \\
+\hline
+7 & & \\
+\hline
+8 & & \\
+\hline
+\end{tabularx}
+
+\vspace{10pt}
+\begin{cajaActividad}[title={Autoevaluaci\'on de la checklist}]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{¿Cubre configuraci\'on, IAM, cifrado, backups y monitoreo? ¿Qu\'e falta?} \\[1.8cm]
+\hline
+\textbf{¿Es realista para el tama\~no del negocio elegido? ¿Qu\'e ajustar\'ian?} \\[1.8cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 7}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Nube (Cloud) & Servicios de c\'omputo bajo demanda a trav\'es de internet. \\
+Responsabilidad compartida & Divisi\'on de tareas de seguridad entre proveedor y cliente. \\
+IaaS & Infraestructura como Servicio (alquil\'as m\'aquinas virtuales). \\
+PaaS & Plataforma como Servicio (sub\'is tu app; el proveedor gestiona la plataforma). \\
+SaaS & Software como Servicio (us\'as un software ya hecho). \\
+IAM & Gesti\'on de Identidades y Accesos (qui\'en puede hacer qu\'e). \\
+Menor privilegio & Dar solo los permisos m\'inimos necesarios. \\
+Bucket & Contenedor de almacenamiento de objetos (ej. S3). \\
+MFA & Autenticaci\'on multifactor. \\
+Access key & Clave de acceso program\'atico a la cuenta cloud. \\
+Regla 3-2-1 & 3 copias, 2 medios, 1 fuera del sitio (buena pr\'actica de backup). \\
+WAF & Web Application Firewall (firewall de aplicaci\'on web). \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Anot\'a aqu\'i dudas sobre el modelo de responsabilidad compartida, ideas de controles para la checklist de tu TP, o hallazgos del an\'alisis de caso.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

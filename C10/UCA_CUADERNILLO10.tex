@@ -1,0 +1,467 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 10
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{verdeTerminal}{HTML}{145A32}
+\definecolor{grisTerminal}{HTML}{1C2833}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaHacker}{
+  colback=verdeTerminal!8, colframe=verdeTerminal,
+  fonttitle=\bfseries\color{verdeTerminal},
+  title={\ding{211}\; Hacking \'Etico}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaReglas}{
+  colback=rojoAlerta!12, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta},
+  title={\ding{55}\; REGLAS DE JUEGO OBLIGATORIAS}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaIA}{
+  colback=violetaIA!8, colframe=violetaIA,
+  fonttitle=\bfseries\color{violetaIA},
+  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 10}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 10}\\[12pt]
+{\Large\itshape ``Hacking \'etico y concientizaci\'on''}\\[6pt]
+{\large\color{violetaIA}\ding{211}\; Incluye actividad con Inteligencia Artificial}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Eje:}        & Puente hacia la Unidad 4 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{¿Qu\'e es el hacking \'etico?}
+
+En la Clase 1 viviste una demo donde el docente accedi\'o a la c\'amara de tu celular sin que lo notaras. Eso fue, en esencia, una \textbf{demostraci\'on controlada de hacking \'etico}: usar t\'ecnicas de ataque, pero con autorizaci\'on, con un prop\'osito educativo y sin causar da\~no.
+
+\begin{cajaDefinicion}
+El \textbf{hacking \'etico} (o pentesting) es la pr\'actica de aplicar las mismas t\'ecnicas y herramientas que usar\'ia un atacante malicioso, pero \textbf{con autorizaci\'on expl\'icita del due\~no del sistema}, con el objetivo de encontrar vulnerabilidades \textbf{antes} de que sean explotadas y reportarlas para que se corrijan.
+\end{cajaDefinicion}
+
+\subsection{Los ``sombreros'' del hacking}
+En la cultura de la seguridad, se usa la met\'afora de los sombreros para clasificar la intenci\'on y la legalidad:
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Tipo} & \textbf{Descripci\'on} \\
+\hline
+\textbf{White Hat} (Sombrero blanco) & Hacker \'etico. Act\'ua con autorizaci\'on, dentro de la ley, para proteger sistemas. Es un profesional contratado. \\
+\hline
+\textbf{Black Hat} (Sombrero negro) & Ciberdelincuente. Act\'ua sin autorizaci\'on, viola la ley (Ley 26.388), busca beneficio propio o causar da\~no. \\
+\hline
+\textbf{Gray Hat} (Sombrero gris) & Zona intermedia. Puede encontrar vulnerabilidades sin autorizaci\'on pero reportarlas (a veces a cambio de recompensa). Legalmente ambiguo. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={La l\'inea divisoria: el consentimiento}]
+Las t\'ecnicas son \textbf{las mismas} para un white hat y un black hat. Lo \'unico que los diferencia es el \textbf{consentimiento del due\~no del sistema}. Un pentester que escanea una red sin autorizaci\'on escrita est\'a cometiendo un delito (acceso indebido, Ley 26.388), aunque su intenci\'on sea ``ayudar''. \textbf{Siempre debe haber un acuerdo de alcance por escrito antes de empezar.}
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — FASES DEL PENTESTING
+% ============================================================
+\section{Las fases del pentesting}
+
+Un test de penetraci\'on profesional no es ``probar cosas al azar''. Sigue una metodolog\'ia estructurada. Para un negocio digital, entender estas fases ayuda a saber qu\'e esperar y qu\'e valor obtener de una contrataci\'on de este tipo.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{verdeTerminal}}p{3.2cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Fase} & \textbf{¿Qu\'e se hace?} & \textbf{Valor para el negocio} \\
+\hline
+1. Reconocimiento (OSINT) & Recolectar informaci\'on p\'ublica del objetivo sin interactuar directamente. & Entender qu\'e puede aprender un atacante solo con datos abiertos. \\
+\hline
+2. Escaneo y an\'alisis & Identificar puertos, servicios, versiones y posibles puntos de entrada. & Mapear la superficie de ataque real. \\
+\hline
+3. Explotaci\'on & Intentar aprovechar las vulnerabilidades encontradas (de forma controlada). & Confirmar qu\'e riesgos son reales y no solo te\'oricos. \\
+\hline
+4. Post-explotaci\'on & Ver hasta d\'onde se podr\'ia llegar si el ataque fuera exitoso. & Medir el impacto potencial real. \\
+\hline
+5. Reporte & Documentar hallazgos, evidencias y recomendaciones de remediaci\'on. & \textbf{El entregable clave:} el plan de acci\'on para corregir. \\
+\hline
+\end{tabularx}
+
+\begin{cajaHacker}[title={El reporte es el verdadero producto}]
+Muchos negocios creen que el valor del pentesting es ``encontrar agujeros''. En realidad, el valor est\'a en el \textbf{reporte final}: un documento priorizado que le dice al negocio \textbf{qu\'e arreglar primero, por qu\'e y c\'omo}. Sin reporte accionable, el pentesting es solo ruido.
+\end{cajaHacker}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — OSINT
+% ============================================================
+\section{OSINT: la inteligencia de fuentes abiertas}
+
+\begin{cajaDefinicion}
+\textbf{OSINT} (Open Source Intelligence) es la recolecci\'on y an\'alisis de informaci\'on proveniente de \textbf{fuentes p\'ublicas y abiertas}: redes sociales, sitios web, registros de dominios, ofertas de empleo, foros, etc. No requiere ``hackear'' nada: es informaci\'on que la propia organizaci\'on o sus empleados publican.
+\end{cajaDefinicion}
+
+\subsection{¿Por qu\'e le importa a un negocio digital?}
+Un atacante usa OSINT para preparar un \textbf{spear phishing} (Clase 3) o una campa\~na de ingenier\'ia social. Cuanta m\'as informaci\'on p\'ublica haya, m\'as f\'acil es construir un enga\~no cre\'ible.
+
+\subsection{Fuentes t\'ipicas de OSINT}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulCielo}}p{3.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Fuente} & \textbf{¿Qu\'e puede revelar?} \\
+\hline
+LinkedIn & Nombres de empleados, cargos, jerarqu\'ias, tecnolog\'ias usadas, ex empleados (posible ingenier\'ia social). \\
+\hline
+Sitio web corporativo & Estructura, sucursales, proveedores, correos de contacto (patrones de email). \\
+\hline
+WHOIS / registros de dominio & Datos del registrante, fechas, proveedores de hosting. \\
+\hline
+Ofertas de empleo & Stack tecnol\'ogico interno (``buscamos dev con experiencia en AWS y React''). \\
+\hline
+Redes sociales & Eventos, viajes de ejecutivos, fotos de oficinas (credenciales en post-its, pantallas). \\
+\hline
+\end{tabularx}
+
+\begin{cajaActividad}[title={OSINT r\'apido: ¿qu\'e se puede saber de tu TP?}]
+Piensen en el negocio digital de su Trabajo Pr\'actico Integrador (o en una empresa real conocida). Respondan:
+\end{cajaActividad}
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. ¿Qu\'e tres datos podr\'ia obtener un atacante solo buscando en fuentes p\'ublicas?} \\[2cm]
+\hline
+\textbf{2. ¿C\'omo usar\'ia esos datos para hacer cre\'ible un correo de phishing dirigido a un empleado?} \\[2.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — ANATOMÍA DEL PHISHING
+% ============================================================
+\section{Anatom\'ia de un correo de phishing}
+
+Antes de dise\~nar un simulacro, hay que conocer las \textbf{se\~nales de alerta} (red flags) que un empleado debe aprender a reconocer. Estas son las piezas que despu\'es van a usar para su campa\~na de concientizaci\'on.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoAlerta}}p{4.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Se\~nal de alerta} & \textbf{¿Qu\'e buscar?} \\
+\hline
+Remitente sospechoso & El dominio no coincide con el oficial (ej. \texttt{banco-seguro.com} vs \texttt{banco-seguro-soporte.xyz}). \\
+\hline
+Sentido de urgencia & ``Su cuenta ser\'a suspendida en 24 horas'', ``Act\'ue ahora''. Busca que no pienses. \\
+\hline
+Saludo gen\'erico & ``Estimado cliente'', ``Estimado usuario'' en lugar de tu nombre real. \\
+\hline
+Enlaces sospechosos & Al pasar el mouse (sin hacer clic), la URL real no coincide con el texto del enlace. \\
+\hline
+Adjuntos inesperados & Archivos .zip, .exe, o documentos que piden ``habilitar macros''. \\
+\hline
+Errores de redacci\'on & Ortograf\'ia extra\~na, traducciones autom\'aticas, formatos inconsistentes. \\
+\hline
+Solicitud de datos sensibles & Pedir contrase\~nas, tarjetas o c\'odigos por correo (ning\'una empresa seria lo hace). \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — SIMULACRO DE PHISHING
+% ============================================================
+\section{El simulacro de phishing como herramienta}
+
+\begin{cajaDefinicion}
+Un \textbf{simulacro de phishing} es una prueba controlada donde la propia organizaci\'on (o un tercero autorizado) env\'ia correos de phishing falsos a sus empleados para medir qu\'e tan vulnerables son y, sobre todo, \textbf{para concientizarlos}.
+\end{cajaDefinicion}
+
+\subsection{¿Por qu\'e es leg\'itimo (y necesario)?}
+El factor humano es el eslab\'on m\'as d\'ebil (Clase 3). De nada sirve el mejor firewall si un empleado hace clic en un enlace malicioso. El simulacro convierte una amenaza abstracta en una \textbf{experiencia de aprendizaje concreta}.
+
+\subsection{M\'etricas de un simulacro}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulCielo}}p{4.5cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{M\'etrica} & \textbf{¿Qu\'e mide?} \\
+\hline
+Tasa de apertura & ¿Cu\'antos abrieron el correo? \\
+\hline
+Tasa de clic (CTR) & ¿Cu\'antos hicieron clic en el enlace? (el indicador m\'as importante) \\
+\hline
+Tasa de reporte & ¿Cu\'antos reportaron el correo como sospechoso? (lo ideal: alta) \\
+\hline
+Tiempo de reporte & ¿Cu\'anto tard\'o el primer empleado en alertar a TI? \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={El simulacro es para aprender, no para castigar}]
+Un error grave es usar los resultados del simulacro para \textbf{sancionar} a los empleados que cayeron. Eso genera miedo y hace que nadie reporte incidentes reales. El objetivo es \textbf{capacitar}: quien cae en el simulacro recibe capacitaci\'on inmediata, no una sanci\'on.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — ACTIVIDAD CON IA
+% ============================================================
+\section{Actividad con IA: Simulacro de phishing educativo}
+
+\begin{cajaReglas}
+Esta actividad involucra crear contenido de phishing. Por eso, las siguientes reglas son \textbf{innegociables}:
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Uso exclusivamente educativo:} el correo simulado nunca se usa fuera del aula ni con fines reales.
+    \item \textbf{Destinatario ficticio:} el ``empleado'' objetivo es un personaje inventado dentro del propio grupo. \textbf{NUNCA} se env\'ia a una persona real.
+    \item \textbf{Sin env\'io real:} el correo se redacta y se analiza, pero \textbf{no se env\'ia} por ning\'un medio a destinatarios externos al grupo.
+    \item \textbf{Supervisi\'on docente:} todo el proceso se realiza bajo la mirada del profesor.
+\end{enumerate}
+\end{cajaReglas}
+
+\vspace{8pt}
+
+\begin{cajaIA}
+\textbf{Parte 1: Generar el correo de phishing simulado con IA.}\\[4pt]
+En grupos, usen una IA generativa para redactar un correo de phishing dirigido a un ``empleado'' ficticio de su negocio digital del TP. Pueden usar este prompt base:
+\begin{tcolorbox}[colback=white, colframe=violetaIA!50, arc=2mm]
+\small\textit{``Act\'ua como un especialista en concientizaci\'on de ciberseguridad. Redact\'a un correo de phishing simulado, exclusivamente con fines educativos, dirigido a un empleado ficticio de una [TIPO DE NEGOCIO]. El correo debe intentar que el empleado haga clic en un enlace falso. Inclui: remitente, asunto y cuerpo. No incluyas enlaces reales ni datos de personas reales.''}
+\end{tcolorbox}
+\end{cajaIA}
+
+\vspace{8pt}
+\begin{cajaActividad}[title={Peg\'a aqu\'i el correo de phishing generado por la IA}]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Remitente:} \hrulefill \\[8pt]
+\textbf{Asunto:} \hrulefill \\[8pt]
+\textbf{Cuerpo del correo:} \\[6cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — CAMPAÑA DE CONCIENTIZACIÓN INVERSA
+% ============================================================
+\section{Parte 2: La campa\~na de concientizaci\'on inversa}
+
+Ahora viene el verdadero ejercicio de pensamiento cr\'itico: \textbf{desarmar} el correo que gener\'o la IA y convertirlo en una herramienta de capacitaci\'on.
+
+\begin{cajaIA}
+\textbf{Consigna:} A partir del correo de phishing generado, dise\~nen la \textbf{campa\~na de concientizaci\'on inversa}: ¿qu\'e se\~nales de alerta deber\'ia haber reconocido el ``empleado'', y qu\'e pieza de capacitaci\'on crear\'ian para prevenir ese ataque?
+\end{cajaIA}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. Señales de alerta presentes en el correo generado (m\'inimo 3, usando la tabla de la Secci\'on 4):} \\[2.5cm]
+\hline
+\textbf{2. ¿Qu\'e deber\'ia haber hecho el ``empleado'' al recibirlo? (paso a paso):} \\[2cm]
+\hline
+\textbf{3. Pieza de capacitaci\'on propuesta: ¿qu\'e formato usar\'ian? (afiche, video corto, micro-learning, simulacro recurrente, etc.) y ¿cu\'al ser\'ia el mensaje central?} \\[3cm]
+\hline
+\textbf{4. Auditor\'ia de la IA: ¿el correo generado por la IA era realista? ¿Qu\'e le falt\'o o qu\'e le corregir\'ian para que sea un buen material de entrenamiento?} \\[2.5cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — PUESTA EN COMÚN
+% ============================================================
+\section{Puesta en com\'un}
+
+Cada grupo presenta al resto de la clase:
+\begin{enumerate}[leftmargin=2em]
+    \item Las \textbf{se\~nales de alerta} que detect\'o en su correo simulado.
+    \item La \textbf{pieza de concientizaci\'on} que dise\~n\'o (o un boceto de ella).
+\end{enumerate}
+
+\begin{cajaActividad}[title={Registro de la puesta en com\'un}]
+Anoten las ideas m\'as interesantes de los otros grupos que podr\'ian aplicar a su propio TP Integrador:
+\end{cajaActividad}
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Se\~nales de alerta que destacaron otros grupos:} \\[3cm]
+\hline
+\textbf{Ideas de campa\~nas de concientizaci\'on que les parecieron efectivas:} \\[3cm]
+\hline
+\textbf{¿Qu\'e aplicar\'ian al programa de seguridad de su TP Integrador?} \\[2.5cm]
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Conexi\'on con el TP Integrador}]
+La concientizaci\'on es un \textbf{control humano} (Clase 6). Lo que dise\~nen hoy puede incorporarse a su TP Integrador como parte del plan de controles y de la Pol\'itica de Seguridad Aceptable (Clase 11). Un programa de seguridad sin concientizaci\'on est\'a incompleto.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 9 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 10}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Hacking \'etico & Uso autorizado de t\'ecnicas de ataque para encontrar y reportar vulnerabilidades. \\
+Pentesting & Test de penetraci\'on; evaluaci\'on controlada de la seguridad de un sistema. \\
+White Hat & Hacker \'etico que act\'ua con autorizaci\'on y dentro de la ley. \\
+Black Hat & Ciberdelincuente que act\'ua sin autorizaci\'on. \\
+OSINT & Inteligencia de fuentes abiertas (informaci\'on p\'ublica). \\
+Superficie de ataque & Conjunto de puntos por donde un atacante podr\'ia entrar. \\
+Simulacro de phishing & Prueba controlada de phishing con fines de concientizaci\'on. \\
+Tasa de clic (CTR) & Porcentaje de destinatarios que hicieron clic en un enlace. \\
+Concientizaci\'on & Capacitaci\'on para que las personas reconozcan y eviten amenazas. \\
+Ingenier\'ia social & Manipulaci\'on psicol\'ogica para obtener informaci\'on o acciones. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Anot\'a aqu\'i las se\~nales de phishing que m\'as te sorprendieron, ideas para tu campa\~na de concientizaci\'on, o dudas sobre el marco legal del hacking \'etico.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

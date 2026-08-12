@@ -1,0 +1,380 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 8
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{azulLegal}{HTML}{154360}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaLegal}{
+  colback=azulLegal!8, colframe=azulLegal,
+  fonttitle=\bfseries\color{azulLegal},
+  title={\ding{211}\; Marco Legal}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaConcepto}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaIA}{
+  colback=violetaIA!8, colframe=violetaIA,
+  fonttitle=\bfseries\color{violetaIA},
+  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Atenci\'on Negocio, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 8}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 8}\\[12pt]
+{\Large\itshape ``Marco legal I: Ley 25.326, GDPR\\[2pt] y derechos ARCO''}\\[6pt]
+{\large\color{violetaIA}\ding{211}\; Incluye actividad con Inteligencia Artificial}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Unidad 3 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{Los datos personales: el activo m\'as regulado}
+
+En las unidades anteriores vimos c\'omo proteger los activos t\'ecnicos y el negocio. Pero hay un tipo de activo que tiene reglas del juego completamente distintas: \textbf{los datos personales de los usuarios}.
+
+\begin{cajaConcepto}[title={El cambio de paradigma}]
+Hist\'oricamente, las empresas ve\'ian los datos de los clientes como una ``propiedad'' o un recurso gratuito para hacer marketing. Hoy, la legislaci\'on global los considera una \textbf{extensi\'on de la persona}. Los datos no son tuyos; te son \textbf{confiados} bajo condiciones estrictas. Si los perd\'es, los vend\'es sin permiso o los us\'as para algo que el usuario no autoriz\'o, las consecuencias no son solo t\'ecnicas (un breach), sino \textbf{legales y econ\'omicas} (multas millonarias).
+\end{cajaConcepto}
+
+\begin{cajaNota}
+\textbf{Para tu TP Integrador:} El Entregable 4 de su Trabajo Pr\'actico exige un ``An\'alisis de cumplimiento normativo y borrador de pol\'itica de privacidad''. Lo que veamos hoy y en la Clase 9 es la base legal de ese entregable.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — LEY 25.326 Y GDPR
+% ============================================================
+\section{El marco legal: Argentina y el mundo}
+
+Todo negocio digital argentino debe cumplir la ley local, pero si opera en internet, es muy probable que tambi\'en deba respetar normativas internacionales.
+
+\subsection{Ley 25.326 de Protecci\'on de Datos Personales (Argentina)}
+Sancionada en 2000, establece los principios b\'asicos para el tratamiento de datos en Argentina. Sus pilares son:
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Consentimiento informado:} El usuario debe dar su consentimiento \textbf{libre, expreso e informado} (salvo excepciones legales).
+    \item \textbf{Finalidad:} Los datos solo pueden usarse para el prop\'osito espec\'ifico que se le inform\'o al usuario. No se pueden usar para otra cosa.
+    \item \textbf{Calidad del dato:} Los datos deben ser ciertos, exactos y actualizados. Si ya no son necesarios para la finalidad, deben destruirse.
+    \item \textbf{Deber de confidencialidad:} El responsable del archivo debe garantizar la seguridad de los datos.
+\end{itemize}
+
+\subsection{El GDPR (Reglamento General de Protecci\'on de Datos - Uni\'on Europea)}
+Entr\'o en vigor en 2018 y cambi\'o las reglas a nivel mundial. 
+\begin{cajaLegal}[title={El efecto extraterritorial}]
+El GDPR aplica a \textbf{cualquier empresa en el mundo} que ofrezca bienes o servicios a ciudadanos europeos, o que monitoree su comportamiento. Si tu e-commerce argentino hace env\'ios a Espa\~na o tiene usuarios en Francia, \textbf{deb\'es cumplir el GDPR}.
+\end{cajaLegal}
+
+\subsection{Comparaci\'on r\'apida}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulLegal}}p{3.5cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Aspecto} & \textbf{Ley 25.326 (Arg)} & \textbf{GDPR (UE)} \\
+\hline
+Sanciones econ\'omicas & Relativamente bajas (actualizables por inflaci\'on). & Alt\'isimas: hasta 20 millones de euros o el \textbf{4\% de la facturaci\'on global anual}. \\
+\hline
+Consentimiento & Debe ser expreso e informado. & Debe ser \textbf{expl\'icito, afirmativo} (no sirve el silencio o casilla pre-tildada). \\
+\hline
+Notificaci\'on de brechas & No exige un plazo estricto expl\'icito en la ley original (aunque s\'i en resoluciones de la AAIP). & Obligatorio notificar a la autoridad en \textbf{72 horas} tras detectar la brecha. \\
+\hline
+Delegado de Protecci\'on de Datos (DPO) & No es obligatorio en todos los casos. & Obligatorio para ciertas empresas y vol\'umenes de datos. \\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — DERECHOS ARCO
+% ============================================================
+\section{Los Derechos ARCO: el control en manos del usuario}
+
+La ley otorga a los ciudadanos herramientas para controlar qu\'e hacen las empresas con su informaci\'on. Se los conoce como \textbf{Derechos ARCO}. Todo negocio digital debe tener un canal (un mail, un formulario) para recibir estas solicitudes y responder en los plazos legales.
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulUCA}}p{2.8cm}|X|>{\centering\arraybackslash}p{2.5cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Derecho} & \textbf{?Qu\'e puede exigir el usuario?} & \textbf{Plazo (Arg)} \\
+\hline
+\textbf{A}cceso & ``Quiero saber qu\'e datos tienen de m\'i y para qu\'e los usan.'' & 10 d\'ias \\
+\hline
+\textbf{R}ectificaci\'on & ``Tienen mi direcci\'on o tel\'efono mal. Actual\'icenlo.'' & 10 d\'ias \\
+\hline
+\textbf{C}ancelaci\'on (Supresi\'on) & ``Ya no quiero ser cliente. \textbf{B\'orrenme} de su base de datos.'' (Derecho al olvido). & 10 d\'ias \\
+\hline
+\textbf{O}posici\'on & ``No me opongo a que me tengan como cliente, pero \textbf{opongo a que usen mis datos para marketing} o publicidad.'' & 10 d\'ias \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}
+\textbf{El error cl\'asico de las startups:} No tener un procedimiento interno para cuando llega un mail diciendo ``Quiero que borren mis datos''. Si el \'area de Legales o Atenci\'on al Cliente no avisa a Sistemas en 24 horas para ejecutar el \texttt{DELETE} en la base de datos, la empresa incumple la ley y es pasible de denuncia ante la Agencia de Acceso a la Informaci\'on P\'ublica (AAIP).
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — ACTIVIDAD PRÁCTICA 1
+% ============================================================
+\section{Radiograf\'ia de Pol\'iticas de Privacidad}
+
+Las pol\'iticas de privacidad son los contratos legales que los usuarios ``aceptan'' sin leer. Para un negocio digital, redactar una pol\'itica clara no es solo un tr\'amite, es una obligaci\'on de transparencia.
+
+\begin{cajaActividad}[title={An\'alisis de una pol\'itica real}]
+Elijan una app o red social que usen diariamente (ej. Instagram, TikTok, Mercado Libre, una app de delivery). Busquen su Pol\'itica de Privacidad y respondan:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. ?Qu\'e datos personales recopilan? (Mencionen al menos 3, ej. geolocalizaci\'on, contactos).} \\[1.5cm]
+\hline
+\textbf{2. ?Con qu\'e finalidad los usan? ?Los comparten con terceros (data brokers, anunciantes)?} \\[2cm]
+\hline
+\textbf{3. ?C\'omo se ejerce el derecho de Cancelaci\'on (borrar la cuenta)? ?Es f\'acil encontrar el bot\'on o est\'a escondido?} \\[2cm]
+\hline
+\textbf{4. Desde la perspectiva de negocio: ?Qu\'e cl\'ausula les parece m\'as invasiva o abusiva para el usuario?} \\[2cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — ACTIVIDAD CON IA
+% ============================================================
+\section{Actividad con IA: Auditor\'ia de Res\'umenes Legales}
+
+\begin{cajaIA}
+\textbf{El problema:} Las pol\'iticas de privacidad son extensas y est\'an escritas en ``abogado''. Los usuarios no las entienden.\\
+\textbf{La tentaci\'on:} Pedirle a una IA que la resuma y publicar ese resumen.\\
+\textbf{El riesgo:} La IA puede omitir cl\'ausulas cr\'iticas (como la venta de datos a terceros) o ``alucinar'' derechos que no existen, generando un incumplimiento legal (compliance risk).
+\end{cajaIA}
+
+\vspace{8pt}
+\textbf{Consigna grupal:}
+\begin{enumerate}[leftmargin=2em]
+    \item Tomen la pol\'itica de privacidad que analizaron en la secci\'on anterior (copien el texto o el enlace si la IA tiene acceso a web).
+    \item P\'idanle a la IA el siguiente prompt:
+    \begin{tcolorbox}[colback=white, colframe=violetaIA!50, arc=2mm]
+    \small\textit{``Act\'ua como un experto en protecci\'on de datos. Resume en lenguaje simple, para un usuario sin conocimientos legales, los 5 puntos m\'as importantes de esta pol\'itica de privacidad. Indica claramente si mis datos se venden a terceros y c\'omo puedo pedir que los borren.''}
+    \end{tcolorbox}
+    \item \textbf{Auditor\'ia Humana (Obligatoria):} Contrasten el resumen de la IA con el texto legal original.
+\end{enumerate}
+
+\vspace{8pt}
+\begin{cajaActividad}[title={Reporte de Auditor\'ia de IA}]
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{?Qu\'e cl\'ausula cr\'itica OMITI\'O la IA en su resumen? (Ej. retenci\'on de datos, transferencia internacional).} \\[2.5cm]
+\hline
+\textbf{?La IA explic\'o correctamente el procedimiento para ejercer el derecho de Cancelaci\'on (ARCO) o invent\'o pasos que no existen en la pol\'itica original?} \\[2.5cm]
+\hline
+\textbf{Conclusi\'on de Compliance: ?Publicar\'ian este resumen de la IA en su app sin revisi\'on legal? ?Por qu\'e?} \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — ACTIVIDAD PRÁCTICA 2
+% ============================================================
+\section{Simulacro de Respuesta a Solicitud ARCO}
+
+Imaginen que son el equipo de Operaciones y Legales de su negocio digital del TP Integrador. Reciben el siguiente correo de un usuario:
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray, arc=2mm]
+\textbf{De:} usuario.enojado@gmail.com\\
+\textbf{Asunto:} BAJA Y BORRADO DE DATOS\\
+\textit{``Hola, ya no quiero usar su servicio. Les exijo que me den de baja inmediatamente y que borren todo mi historial de compras y mi tarjeta de cr\'edito de sus servidores. Espero confirmaci\'on hoy.''}
+\end{tcolorbox}
+
+\begin{cajaActividad}[title={Redacci\'on de la respuesta}]
+Redacten la respuesta formal al usuario, cumpliendo con la Ley 25.326. Deben incluir:
+\begin{itemize}[leftmargin=1.5em]
+    \item Confirmaci\'on de recepci\'on.
+    \item Menci\'on a los plazos legales (cu\'ando se har\'a efectivo).
+    \item Aclaraci\'on sobre datos que \textbf{no} pueden borrar por obligaciones legales (ej. facturas emitidas a la AFIP deben guardarse 10 a\~nos, aunque se borre la cuenta).
+\end{itemize}
+\end{cajaActividad}
+
+\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{Borrador de respuesta al usuario:} \\[8cm]
+\hline
+\end{tabularx}
+
+\begin{cajaConcepto}[title={El dilema de la Cancelaci\'on vs Retenci\'on Legal}]
+El derecho de Cancelaci\'on (Supresi\'on) no es absoluto. Si el usuario pide borrar todo, la empresa debe borrar los datos de marketing y perfil, pero \textbf{debe bloquear y retener} los datos de facturaci\'on por el tiempo que exija la ley fiscal (AFIP). Responder mal a esto es una sanci\'on asegurada.
+\end{cajaConcepto}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 8}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Dato Personal & Informaci\'on que identifica o hace identificable a una persona f\'isica. \\
+Ley 25.326 & Normativa argentina que regula el tratamiento de datos personales. \\
+GDPR & Reglamento europeo de protecci\'on de datos (aplicaci\'on global). \\
+Consentimiento Informado & Autorizaci\'on libre y expresa del usuario para tratar sus datos. \\
+Finalidad & El prop\'osito espec\'ifico para el cual se recolecta el dato. \\
+Derechos ARCO & Acceso, Rectificaci\'on, Cancelaci\'on y Oposici\'on. \\
+AAIP & Agencia de Acceso a la Informaci\'on P\'ublica (autoridad de control en Arg). \\
+DPO & Delegado de Protecci\'on de Datos (rol exigido por GDPR). \\
+Derecho al Olvido & Facultad de pedir la supresi\'on de datos personales en internet. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Anot\'a aqu\'i dudas sobre c\'omo redactar la pol\'itica de privacidad de tu TP Integrador, o hallazgos de la auditor\'ia a la IA.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}

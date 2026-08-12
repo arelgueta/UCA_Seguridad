@@ -1,0 +1,460 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 9
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{azulLegal}{HTML}{154360}
+\definecolor{moradoEtica}{HTML}{6C3483}
+\definecolor{azulCookie}{HTML}{2874A6}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaLegal}{
+  colback=azulLegal!8, colframe=azulLegal,
+  fonttitle=\bfseries\color{azulLegal},
+  title={\ding{211}\; Marco Legal}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaEtica}{
+  colback=moradoEtica!8, colframe=moradoEtica,
+  fonttitle=\bfseries\color{moradoEtica},
+  title={\ding{73}\; \'Etica y Privacidad}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaCookie}{
+  colback=azulCookie!8, colframe=azulCookie,
+  fonttitle=\bfseries\color{azulCookie},
+  title={\ding{80}\; Cookies y Rastreo}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA},
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Atenci\'on Negocio, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Informaci\'on y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo --- Clase 9}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkbox ----------
+\newcommand{\checkboxVacio}{$\square$\;}
+\newcommand{\checkMark}{\ding{51}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gesti\'on de Negocios Digitales --- UCA}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 9}\\[12pt]
+{\Large\itshape ``Marco legal II: cibercrimen, \'etica,\\[2pt] privacidad por dise\~no y cookies''}\\[6pt]
+{\large\color{azulCookie}\ding{80}\; Cierre de la Unidad 3}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+\textbf{Unidad:}     & Cierre de Unidad 3 \\[4pt]
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.9\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[10pt]
+  Nombre y apellido: \underline{\hspace{5cm}}\\[10pt]
+  Grupo N.\textdegree: \underline{\hspace{5cm}}\\[10pt]
+  Negocio Digital (TP): \underline{\hspace{5cm}}\\[10pt]
+  Fecha: \underline{\hspace{5cm}}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — INTRODUCCIÓN
+% ============================================================
+\section{De la protecci\'on al delito: las reglas del juego}
+
+En la Clase 8 vimos c\'omo la ley (Ley 25.326 y GDPR) protege los datos de los usuarios y les otorga derechos (ARCO). Pero, ?qu\'e pasa cuando alguien cruza la l\'inea y ataca esos datos? ?Y qu\'e pasa cuando una empresa, sin llegar a cometer un delito, dise\~na su producto de forma manipuladora para extraer la mayor cantidad de informaci\'on posible?
+
+Hoy cerramos la \textbf{Unidad 3} explorando tres dimensiones fundamentales para cualquier negocio digital:
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{El Cibercrimen:} Qu\'e conductas est\'an tipificadas como delitos inform\'aticos en Argentina.
+    \item \textbf{La \'Etica y Privacidad por Dise\~no:} C\'omo construir productos que respeten al usuario desde su arquitectura, no solo como un parche legal.
+    \item \textbf{Las Cookies:} El mecanismo t\'ecnico y legal que sostiene la publicidad digital y el rastreo en la web (uno de los temas m\'as pedidos por ustedes en la encuesta).
+\end{enumerate}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — LEY 26.388 (DELITOS INFORMÁTICOS)
+% ============================================================
+\section{Cibercrimen en Argentina: Ley 26.388}
+
+Sancionada en 2008, la Ley 26.388 modific\'o el C\'odigo Penal argentino para incorporar los ``delitos inform\'aticos''. Antes de esta ley, atacar un servidor o robar datos digitales era un vac\'io legal o se juzgaba con figuras anal\'ogicas (como ``robo'' o ``da\~no''), que no encajaban bien con la naturaleza intangible de los datos.
+
+\subsection{Principales figuras penales incorporadas}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulLegal}}p{4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Delito} & \textbf{?Qu\'e sanciona?} \\
+\hline
+Acceso indebido & Entrar a un sistema o dato restringido sin autorizaci\'on (hacking b\'asico). \\
+\hline
+Retenci\'on de datos & Apoderarse de datos inform\'aticos o retenerlos contra la voluntad de su due\~no. \\
+\hline
+Da\~no inform\'atico & Alterar, destruir o inutilizar datos, documentos o sistemas (ej. borrar una base de datos, lanzar un wiper). \\
+\hline
+Fraude inform\'atico & Manipular datos para obtener un beneficio econ\'omico injusto (ej. alterar el precio en un e-commerce, clonar tarjetas). \\
+\hline
+Interceptaci\'on de comunicaciones & Captar comunicaciones electr\'onicas no destinadas al p\'ublico (ej. sniffing de redes WiFi abiertas). \\
+\hline
+Pornograf\'ia infantil & Producci\'on, tenencia o distribuci\'on de material de abuso sexual infantil a trav\'es de medios digitales. \\
+\hline
+Grooming & Contacto por medios tecnol\'ogicos de un adulto con un menor con el prop\'osito de cometer un delito contra su integridad sexual. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}
+\textbf{Para el negocio digital:} Conocer esta ley no es solo para no cometer delitos. Es vital para saber \textbf{cu\'ando un incidente de seguridad (como un hackeo o una extorsi\'on) debe ser denunciado a la fiscal\'ia} como un delito penal, en lugar de manejarse solo como un problema t\'ecnico interno.
+\end{cajaNota}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — ÉTICA Y PRIVACIDAD POR DISEÑO
+% ============================================================
+\section{\'Etica y Privacidad por Dise\~no (Privacy by Design)}
+
+Cumplir la ley es el m\'inimo exigible. Pero los negocios digitales que generan \textbf{confianza a largo plazo} van m\'as all\'a: aplican la \'etica y la Privacidad por Dise\~no.
+
+\begin{cajaEtica}[title={?Qu\'e es Privacidad por Dise\~no?}]
+Es un enfoque propuesto por Ann Cavoukian que establece que la privacidad no debe agregarse como un parche al final del desarrollo de un producto, sino que debe estar \textbf{incrustada en la arquitectura misma} del sistema desde el primer d\'ia.
+\end{cajaEtica}
+
+\subsection{Los 7 principios fundamentales}
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Proactivo, no reactivo:} Anticipar y prevenir incidentes de privacidad antes de que ocurran.
+    \item \textbf{Privacidad como configuraci\'on por defecto:} El usuario no deber\'ia tener que hacer clic en 20 men\'us para proteger sus datos. Si no hace nada, sus datos est\'an protegidos (Default Privacy).
+    \item \textbf{Privacidad embebida en el dise\~no:} Es parte integral del producto, no un a\~nadido.
+    \item \textbf{Funcionalidad total (Suma positiva):} No se trata de elegir entre seguridad y usabilidad; se buscan soluciones que ofrezcan ambas (Win-Win).
+    \item \textbf{Seguridad de extremo a extremo:} Protecci\'on durante todo el ciclo de vida del dato, desde que se recolecta hasta que se destruye.
+    \item \textbf{Visibilidad y transparencia:} Las pr\'acticas de datos deben ser verificables por los usuarios.
+    \item \textbf{Respeto por la privacidad del usuario:} El inter\'es del usuario es la prioridad (empoderamiento a trav\'es de los derechos ARCO).
+\end{enumerate}
+
+\begin{cajaActividad}[title={Reflexi\'on \'Etica: Dark Patterns}]
+Los \textbf{Dark Patterns} (patrones oscuros) son dise\~nos de interfaz enga\~nosos que manipulan al usuario para que haga algo que no quer\'ia hacer (ej. suscribirse a un servicio, aceptar cookies de marketing, o hacer que el bot\'on de ``Cancelar suscripci\'on'' sea casi invisible).\\[6pt]
+\textbf{Pregunta para el grupo:} Si un Dark Pattern aumenta las ventas un 15\% a corto plazo pero es legal (o est\'a en un gris legal), ?deber\'ia usarlo un negocio digital? ?Qu\'e impacto tiene en la confianza de la marca a largo plazo?
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — COOKIES Y RASTREO
+% ============================================================
+\section{El universo de las Cookies}
+
+El protocolo HTTP (la base de la web) es ``sin estado'' (stateless). Esto significa que el servidor no recuerda qui\'en sos de una p\'agina a otra. Las \textbf{cookies} se inventaron para resolver esto: son peque\~nos archivos de texto que el servidor le pide al navegador que guarde y le devuelva en cada visita.
+
+\subsection{Tipos de Cookies}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulCookie}}p{3.5cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Tipo} & \textbf{Caracter\'istica} & \textbf{Ejemplo de uso} \\
+\hline
+\textbf{De Sesi\'on} & Se borran autom\'aticamente al cerrar el navegador. & Mantener el carrito de compras mientras naveg\'as por la tienda. \\
+\hline
+\textbf{Persistentes} & Tienen una fecha de expiraci\'on y quedan en tu disco. & Recordar tu idioma preferido o mantener tu sesi\'on iniciada (``Recordarme''). \\
+\hline
+\textbf{De Origen (First-party)} & Creadas por el dominio que est\'as visitando directamente. & Autenticaci\'on, preferencias del sitio. \\
+\hline
+\textbf{De Terceros (Third-party)} & Creadas por dominios distintos al que visitas (ej. anunciantes, trackers). & Publicidad comportamental, botones de ``Me gusta'' de redes sociales, anal\'itica cruzada. \\
+\hline
+\end{tabularx}
+
+\begin{cajaCookie}[title={El problema del consentimiento y la ``fatiga de cookies''}]
+Por normativas como el GDPR y la Ley 25.326, los sitios deben pedir consentimiento para cookies \textbf{no esenciales} (marketing, anal\'itica de terceros). Sin embargo, la mayor\'ia de los sitios usan Dark Patterns: el bot\'on de ``Aceptar Todo'' es gigante y verde, mientras que ``Rechazar'' o ``Configurar'' est\'a escondido en gris o requiere 5 clics. Esto viola el principio de \textbf{Privacidad por Defecto}.
+\end{cajaCookie}
+
+\newpage
+% ============================================================
+%  SECCIÓN 5 — ACTIVIDAD PRÁCTICA
+% ============================================================
+\section{Taller: Radiograf\'ia de Cookies}
+
+Hoy vamos a dejar de ser usuarios pasivos y vamos a ``ver la matrix'' usando las Herramientas de Desarrollador (DevTools) del navegador.
+
+\begin{cajaActividad}[title={Inspecci\'on en tiempo real}]
+\textbf{Paso 1:} Abran una ventana de \textbf{Inc\'ognito} en Chrome, Edge o Firefox (para no arrastrar cookies viejas).\\
+\textbf{Paso 2:} Ingresen a un portal de noticias muy concurrido o a un e-commerce grande (ej. clarin.com, mercadolibre.com).\\
+\textbf{Paso 3:} \textbf{NO} hagan clic en el banner de cookies todav\'ia. Presionen \textbf{F12} (o clic derecho $\rightarrow$ Inspeccionar).\\
+\textbf{Paso 4:} Vayan a la pesta\~na \textbf{Application} (o \textbf{Storage} en Firefox) $\rightarrow$ \textbf{Cookies}.\\
+\textbf{Paso 5:} Respondan:
+\end{cajaActividad}
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|}
+\hline
+\textbf{1. Sin haber aceptado nada, ?cu\'antas cookies ya se cargaron autom\'aticamente? ?De qu\'e dominios son?} \\[2.5cm]
+\hline
+\textbf{2. Busquen una cookie que parezca de rastreo (nombres como \_ga, \_fbp, fr, c\_user). ?Qu\'e dato est\'a almacenando?} \\[2.5cm]
+\hline
+\textbf{3. Ahora hagan clic en ``Rechazar todo'' o ``Configurar'' (si el sitio lo permite). ?Qu\'e cookies desaparecieron y cu\'ales se quedaron (las esenciales)?} \\[2.5cm]
+\hline
+\textbf{4. Reflexi\'on de Negocio: Si ustedes estuvieran dise\~nando el banner de cookies de su TP Integrador, ?c\'omo lo har\'ian para ser \'eticos y cumplir Privacidad por Defecto?} \\[3cm]
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — CUESTIONARIO 3
+% ============================================================
+\section{Cuestionario 3 de autoevaluaci\'on}
+
+\begin{cajaNota}[title={Instrucciones}]
+Este cuestionario cierra la Unidad 3. Se realiza al final de la clase (Kahoot / Forms / papel). \textbf{No es eliminatorio.} Sirve de autoevaluaci\'on y repaso para el Parcial 2 (Clase 11). Las respuestas correctas est\'an marcadas con \checkMark \; al final.
+\end{cajaNota}
+
+\vspace{6pt}
+
+\textbf{1. La Ley 25.326 en Argentina regula:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item El comercio electr\'onico
+  \item La protecci\'on de datos personales
+  \item La propiedad intelectual
+  \item Los delitos inform\'aticos exclusivamente
+\end{enumerate}
+
+\textbf{2. Los derechos ARCO permiten a una persona:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Acceder, Rectificar, Cancelar (Suprimir) y Oponerse al tratamiento de sus datos
+  \item Auditar, Reclamar, Comprar y Ofertar
+  \item Archivar, Registrar, Certificar y Operar
+  \item Ninguna de las anteriores
+\end{enumerate}
+
+\textbf{3. El GDPR es la normativa de protecci\'on de datos de:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Estados Unidos
+  \item La Uni\'on Europea
+  \item Argentina
+  \item Naciones Unidas
+\end{enumerate}
+
+\textbf{4. Una cookie de sesi\'on, a diferencia de una persistente:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Se elimina al cerrar el navegador
+  \item Dura para siempre
+  \item Siempre requiere consentimiento expl\'icito y las persistentes no
+  \item No existe, es un mito
+\end{enumerate}
+
+\textbf{5. La Ley 26.388 en Argentina:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Regula el teletrabajo
+  \item Incorpor\'o los delitos inform\'aticos al C\'odigo Penal
+  \item Es la ley de protecci\'on de datos
+  \item Regula la firma digital
+\end{enumerate}
+
+\textbf{6. ``Privacidad por dise\~no'' significa:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Agregar seguridad al final del desarrollo de un producto
+  \item Incorporar la protecci\'on de datos desde el inicio del dise\~no de un producto o servicio
+  \item Un estilo de dise\~no gr\'afico minimalista
+  \item Una certificaci\'on obligatoria en Argentina
+\end{enumerate}
+
+\textbf{7. Antes de aceptar todas las cookies de un sitio, una buena pr\'actica es:}
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Aceptar siempre para no perder tiempo
+  \item Revisar la configuraci\'on y rechazar las no esenciales cuando sea posible
+  \item Borrar el navegador
+  \item No importa, las cookies no tienen riesgo
+\end{enumerate}
+
+\textbf{8. Verdadero o Falso: si una app es gratuita, no recopila ni monetiza datos personales.}
+\vspace{4pt}
+\checkboxVacio Verdadero \qquad \checkboxVacio Falso
+
+% --- Clave de respuestas ---
+\vspace{12pt}
+\begin{tcolorbox}[colback=verdeOK!10, colframe=verdeOK,
+                  title={\checkMark \; Clave de respuestas}, arc=3mm]
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{b)} La protecci\'on de datos personales.
+  \item \textbf{a)} Acceder, Rectificar, Cancelar (Suprimir) y Oponerse\ldots
+  \item \textbf{b)} La Uni\'on Europea.
+  \item \textbf{a)} Se elimina al cerrar el navegador.
+  \item \textbf{b)} Incorpor\'o los delitos inform\'aticos al C\'odigo Penal.
+  \item \textbf{b)} Incorporar la protecci\'on de datos desde el inicio\ldots
+  \item \textbf{b)} Revisar la configuraci\'on y rechazar las no esenciales\ldots
+  \item \textbf{Falso.} Muchas apps ``gratuitas'' se financian precisamente a trav\'es de los datos de sus usuarios.
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — CIERRE DE UNIDAD 3
+% ============================================================
+\section{Cierre de Unidad 3: el marco normativo y \'etico}
+
+Con esta clase completamos el tablero de la \textbf{Unidad 3}. Ya no solo sabemos c\'omo proteger los sistemas t\'ecnicamente (Unidades 1 y 2), sino que entendemos las reglas legales, \'eticas y sociales bajo las cuales operan los negocios digitales.
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.2cm and 1.5cm,
+  box/.style={rectangle, draw=azulLegal, fill=azulLegal!10,
+              text width=3.5cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  boxsmall/.style={rectangle, draw=moradoEtica, fill=moradoEtica!10,
+              text width=3.5cm, align=center, rounded corners=3pt,
+              font=\scriptsize},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, azulLegal}
+]
+  \node[box] (ley) {PROTECCI\'ON DE DATOS\\Ley 25.326 / GDPR\\Derechos ARCO};
+  \node[box, right=2cm of ley] (delito) {CIBERCRIMEN\\Ley 26.388\\Delitos Inform\'aticos};
+  
+  \node[boxsmall, below=1.5cm of ley] (priv) {PRIVACIDAD POR DISE\~NO\\\'Etica y Transparencia\\Dark Patterns};
+  \node[boxsmall, below=1.5cm of delito] (cook) {COOKIES Y RASTREO\\Consentimiento\\First vs Third Party};
+
+  \draw[arr] (ley.south) -- (priv.north);
+  \draw[arr] (delito.south) -- (cook.north);
+  \draw[arr, dashed] (priv.east) -- (cook.west);
+\end{tikzpicture}
+\end{center}
+
+\begin{cajaEtica}[title={El puente hacia la Unidad 4}]
+Saber la ley y la \'etica es in\'util si la organizaci\'on no tiene \textbf{reglas internas} para cumplirlas. En la Unidad 4 (Gobierno de la Seguridad) vamos a traducir todo este conocimiento externo en \textbf{Pol\'iticas internas} (como la Pol\'itica de Seguridad Aceptable - PSA) y planes de acci\'on para cuando las cosas salen mal (Gesti\'on de Incidentes).
+\end{cajaEtica}
+
+\newpage
+% ============================================================
+%  SECCIÓN 8 — GLOSARIO Y NOTAS
+% ============================================================
+\section{Glosario de la Clase 9}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.5cm}X}
+\toprule
+\textbf{T\'ermino} & \textbf{Definici\'on en una l\'inea} \\
+\midrule
+Ley 26.388 & Ley argentina que tipifica los delitos inform\'aticos en el C\'odigo Penal. \\
+Privacidad por Dise\~no & Integrar la protecci\'on de datos desde la arquitectura inicial del producto. \\
+Dark Pattern & Dise\~no de interfaz enga\~noso que manipula las decisiones del usuario. \\
+Cookie de Sesi\'on & Archivo temporal que expira al cerrar el navegador. \\
+Cookie Persistente & Archivo que permanece en el disco hasta su fecha de expiraci\'on. \\
+Cookie de Terceros & Rastreador de un dominio distinto al que el usuario est\'a visitando. \\
+Grooming & Delito de contacto digital de un adulto con un menor con fines sexuales. \\
+Default Privacy & Privacidad por defecto; el usuario est\'a protegido sin tener que configurar nada. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1cm}
+
+\section{Espacio para notas y hallazgos}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=7cm]
+\textcolor{gray}{\itshape Anot\'a aqu\'i los hallazgos de la Radiograf\'ia de Cookies, ideas para el dise\~no \'etico de tu TP Integrador, o dudas para el Parcial 2.}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la c\'atedra de Seguridad de la Informaci\'on y de
+Sistemas --- Lic.\ en Gesti\'on de Negocios Digitales, UCA.\\
+Prohibida su distribuci\'on fuera del \'ambito de la cursada sin autorizaci\'on del docente.}
+\end{center}
+
+\end{document}
