@@ -1,0 +1,683 @@
+% ============================================================
+%  CUADERNILLO DE ESTUDIO — CLASE 2
+%  Seguridad de la Información y de Sistemas
+%  Lic. en Gestión de Negocios Digitales — UCA
+%  Compilar con: pdflatex  (dos pasadas)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+
+% ---------- Colores ----------
+\definecolor{azulUCA}{HTML}{003366}
+\definecolor{doradoUCA}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+
+% ---------- tcolorbox estilos ----------
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  colback=azulUCA, colframe=azulUCA, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, #1
+}
+
+\newtcolorbox{cajaDefinicion}{
+  colback=azulCielo!10, colframe=azulCielo,
+  fonttitle=\bfseries, title=Definición, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaEjemplo}{
+  colback=verdeOK!10, colframe=verdeOK,
+  fonttitle=\bfseries, title=Ejemplo, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaReflexion}{
+  colback=doradoUCA!10, colframe=doradoUCA,
+  fonttitle=\bfseries, title=Reflexión, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaActividad}{
+  colback=grisClaro, colframe=azulUCA,
+  fonttitle=\bfseries\color{azulUCA}, title={\ding{45}\; Actividad}, arc=3mm, breakable
+}
+
+\newtcolorbox{cajaNota}{
+  colback=rojoAlerta!8, colframe=rojoAlerta,
+  fonttitle=\bfseries\color{rojoAlerta}, title=Nota, arc=3mm, breakable
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUCA}{Seguridad de la Información y de Sistemas}}
+\fancyhead[R]{\small\textcolor{azulUCA}{Cuadernillo — Clase 2}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textcolor{gray}{UCA — 2.º cuatr.}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos de sección ----------
+\titleformat{\section}
+  {\color{azulUCA}\Large\bfseries}
+  {\thesection.}{0.6em}{}
+\titleformat{\subsection}
+  {\color{azulCielo}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
+
+% ---------- Checkboxes ----------
+\newcommand{\checkbox}{\ding{111}\;}
+\newcommand{\checkboxVacio}{$\square$\;}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+% Escudo / Título principal
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACIÓN Y DE SISTEMAS\\[4pt]
+  {\large Licenciatura en Gestión de Negocios Digitales — UCA}\\[2pt]
+  {\normalsize 2.º Cuatrimestre}
+\end{cajaTitulo}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{azulUCA} CUADERNILLO DE ESTUDIO}\\[8pt]
+{\LARGE\color{doradoUCA} CLASE 2}\\[12pt]
+{\Large\itshape ``Fundamentos de Seguridad (CID)\\[2pt] y Debrief de la Huella Digital''}\\[1.5cm]
+
+% Datos
+\begin{tabular}{rl}
+\textbf{Profesor:}   & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\[4pt]
+%\textbf{Fecha:}      & Jueves 13 de agosto de 2026 \\[4pt]
+\textbf{Unidad:}     & Unidad 1 \\[4pt]
+\end{tabular}
+
+\vfill
+
+% Datos del estudiante
+\begin{tcolorbox}[colback=grisClaro, colframe=azulUCA, arc=3mm, width=0.85\textwidth]
+  \centering
+  {\bfseries Datos del/la estudiante}\\[8pt]
+  \begin{tabular}{p{5cm}l p{5cm}l}
+    Nombre y apellido: & \underline{\hspace{4.8cm}} &
+    Grupo / N.º: & \underline{\hspace{4.8cm}} \\[10pt]
+    Correo: & \underline{\hspace{4.8cm}} &
+    Fecha: & \underline{\hspace{4.8cm}} \\
+  \end{tabular}
+\end{tcolorbox}
+
+\vspace{1cm}
+{\small\textcolor{gray}{Material de uso exclusivo para la cursada. Prohibida su distribución externa.}}
+\end{titlepage}
+
+% ============================================================
+%  ÍNDICE (opcional)
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SECCIÓN 1 — DEBRIEF
+% ============================================================
+\section{¿Qué vivimos la semana pasada? (Debrief)}
+
+La Clase~1 ingresaste desde tu celular a una página web que parecía inofensiva.
+Sin que lo notaras de forma clara, esa página \textbf{accedió a la cámara de tu
+dispositivo} y transmitió la imagen a un panel de administración controlado por
+el docente.
+
+\begin{cajaReflexion}
+No hubo un ``hackeo'' sofisticado. Hubo un diseño que aprovechó que no leíste,
+no notaste o aceptaste un permiso sin pensar. Eso, en un negocio digital real,
+es una \textbf{brecha de seguridad}.
+\end{cajaReflexion}
+
+\begin{cajaActividad}[title={\ding{45}\; Actividad individual — Completá durante la clase}]
+Respondé con tus palabras en cada recuadro:
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{0.32\textwidth}|X|}
+\hline
+\textbf{① ¿Qué dato o permiso cediste sin advertirlo plenamente?} & \\[2.5cm]
+\hline
+\textbf{② ¿Qué mecanismo usó la página para obtenerlo?} \newline
+\footnotesize{(Pista: permisos del navegador, botones de ``aceptar'', redirecciones\ldots)} & \\[2.5cm]
+\hline
+\textbf{③ ¿Qué medida concreta habría prevenido o mitigado esto?} & \\[2.5cm]
+\hline
+\textbf{④ ¿A cuál concepto de hoy lo asociás?} \newline
+\footnotesize{(activo, amenaza, vulnerabilidad, impacto, riesgo)} & \\[2.5cm]
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 2 — LOS 5 CONCEPTOS
+% ============================================================
+\section{Los 5 conceptos fundamentales}
+
+Antes de hablar de ``seguridad informática'' hay que dominar cinco palabras.
+Todo el curso ---y toda la práctica profesional--- se apoya en ellas.
+
+% --- 2.1 Activo ---
+\subsection{Activo de información}
+\begin{cajaDefinicion}
+Cualquier elemento que tenga valor para la organización y deba protegerse.
+\end{cajaDefinicion}
+
+No es solo ``el servidor''. Son activos:
+\begin{itemize}[leftmargin=2em]
+  \item Los \textbf{datos} de clientes (nombres, tarjetas, historial de compras).
+  \item El \textbf{software} propio (código de una app, algoritmos).
+  \item El \textbf{hardware} (servidores, notebooks, celulares corporativos).
+  \item El \textbf{conocimiento} (manuales de proceso, estrategias comerciales).
+  \item La \textbf{reputación} de la marca.
+  \item Las \textbf{personas} (sus credenciales, su acceso).
+\end{itemize}
+
+\begin{cajaEjemplo}
+\textbf{Para un e-commerce:} la base de datos con 50\,000 clientes, el código de
+la pasarela de pago, el servidor donde corre la tienda, la cuenta de Instagram
+con 200\,000 seguidores.
+\end{cajaEjemplo}
+
+% --- 2.2 Amenaza ---
+\subsection{Amenaza}
+\begin{cajaDefinicion}
+Un evento o actor potencial que puede causar daño a un activo.
+\end{cajaDefinicion}
+
+La amenaza \textbf{no es el daño en sí}, es la \emph{posibilidad} de que algo malo pase.
+\begin{itemize}[leftmargin=2em]
+  \item Un atacante que envía correos de \textbf{phishing}.
+  \item Un \textbf{ransomware} que cifra los discos.
+  \item Un empleado que hace clic donde no debe (\textbf{ingeniería social}).
+  \item Un desastre natural que inunda el data center.
+  \item Un competidor que hace \textbf{scraping} agresivo de tu catálogo.
+\end{itemize}
+
+% --- 2.3 Vulnerabilidad ---
+\subsection{Vulnerabilidad}
+\begin{cajaDefinicion}
+Una debilidad en un activo, proceso o control que puede ser explotada por una amenaza.
+\end{cajaDefinicion}
+
+La vulnerabilidad \textbf{está en tu lado}, no en el atacante.
+\begin{itemize}[leftmargin=2em]
+  \item Un software sin parches de seguridad.
+  \item Una contraseña débil como \texttt{123456}.
+  \item \textbf{No leer los permisos} que pide una página o app (¡lo que pasó en la Clase~1!).
+  \item Un empleado que no recibió capacitación.
+  \item Un bucket de almacenamiento en la nube configurado como ``público''.
+\end{itemize}
+
+% --- 2.4 Impacto ---
+\subsection{Impacto}
+\begin{cajaDefinicion}
+La consecuencia (económica, legal, reputacional, operativa) que se materializa
+cuando una amenaza explota una vulnerabilidad.
+\end{cajaDefinicion}
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Tipo} & \textbf{Ejemplo} \\
+\midrule
+Económico & Multa de la AAIP por filtración; pérdida de ventas durante 48\,h de caída. \\
+Legal     & Demanda colectiva; sanción por incumplimiento de Ley 25.326. \\
+Reputacional & Tendencia negativa en redes; pérdida de confianza. \\
+Operativo & No se pueden procesar pagos durante un fin de semana largo. \\
+\bottomrule
+\end{tabularx}
+\caption{Tipos de impacto.}
+\end{table}
+
+% --- 2.5 Riesgo ---
+\subsection{Riesgo}
+\begin{cajaDefinicion}
+La combinación de la \textbf{probabilidad} de que una amenaza explote una
+vulnerabilidad y el \textbf{impacto} que eso generaría.
+\end{cajaDefinicion}
+
+\begin{center}
+\fbox{\parbox{0.75\textwidth}{\centering
+\Large $\displaystyle \text{RIESGO} \;\approx\; \text{PROBABILIDAD} \;\times\; \text{IMPACTO}$
+}}
+\end{center}
+
+\begin{cajaEjemplo}[title={Ejemplo integrado}]
+Para un e-commerce argentino chico:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Activo:} base de datos de 5\,000 clientes con datos de tarjeta.
+  \item \textbf{Amenaza:} ataque de phishing a un empleado de atención al cliente.
+  \item \textbf{Vulnerabilidad:} el empleado no fue capacitado y usa la misma
+        contraseña en el mail corporativo y en sitios personales.
+  \item \textbf{Impacto:} robo de datos de tarjetas $\rightarrow$ multa + pérdida
+        de clientes + nota en medios.
+  \item \textbf{Riesgo:} ALTO, porque la probabilidad es media-alta y el impacto
+        es severo.
+\end{itemize}
+\end{cajaEjemplo}
+
+% --- Esquema visual ---
+\subsection*{Esquema resumen}
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.8cm,
+  box/.style={rectangle, draw=azulUCA, fill=azulUCA!10,
+              text width=3cm, align=center, rounded corners=3pt,
+              font=\small\bfseries},
+  arr/.style={-{Stealth[length=3mm]}, thick, azulUCA}
+]
+  \node[box] (amen) {AMENAZA};
+  \node[box, right=2.2cm of amen] (vuln) {VULNERABILIDAD};
+  \node[box, right=2.2cm of vuln] (act)  {ACTIVO};
+  \node[box, below=1.4cm of act]  (imp)  {IMPACTO};
+  \node[box, below=1.4cm of imp,
+        fill=doradoUCA!15, draw=doradoUCA] (ries) {RIESGO};
+
+  \draw[arr] (amen) -- node[above,font=\scriptsize]{explota} (vuln);
+  \draw[arr] (vuln) -- node[above,font=\scriptsize]{afecta} (act);
+  \draw[arr] (act)  -- (imp);
+  \draw[arr] (imp)  -- node[right,font=\scriptsize]{Prob.\ $\times$ Impacto} (ries);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+% ============================================================
+%  SECCIÓN 3 — PILARES CID
+% ============================================================
+\section{Los tres pilares CID}
+
+La seguridad de la información se sostiene sobre tres propiedades.
+Si alguna se rompe, hay un \textbf{incidente}.
+
+% --- 3.1 Confidencialidad ---
+\subsection{Confidencialidad \;\textrm{\Large\lock}}
+\begin{cajaDefinicion}
+La información solo es accesible para quienes están \textbf{autorizados}.
+\end{cajaDefinicion}
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{XX}
+\toprule
+\textbf{Se cumple cuando\ldots} & \textbf{Se viola cuando\ldots} \\
+\midrule
+Solo RR.\,HH.\ ve los sueldos. &
+Un empleado reenvía la nómina por error a todo el equipo. \\[4pt]
+La conexión usa HTTPS. &
+La demo de Clase 1: la cámara se activó sin consentimiento. \\[4pt]
+Cifrado extremo a extremo. &
+Un bucket de S3 queda ``público'' y cualquiera descarga datos. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% --- 3.2 Integridad ---
+\subsection{Integridad \;\textrm{\Large\checkmark}}
+\begin{cajaDefinicion}
+La información es \textbf{exacta y completa}, y no fue modificada sin autorización.
+\end{cajaDefinicion}
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{XX}
+\toprule
+\textbf{Se cumple cuando\ldots} & \textbf{Se viola cuando\ldots} \\
+\midrule
+Un hash SHA-256 coincide con el original. &
+Un atacante modifica precios en la base de datos. \\[4pt]
+Registros contables sin alteraciones. &
+Un ransomware cifra y corrompe archivos. \\[4pt]
+Un correo llega sin modificaciones. &
+Alguien edita una factura PDF antes de reenviarla. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% --- 3.3 Disponibilidad ---
+\subsection{Disponibilidad \;\textrm{\Large\clock}}
+\begin{cajaDefinicion}
+La información y los sistemas están \textbf{accesibles cuando se los necesita}.
+\end{cajaDefinicion}
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{XX}
+\toprule
+\textbf{Se cumple cuando\ldots} & \textbf{Se viola cuando\ldots} \\
+\midrule
+El e-commerce funciona un Black Friday. &
+Un DDoS deja la tienda offline 12 horas. \\[4pt]
+Hay backups probados y plan de recuperación. &
+Se borra la base y no hay backup hace 3 meses. \\[4pt]
+Pagos procesados 24/7. &
+Corte de energía sin UPS ni generador. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% --- Regla mnemotécnica ---
+\begin{tcolorbox}[colback=doradoUCA!10, colframe=doradoUCA, title=Regla mnemotécnica, arc=3mm]
+\begin{center}
+\textbf{C}onfidencialidad $\rightarrow$ ¿Quién lo ve?\\[4pt]
+\textbf{I}ntegridad $\rightarrow$ ¿Está intacto?\\[4pt]
+\textbf{D}isponibilidad $\rightarrow$ ¿Puedo usarlo cuando lo necesito?
+\end{center}
+\end{tcolorbox}
+
+% --- Ejercicio ---
+\begin{cajaActividad}[title={\ding{45}\; Ejercicio rápido — Marcá con C, I o D}]
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\textwidth}{|c|X|c|}
+\hline
+\textbf{\#} & \textbf{Escenario} & \textbf{Pilar} \\
+\hline
+1 & Un ex empleado publica en redes la lista de clientes. & \checkboxVacio \\
+\hline
+2 & Un malware modifica cuentas bancarias destino en una fintech. & \checkboxVacio \\
+\hline
+3 & Un DDoS deja caída la app de delivery toda la hora del almuerzo. & \checkboxVacio \\
+\hline
+4 & Base de datos cifrada pero legible por cualquier empleado. & \checkboxVacio \\
+\hline
+5 & El servidor de backups se corrompe; 6 meses ilegibles. & \checkboxVacio \\
+\hline
+6 & Interceptación de HTTP sin cifrar; se leen datos de tarjeta. & \checkboxVacio \\
+\hline
+\end{tabularx}
+\end{cajaActividad}
+
+\newpage
+% ============================================================
+%  SECCIÓN 4 — CONEXIÓN CON LA DEMO
+% ============================================================
+\section{Conectar la demo con la teoría}
+
+Volvamos a lo que pasó la Clase~1 y clasifiquémoslo:
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.2cm}|X|}
+\hline
+Activo       & Tu imagen personal, tu cámara, tu privacidad. \\
+\hline
+Amenaza      & El sitio web diseñado para acceder a la cámara sin evidencia clara. \\
+\hline
+Vulnerabilidad & Aceptar permisos sin leer; no verificar la URL; confianza ciega en un enlace. \\
+\hline
+Impacto      & Tu foto terminó en un panel que no controlás. En escala real: chantaje, suplantación, exposición pública. \\
+\hline
+Riesgo       & Alto si la página fuera maliciosa y el activo fueran datos sensibles. \\
+\hline
+Pilar CID violado & \textbf{Confidencialidad} (se accedió a tu imagen sin autorización consciente). \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{cajaNota}[title={Lección para negocios digitales}]
+Si una página ``inocente'' puede hacer esto, pensá qué puede hacer un
+competidor, un ciberdelincuente o un empleado interno malintencionado con
+acceso a los activos de tu empresa. La seguridad no es un gasto: es un
+\textbf{habilitador de confianza} (concepto clave del programa).
+\end{cajaNota}
+
+% ============================================================
+%  SECCIÓN 5 — GLOSARIO
+% ============================================================
+\section{Glosario mínimo de la Clase 2}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4cm}X}
+\toprule
+Término & Definición en una línea \\
+\midrule
+Activo de información & Todo lo que tiene valor y debe protegerse. \\
+Amenaza               & Evento o actor que \emph{puede} causar daño. \\
+Vulnerabilidad        & Debilidad que la amenaza puede explotar. \\
+Impacto               & Consecuencia del daño materializado. \\
+Riesgo                & Probabilidad $\times$ Impacto. \\
+Confidencialidad      & Solo accede quien está autorizado. \\
+Integridad            & La información no fue alterada indebidamente. \\
+Disponibilidad        & La información está accesible cuando se necesita. \\
+Huella digital        & Rastro de datos que dejamos al usar tecnología. \\
+Permiso (app/navegador) & Autorización para acceder a un recurso del dispositivo. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+% ============================================================
+%  SECCIÓN 6 — CUESTIONARIO 1
+% ============================================================
+\section{Cuestionario 1 de autoevaluación}
+
+\begin{cajaNota}[title={Instrucciones}]
+Este cuestionario se realiza al cierre de la clase (Kahoot / Forms / papel).
+\textbf{No es eliminatorio.} Usalo para medir cuánto entendiste antes de seguir.
+Las respuestas correctas están marcadas con \ding{51} al final de la sección.
+\end{cajaNota}
+
+\vspace{6pt}
+
+% Pregunta 1
+\textbf{1.} ¿Qué significa la sigla CID en seguridad de la información?
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Control, Inspección, Detección
+  \item Confidencialidad, Integridad, Disponibilidad
+  \item Ciberseguridad, Información, Datos
+  \item Confianza, Identidad, Datos
+\end{enumerate}
+
+% Pregunta 2
+\textbf{2.} Un activo de información es:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Solo el hardware de una empresa
+  \item Cualquier elemento que tenga valor para la organización y deba protegerse
+  \item Únicamente los datos personales de los clientes
+  \item El software antivirus instalado
+\end{enumerate}
+
+% Pregunta 3
+\textbf{3.} La diferencia entre amenaza y vulnerabilidad es:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Son sinónimos
+  \item La amenaza es un evento potencial dañino; la vulnerabilidad es una debilidad que puede ser explotada
+  \item La vulnerabilidad es externa y la amenaza es interna
+  \item No hay diferencia relevante para el negocio
+\end{enumerate}
+
+% Pregunta 4
+\textbf{4.} En la demo de la Clase~1, ¿qué permiso del dispositivo se solicitó
+sin que el usuario lo notara conscientemente?
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Ubicación GPS
+  \item Cámara
+  \item Contactos
+  \item Micrófono
+\end{enumerate}
+
+% Pregunta 5
+\textbf{5.} La ``huella digital'' se refiere a:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Solo las huellas dactilares usadas en biometría
+  \item El rastro de datos e información que dejamos al usar tecnología
+  \item Un tipo de malware
+  \item La firma digital de un documento
+\end{enumerate}
+
+% Pregunta 6
+\textbf{6.} ¿Cuál describe mejor un \textbf{riesgo} (y no solo una amenaza)
+para un e-commerce?
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Que exista phishing en internet en general
+  \item La probabilidad de que un ataque de phishing exitoso cause pérdida de datos de tarjetas y sanciones regulatorias
+  \item Tener una vulnerabilidad de software sin explotar
+  \item Ninguna de las anteriores
+\end{enumerate}
+
+% Pregunta 7
+\textbf{7.} La seguridad de la información en un negocio digital debe entenderse
+principalmente como:
+\begin{enumerate}[label=\alph*), leftmargin=2.5em]
+  \item Un gasto que hay que minimizar
+  \item Un habilitador de confianza y una ventaja competitiva
+  \item Un tema exclusivo del área de sistemas
+  \item Una obligación solo para empresas grandes
+\end{enumerate}
+
+% Pregunta 8
+\textbf{8.} Verdadero o Falso: la disponibilidad se refiere a que la información
+esté accesible solo para quien está autorizado.
+
+\vspace{4pt}
+\checkboxVacio Verdadero \qquad \checkboxVacio Falso
+
+% --- Clave de respuestas ---
+\vspace{12pt}
+\begin{tcolorbox}[colback=verdeOK!10, colframe=verdeOK,
+                  title={\ding{51}\; Clave de respuestas}, arc=3mm]
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{b)} Confidencialidad, Integridad, Disponibilidad
+  \item \textbf{b)} Cualquier elemento que tenga valor\ldots
+  \item \textbf{b)} La amenaza es un evento potencial dañino\ldots
+  \item \textbf{b)} Cámara
+  \item \textbf{b)} El rastro de datos e información\ldots
+  \item \textbf{b)} La probabilidad de que un ataque de phishing\ldots
+  \item \textbf{b)} Un habilitador de confianza\ldots
+  \item \textbf{Falso.} Eso describe a la confidencialidad; la disponibilidad es
+        que la información esté accesible \emph{cuando se la necesita}.
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+% ============================================================
+%  SECCIÓN 7 — RESPUESTAS DEL EJERCICIO CID
+% ============================================================
+\section{Respuestas del ejercicio de la Sección 3}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|c|X|>{\centering\arraybackslash}p{3.5cm}|}
+\hline
+\textbf{\#} & \textbf{Escenario} & \textbf{Pilar afectado} \\
+\hline
+1 & Ex empleado publica lista de clientes & \textbf{C} \\
+\hline
+2 & Malware modifica cuentas bancarias destino & \textbf{I} \\
+\hline
+3 & DDoS deja caída la app de delivery & \textbf{D} \\
+\hline
+4 & Base cifrada pero legible por cualquier empleado & \textbf{C} \\
+\hline
+5 & Backups de 6 meses corruptos & \textbf{D} e \textbf{I} \\
+\hline
+6 & Interceptación de HTTP sin cifrar & \textbf{C} \\
+\hline
+\end{tabularx}
+\end{table}
+
+% ============================================================
+%  SECCIÓN 8 — RECURSOS
+% ============================================================
+\section{Para seguir profundizando (optativo)}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{5.5cm}X}
+\toprule
+Recurso & Qué vas a encontrar \\
+\midrule
+ISO/IEC 27000 (glosario) & Definiciones formales de activo, amenaza, vulnerabilidad, riesgo. \\
+\texttt{haveibeenpwned.com} & Verificá si tu mail apareció en alguna brecha de datos pública. \\
+INCIBE --- Guía de ciberseguridad para pymes & Lenguaje simple, ejemplos prácticos. \\
+Video: ``HTTP vs HTTPS'' & Para entender por qué el cifrado protege la confidencialidad. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================
+%  SECCIÓN 9 — NOTAS
+% ============================================================
+\section{Espacio para notas personales}
+
+\begin{tcolorbox}[colback=grisClaro, colframe=gray!50, arc=2mm, height=8cm]
+\textcolor{gray}{\itshape Usá este espacio durante la clase para anotar dudas,
+ejemplos útiles o preguntas para la próxima clase.}
+\end{tcolorbox}
+
+% ============================================================
+%  SECCIÓN 10 — PRÓXIMA CLASE
+% ============================================================
+\section{¿Qué sigue? (Puente a la Clase 3)}
+
+La próxima clase vamos a:
+\begin{itemize}[leftmargin=2em]
+  \item Ver el \textbf{panorama de amenazas} más comunes para negocios digitales
+        (phishing, ransomware, ingeniería social).
+  \item Probar \textbf{herramientas gratuitas reales}: Have I Been Pwned,
+        VirusTotal, un gestor de contraseñas.
+  \item \textbf{Conformar los grupos de 4-5} que van a trabajar todo el
+        cuatrimestre, incluida la consigna del \textbf{Trabajo Práctico Integrador}.
+\end{itemize}
+
+\begin{center}
+\begin{tcolorbox}[colback=rojoAlerta!8, colframe=rojoAlerta,
+                  width=0.8\textwidth, halign=center, arc=3mm]
+  \Large\ding{42}\; \textbf{¡Traé el celular con batería!}\\[4pt]
+  \normalsize Vamos a usar herramientas en vivo.
+\end{tcolorbox}
+\end{center}
+
+\vfill
+\begin{center}
+\small\textcolor{gray}{%
+Cuadernillo elaborado para la cátedra de Seguridad de la Información y de
+Sistemas --- Lic.\ en Gestión de Negocios Digitales, UCA, 2.º cuatrimestre.\\
+Prohibida su distribución fuera del ámbito de la cursada sin autorización del docente.}
+\end{center}
+
+\end{document}
