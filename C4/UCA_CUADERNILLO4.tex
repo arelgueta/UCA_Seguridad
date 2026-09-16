@@ -28,6 +28,7 @@
 \usepackage{pifont}
 \usepackage{wasysym}
 \usepackage{tikz}
+\usepackage{microtype}
 \usetikzlibrary{positioning,arrows.meta,shapes.geometric}
 
 % ---------- Colores ----------
@@ -43,46 +44,65 @@
 % ---------- tcolorbox estilos ----------
 \tcbuselibrary{skins,breakable}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.30em}
+\setlength{\tabcolsep}{6pt}
+\setlist[itemize]{leftmargin=1.5em, itemsep=0.25em, topsep=0.35em}
+\setlist[enumerate]{leftmargin=1.8em, itemsep=0.25em, topsep=0.35em}
+\sloppy
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.25}
+
 \newtcolorbox{cajaTitulo}[1][]{
+  enhanced, breakable,
   colback=azulUCA, colframe=azulUCA, coltext=white,
-  fonttitle=\Large\bfseries, arc=4mm, #1
+  fonttitle=\Large\bfseries, arc=4mm, boxrule=0.8pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  drop shadow=black!20, #1
 }
 
-\newtcolorbox{cajaDefinicion}{
+\newtcolorbox{cajaDefinicion}[1][]{
   colback=azulCielo!10, colframe=azulCielo,
-  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaConcepto}{
+\newtcolorbox{cajaConcepto}[1][]{
   colback=azulUCA!8, colframe=azulUCA,
-  fonttitle=\bfseries\color{azulUCA}, arc=3mm, breakable
+  fonttitle=\bfseries\color{azulUCA}, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaEjemplo}{
+\newtcolorbox{cajaEjemplo}[1][]{
   colback=verdeOK!10, colframe=verdeOK,
-  fonttitle=\bfseries\color{verdeOK}, title=Ejemplo, arc=3mm, breakable
+  fonttitle=\bfseries\color{verdeOK}, title=Ejemplo, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaActividad}{
+\newtcolorbox{cajaActividad}[1][]{
   colback=grisClaro, colframe=azulUCA,
   fonttitle=\bfseries\color{azulUCA},
-  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaIA}{
+\newtcolorbox{cajaIA}[1][]{
   colback=violetaIA!8, colframe=violetaIA,
   fonttitle=\bfseries\color{violetaIA},
-  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable
+  title={\ding{211}\; Actividad con Inteligencia Artificial}, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaNota}{
+\newtcolorbox{cajaNota}[1][]{
   colback=rojoAlerta!8, colframe=rojoAlerta,
-  fonttitle=\bfseries\color{rojoAlerta}, title=Importante, arc=3mm, breakable
+  fonttitle=\bfseries\color{rojoAlerta}, title=Importante, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
-\newtcolorbox{cajaCierre}{
+\newtcolorbox{cajaCierre}[1][]{
   colback=doradoUCA!10, colframe=doradoUCA,
-  fonttitle=\bfseries, title=Cierre de Unidad, arc=3mm, breakable
+  fonttitle=\bfseries, title=Cierre de Unidad, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+  #1
 }
 
 % ---------- Header / Footer ----------
@@ -98,10 +118,12 @@
 % ---------- Títulos ----------
 \titleformat{\section}
   {\color{azulUCA}\Large\bfseries}
-  {\thesection.}{0.6em}{}
+  {\thesection.}{0.7em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.8em}
 \titleformat{\subsection}
   {\color{azulCielo}\large\bfseries}
   {\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.6em}
 
 % ---------- Enlaces ----------
 \hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
