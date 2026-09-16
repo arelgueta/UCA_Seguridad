@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repositorio
+      - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      - name: Instalar LaTeX
+      - name: Instalar dependencias de LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
@@ -32,26 +32,41 @@ jobs:
             texlive-lang-spanish \
             texlive-fonts-recommended
 
-      - name: Compilar todos los cuadernillos
+      - name: Compilar los cuadernillos
         shell: bash
         run: |
-          set -e
-          for tex in C*/UCA_CUADERNILLO*.tex; do
-            [ -f "$tex" ] || continue
-            dir=$(dirname "$tex")
-            base=$(basename "$tex")
-            echo "📄 Compilando $tex"
-            (cd "$dir" && pdflatex -interaction=nonstopmode -halt-on-error "$base" > /tmp/latex.log 2>&1) || {
+          set -euo pipefail
+          shopt -s nullglob
+          tex_files=(C*/UCA_CUADERNILLO*.tex)
+
+          if [ "${#tex_files[@]}" -eq 0 ]; then
+            echo "No se encontraron archivos .tex para compilar."
+            exit 1
+          fi
+
+          for tex_file in "${tex_files[@]}"; do
+            dir=$(dirname "$tex_file")
+            base=$(basename "$tex_file")
+            echo "📄 Compilando $tex_file"
+
+            (
+              cd "$dir"
+              pdflatex -interaction=nonstopmode -halt-on-error "$base" > /tmp/latex.log 2>&1
+            ) || {
               cat /tmp/latex.log || true
               exit 1
             }
-            (cd "$dir" && pdflatex -interaction=nonstopmode -halt-on-error "$base" > /tmp/latex.log 2>&1) || {
+
+            (
+              cd "$dir"
+              pdflatex -interaction=nonstopmode -halt-on-error "$base" > /tmp/latex.log 2>&1
+            ) || {
               cat /tmp/latex.log || true
               exit 1
             }
           done
 
-      - name: Crear o actualizar release con los PDFs
+      - name: Publicar PDFs en la Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: cuadernillos-pdfs
