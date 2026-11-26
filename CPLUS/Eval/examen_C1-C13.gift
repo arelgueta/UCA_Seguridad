@@ -1,0 +1,183 @@
+// ============================================================
+//  Examen integrador — Seguridad de la Información y de Sistemas
+//  Cobertura: Módulos 1 a 13 (ver SUPERCUADERNILLO.pdf)
+//  30 preguntas: 10 V/F + 6 Unir conceptos + 14 Opción múltiple
+//  Formato GIFT (Moodle > Banco de preguntas > Importar > GIFT)
+// ============================================================
+
+$CATEGORY: $course$/Examen integrador C1-C13
+
+// ------------------------------------------------------------
+//  PARTE A — VERDADERO / FALSO
+// ------------------------------------------------------------
+
+::VF01 Demo Módulo 1::En la demo descripta en el Módulo 1, una página web accedió a la cámara del celular sin un consentimiento consciente del usuario. Ese hecho constituye principalmente una violación de la confidencialidad.{TRUE####Correcto. Se accedió a la imagen personal sin autorización consciente, lo que afecta la confidencialidad (Módulo 1).}
+
+::VF02 Hash::Una función hash es reversible si se conoce la clave correcta, igual que el cifrado simétrico.{FALSE####Falso. El hash es irreversible y no usa clave; el cifrado sí es reversible con la clave correcta (Módulo 4).}
+
+::VF03 Riesgo cero::El objetivo de la gestión de riesgos en un negocio digital es alcanzar el "riesgo cero".{FALSE####Falso. El riesgo cero es técnicamente imposible y económicamente inviable; el objetivo es administrar el riesgo hasta un nivel aceptable (Módulo 5).}
+
+::VF04 RTO y MTD::En un BIA bien diseñado, el RTO de un proceso debe ser menor o igual que su MTD.{TRUE####Verdadero. Si el proceso tolera como máximo 2 horas caído (MTD) y el plan de recuperación tarda 6 horas (RTO), hay un problema de diseño (Módulo 6).}
+
+::VF05 SaaS::Cuando una empresa contrata un servicio SaaS, la protección de sus datos y la gestión de identidades y accesos (IAM) pasan a ser responsabilidad del proveedor.{FALSE####Falso. En IaaS, PaaS y SaaS, los datos y el IAM siempre son responsabilidad del cliente (Módulo 7).}
+
+::VF06 GDPR extraterritorial::Un e-commerce argentino que realiza envíos a clientes en España debe cumplir el GDPR.{TRUE####Verdadero. El GDPR tiene efecto extraterritorial; aplica a cualquier empresa que ofrezca bienes o servicios a ciudadanos europeos (Módulo 8).}
+
+::VF07 Cookies de terceros::Las cookies de terceros (third-party) son las creadas por el mismo dominio que el usuario está visitando directamente.{FALSE####Falso. Esas son las cookies de origen (first-party). Las de terceros provienen de dominios distintos, como anunciantes o trackers (Módulo 9).}
+
+::VF08 Sombreros::Las técnicas que usan un White Hat y un Black Hat son esencialmente las mismas; lo que los distingue es la autorización del dueño del sistema.{TRUE####Verdadero. La línea divisoria es el consentimiento; sin autorización escrita, un escaneo es acceso indebido (Módulo 10).}
+
+::VF09 Pirámide documental::Dentro de la pirámide documental, la política es el documento que describe los pasos operativos detallados para ejecutar una tarea.{FALSE####Falso. Eso es el procedimiento. La política declara el "qué" y el "por qué" desde la dirección (Módulo 11).}
+
+::VF10 BCP y DRP::Un BCP (Plan de Continuidad del Negocio) incluye al DRP, que se enfoca específicamente en recuperar los sistemas de información y tecnología.{TRUE####Verdadero. El DRP es un subconjunto del BCP; el BCP abarca todo el negocio (personas, procesos, físico y tecnológico) (Módulo 13).}
+
+// ------------------------------------------------------------
+//  PARTE B — UNIR CONCEPTOS
+// ------------------------------------------------------------
+
+::UC01 Cinco conceptos::Para un e-commerce chico, uní cada elemento del caso con el concepto fundamental que representa.{
+=Base de datos con 5.000 clientes y sus datos de tarjeta -> Activo
+=Ataque de phishing dirigido a un empleado de atención al cliente -> Amenaza
+=El empleado no fue capacitado y reutiliza su contraseña en sitios personales -> Vulnerabilidad
+=Multa, pérdida de clientes y nota negativa en medios -> Impacto
+=Combinación de la probabilidad del ataque y la gravedad de sus consecuencias -> Riesgo
+####Activo, Amenaza, Vulnerabilidad, Impacto y Riesgo (Módulo 2).}
+
+::UC02 Amenazas::Uní cada amenaza con su descripción.{
+=Spear Phishing -> Phishing dirigido e hiper-personalizado a una víctima concreta
+=Ransomware -> Malware que cifra los datos y exige un rescate para liberarlos
+=BEC (Business Email Compromise) -> Fraude mediante el correo comprometido o suplantado de un ejecutivo
+=Credential Stuffing -> Ataque automatizado con contraseñas filtradas en otros sitios
+=Ingeniería social -> Manipulación psicológica del factor humano para obtener información o acciones
+####Panorama de amenazas para negocios digitales (Módulo 3).}
+
+::UC03 Las 4 T::Uní cada estrategia de tratamiento del riesgo con el ejemplo que le corresponde.{
+=Mitigar -> Implementar MFA para reducir la probabilidad de robo de credenciales
+=Transferir -> Contratar un seguro de ciber-riesgo
+=Aceptar -> Tolerar 10 minutos de caída al año porque la redundancia cuesta más que la pérdida
+=Evitar -> No almacenar datos de tarjetas y usar siempre una pasarela de pago externa
+####Las 4 T del tratamiento de riesgos (Módulo 5).}
+
+::UC04 Continuidad y backups::Uní cada sigla o regla con la pregunta que responde.{
+=MTD -> ¿Cuánto tiempo máximo puede estar caído el proceso antes de que el daño sea inaceptable?
+=RTO -> ¿En cuánto tiempo nos proponemos volver a operar tras un incidente?
+=RPO -> ¿Cuántos datos podemos permitirnos perder (cada cuánto se hace backup)?
+=Regla 3-2-1 -> ¿Cuántas copias, en cuántos medios y cuántas fuera del sitio principal?
+####BIA (Módulo 6), backups en la nube (Módulo 7) y DRP (Módulo 13).}
+
+::UC05 Derechos ARCO::Uní cada solicitud de un usuario con el derecho ARCO que está ejerciendo.{
+=«Quiero saber qué datos tienen de mí y para qué los usan» -> Acceso
+=«Tienen mal mi dirección, actualícenla» -> Rectificación
+=«Ya no quiero ser cliente, bórrenme de su base de datos» -> Cancelación (supresión)
+=«Pueden tenerme como cliente, pero no usen mis datos para publicidad» -> Oposición
+####Derechos ARCO; en Argentina el plazo de respuesta es de 10 días (Módulo 8).}
+
+::UC06 Marcos normativos::Uní cada norma, guía u organismo con su descripción.{
+=Ley 25.326 -> Ley argentina de protección de datos personales
+=Ley 26.388 -> Ley argentina que incorporó los delitos informáticos al Código Penal
+=GDPR -> Reglamento europeo de protección de datos con aplicación extraterritorial
+=AAIP -> Autoridad de control en materia de datos personales en Argentina
+=NIST SP 800-61 -> Guía de referencia para el manejo de incidentes de seguridad
+####Módulos 8, 9 y 13.}
+
+// ------------------------------------------------------------
+//  PARTE C — OPCIÓN MÚLTIPLE
+// ------------------------------------------------------------
+
+::OM01 Firma digital::¿Cómo se genera, conceptualmente, una firma digital?{
+=Se calcula el hash del documento y se lo cifra con la clave privada del firmante
+~Se cifra el documento completo con la clave pública del receptor
+~Se cifra el documento con una clave simétrica compartida entre ambas partes
+~Se agrega una imagen escaneada de la firma manuscrita al PDF
+####La firma digital es un hash cifrado con la clave privada; el receptor la verifica con la clave pública y así se garantizan autenticidad e integridad (Módulo 4).}
+
+::OM02 Contraseñas::¿Cuál es la forma correcta de almacenar las contraseñas de los usuarios de un e-commerce?{
+=Hasheadas con una función lenta como bcrypt o Argon2, con un salt único por usuario
+~En texto plano dentro de una base de datos con acceso restringido
+~Hasheadas con MD5, porque es rápido y ampliamente usado
+~Cifradas con AES-256 usando la misma clave para todos los usuarios
+####Nunca en texto plano ni con hashes simples como MD5. Se usan funciones lentas con salt (Módulo 4).}
+
+::OM03 Caso FintechYa::En el caso "FintechYa", un ransomware cifró la base de datos de clientes y la empresa estuvo 5 días sin poder procesar transacciones. ¿Qué pilar del modelo CID se vio afectado principalmente?{
+=Disponibilidad
+~Confidencialidad
+~Integridad
+~Ninguno, porque los datos no fueron robados
+####El negocio se detuvo; el ransomware afecta principalmente la disponibilidad (Módulo 3).}
+
+::OM04 Mapa de calor::Según el mapa de calor visto en clase, un riesgo con probabilidad ALTA e impacto BAJO se clasifica como\:{
+=Medio
+~Bajo
+~Alto
+~Crítico
+####Probabilidad Alta × Impacto Bajo da un riesgo Medio, que requiere un plan de acción a mediano plazo y monitoreo (Módulo 5).}
+
+::OM05 Tipos de control::Un sistema de monitoreo que genera una alerta cuando detecta tráfico de salida inusual desde un servidor es un control\:{
+=Detectivo
+~Preventivo
+~Correctivo
+~Legal / normativo
+####Los controles detectivos alertan cuando el incidente está ocurriendo; los preventivos lo evitan y los correctivos restauran la normalidad (Módulo 6).}
+
+::OM06 ISO 27001 y 27002::¿Cuál afirmación describe correctamente la relación entre ISO/IEC 27001 y 27002?{
+=La 27001 define los requisitos de un SGSI y es certificable; la 27002 es un catálogo de controles y buenas prácticas
+~La 27002 es la norma certificable y la 27001 es solo una guía optativa
+~Ambas son leyes argentinas de cumplimiento obligatorio
+~La 27001 aplica solo a la nube y la 27002 solo a centros de datos físicos
+####La 27001 dice QUÉ hay que hacer y la 27002 sugiere CÓMO hacerlo (Módulo 6).}
+
+::OM07 Menor privilegio::En el caso Capital One (2019), un rol IAM con permisos excesivos amplificó el daño de la brecha. ¿Qué principio se incumplió?{
+=Menor privilegio
+~Privacidad por diseño
+~Regla 3-2-1
+~Defensa por oscuridad
+####Cada usuario o servicio debe tener solo los permisos mínimos necesarios, así el daño de un compromiso queda acotado (Módulo 7).}
+
+::OM08 Notificación GDPR::Según el GDPR, ¿en qué plazo debe notificarse a la autoridad una brecha de datos personales una vez detectada?{
+=72 horas
+~24 horas
+~10 días hábiles
+~30 días corridos
+####El GDPR exige notificar a la autoridad en 72 horas (Módulo 8).}
+
+::OM09 Dark patterns::Un banner de cookies en el que el botón "Aceptar todo" es enorme y llamativo, mientras que la opción "Rechazar" está escondida en un menú secundario, es un ejemplo de\:{
+=Dark pattern (patrón oscuro)
+~Privacidad por defecto
+~Consentimiento informado válido
+~Cookie de sesión
+####Los dark patterns son diseños de interfaz engañosos que manipulan las decisiones del usuario (Módulo 9).}
+
+::OM10 Ley 26.388::Un empleado manipula la base de datos de un e-commerce para alterar precios y obtener un beneficio económico. Según la Ley 26.388, esta conducta se encuadra como\:{
+=Fraude informático
+~Acceso indebido
+~Interceptación de comunicaciones
+~Daño informático
+####Manipular datos para obtener un beneficio económico injusto es fraude informático (Módulo 9).}
+
+::OM11 Simulacro de phishing::En un simulacro de phishing, ¿qué indicador conviene que sea lo más ALTO posible?{
+=La tasa de reporte (empleados que avisan que el correo es sospechoso)
+~La tasa de clic (CTR)
+~La tasa de apertura del correo
+~El tiempo que tarda el primer empleado en reportarlo
+####Se busca una tasa de clic baja, un tiempo de reporte corto y una tasa de reporte alta. El simulacro es para capacitar, no para sancionar (Módulo 10).}
+
+::OM12 Responsable último::En el gobierno de la seguridad, ¿quién aprueba la política, asigna el presupuesto y es el responsable último de la seguridad de la organización?{
+=La Dirección / CEO
+~El área de TI
+~El DPO
+~Cada empleado, por igual
+####El CISO lidera la estrategia y reporta a la Dirección, que es la responsable última (Módulo 11).}
+
+::OM13 Junta de Crisis::En la Junta de Crisis de "DataShop", ¿qué rol debe evaluar si corresponde notificar a la AAIP y si aplica el GDPR?{
+=Legal / Cumplimiento
+~Comunicaciones
+~TI / Seguridad
+~Gerencia General
+####Legal / Cumplimiento asegura el cumplimiento normativo (Ley 25.326, GDPR), los plazos y la preservación de evidencia (Módulo 12).}
+
+::OM14 Tipos de auditoría::Una auditoría realizada por un organismo independiente para certificar el cumplimiento de ISO 27001 es una auditoría\:{
+=De tercera parte (de certificación)
+~De primera parte (interna)
+~De segunda parte (externa, realizada por un cliente)
+~Forense
+####La de primera parte la hace la propia organización; la de segunda, un cliente o partner; la de tercera, un organismo independiente que certifica (Módulo 13).}

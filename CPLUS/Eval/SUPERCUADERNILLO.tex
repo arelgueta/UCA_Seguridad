@@ -1,0 +1,1277 @@
+% ============================================================
+%  SUPERCUADERNILLO — Resumen integrador (Módulos 1 a 13)
+%  Seguridad de la Información para Negocios Digitales
+%  Compilar con: pdflatex (dos pasadas para el índice)
+% ============================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{microtype}
+\usetikzlibrary{positioning,arrows.meta}
+
+% ---------- Colores ----------
+\definecolor{azulPrincipal}{HTML}{003366}
+\definecolor{dorado}{HTML}{B8860B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{verdeOK}{HTML}{27AE60}
+\definecolor{azulCielo}{HTML}{2980B9}
+\definecolor{naranjaAmenaza}{HTML}{D35400}
+\definecolor{violetaIA}{HTML}{8E44AD}
+\definecolor{azulLegal}{HTML}{1F618D}
+\definecolor{verdeAuditoria}{HTML}{1E8449}
+\definecolor{riskLow}{HTML}{A9DFBF}
+\definecolor{riskMed}{HTML}{F9E79F}
+\definecolor{riskHigh}{HTML}{F5B041}
+\definecolor{riskCrit}{HTML}{EC7063}
+\definecolor{respProv}{HTML}{D6EAF8}
+\definecolor{respCli}{HTML}{FADBD8}
+
+% ---------- Cajas ----------
+\tcbuselibrary{skins,breakable}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.30em}
+\setlength{\tabcolsep}{6pt}
+\setlist[itemize]{leftmargin=1.5em, itemsep=0.25em, topsep=0.35em}
+\setlist[enumerate]{leftmargin=1.8em, itemsep=0.25em, topsep=0.35em}
+\sloppy
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.25}
+
+\newtcolorbox{cajaTitulo}[1][]{
+  enhanced, colback=azulPrincipal, colframe=azulPrincipal, coltext=white,
+  fonttitle=\Large\bfseries, arc=4mm, boxrule=0.8pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt, drop shadow=black!20, #1
+}
+\newtcolorbox{cajaDefinicion}[1][]{
+  colback=azulCielo!10, colframe=azulCielo, fonttitle=\bfseries,
+  title=Definici\'on, arc=3mm, breakable, boxrule=0.6pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+\newtcolorbox{cajaNota}[1][]{
+  colback=dorado!10, colframe=dorado, fonttitle=\bfseries,
+  title=Concepto clave, arc=3mm, breakable, boxrule=0.6pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+\newtcolorbox{cajaCaso}[1][]{
+  colback=naranjaAmenaza!8, colframe=naranjaAmenaza,
+  fonttitle=\bfseries\color{white}, title=Caso, arc=3mm, breakable,
+  boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+\newtcolorbox{cajaLegal}[1][]{
+  colback=azulLegal!8, colframe=azulLegal, fonttitle=\bfseries,
+  title=Marco legal, arc=3mm, breakable, boxrule=0.6pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+\newtcolorbox{cajaIA}[1][]{
+  colback=violetaIA!8, colframe=violetaIA, fonttitle=\bfseries,
+  title={Uso cr\'itico de la IA}, arc=3mm, breakable, boxrule=0.6pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+\newtcolorbox{cajaResumen}[1][]{
+  colback=verdeOK!8, colframe=verdeOK, fonttitle=\bfseries,
+  title={\ding{51}\; Ideas para recordar}, arc=3mm, breakable, boxrule=0.6pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt, #1
+}
+
+% ---------- Separador de partes ----------
+\newcommand{\parte}[2]{%
+  \clearpage
+  \begin{cajaTitulo}[halign=center]
+    {\large PARTE #1}\\[4pt]
+    {\LARGE #2}
+  \end{cajaTitulo}
+  \addcontentsline{toc}{part}{Parte #1 --- #2}
+  \vspace{0.6em}
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulPrincipal}{Seguridad de la Informaci\'on para Negocios Digitales}}
+\fancyhead[R]{\small\textcolor{azulPrincipal}{Supercuadernillo}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------- Títulos ----------
+\titleformat{\section}{\color{azulPrincipal}\Large\bfseries}{M\'odulo \thesection\;---}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.8em}
+\titleformat{\subsection}{\color{azulCielo}\large\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.6em}
+
+\hypersetup{colorlinks=true, linkcolor=azulPrincipal, urlcolor=azulCielo}
+
+% ============================================================
+\begin{document}
+
+% ---------- Portada ----------
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
+\begin{cajaTitulo}[width=\textwidth, halign=center]
+  SEGURIDAD DE LA INFORMACI\'ON\\[4pt]
+  {\large para Negocios Digitales}
+\end{cajaTitulo}
+
+\vspace{1.8cm}
+{\Huge\bfseries\color{azulPrincipal} SUPERCUADERNILLO}\\[10pt]
+{\LARGE\color{dorado} Resumen integrador}\\[12pt]
+{\Large\itshape M\'odulos 1 a 13}\\[1.5cm]
+
+\begin{minipage}{0.85\textwidth}\centering\large
+Fundamentos y criptograf\'ia $\cdot$ Gesti\'on de riesgos y nube $\cdot$
+Protecci\'on de datos, cibercrimen y \'etica $\cdot$
+Gobierno, factor humano, incidentes y continuidad
+\end{minipage}
+
+\vfill
+\begin{tabular}{rl}
+\textbf{Autor:} & Mg.\ Ing.\ Rodrigo Atilio Elgueta \\
+\end{tabular}
+
+\vspace{1cm}
+\begin{tcolorbox}[colback=grisClaro, colframe=azulPrincipal, arc=3mm, width=0.9\textwidth]
+\centering\small
+Este material resume los contenidos de los 13 m\'odulos y sirve como base de
+estudio para la evaluaci\'on integradora (Verdadero/Falso, Unir conceptos y
+Opci\'on m\'ultiple).
+\end{tcolorbox}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+\section*{C\'omo usar este cuadernillo}
+\addcontentsline{toc}{section}{C\'omo usar este cuadernillo}
+
+Cada m\'odulo resume las definiciones, tablas, casos y reglas pr\'acticas que
+hay que dominar. Al final de cada uno hay un recuadro verde de
+\textbf{Ideas para recordar}. Al cierre se incluye un \textbf{glosario integrador}.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.2cm}|X|>{\centering\arraybackslash}p{2.4cm}|}
+\hline
+\rowcolor{azulPrincipal!20}
+Parte & Contenido & M\'odulos \\
+\hline
+I   & Fundamentos: CID, conceptos de riesgo, amenazas, herramientas y criptograf\'ia & 1 a 4 \\
+\hline
+II  & Gesti\'on de riesgos: matriz P$\times$I, BIA, controles, ISO 27001/27002 y nube & 5 a 7 \\
+\hline
+III & Marco normativo y \'etico: datos personales, cibercrimen, privacidad por dise\~no y cookies & 8 y 9 \\
+\hline
+IV  & Gobierno, factor humano, incidentes, continuidad y auditor\'ia & 10 a 13 \\
+\hline
+\end{tabularx}
+\end{center}
+
+\begin{cajaNota}[title={La idea que atraviesa todo el curso}]
+La seguridad de la informaci\'on no es un gasto ni un tema exclusivo del \'area
+de sistemas: es un \textbf{habilitador de confianza} y una ventaja competitiva
+para cualquier negocio digital.
+\end{cajaNota}
+
+% ============================================================
+\parte{I}{Fundamentos de la seguridad}
+% ============================================================
+
+\section{La huella digital: una demo para empezar}
+
+El curso arranca con una experiencia: los participantes ingresan desde su
+celular a una p\'agina web aparentemente inofensiva. Sin que lo adviertan con
+claridad, la p\'agina \textbf{solicita acceso a la c\'amara} del dispositivo y
+transmite la imagen a un panel controlado por el docente.
+
+\begin{cajaNota}[title={Lecci\'on de la demo}]
+No hubo un ``hackeo'' sofisticado: hubo un dise\~no que aprovech\'o que el usuario
+no ley\'o, no not\'o o acept\'o un permiso sin pensar. En un negocio digital real,
+eso es una \textbf{brecha de seguridad}. La demo es, en esencia, una demostraci\'on
+controlada de \textbf{hacking \'etico} (M\'odulo 10): t\'ecnicas de ataque usadas
+con autorizaci\'on y con prop\'osito educativo.
+\end{cajaNota}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Concepto & En la demo \\
+\hline
+Activo & La imagen personal, la c\'amara, la privacidad. \\
+\hline
+Amenaza & El sitio dise\~nado para acceder a la c\'amara sin evidencia clara. \\
+\hline
+Vulnerabilidad & Aceptar permisos sin leer; no verificar la URL; confiar ciegamente en un enlace. \\
+\hline
+Impacto & La foto termina en un panel que el usuario no controla (en escala real: chantaje, suplantaci\'on, exposici\'on). \\
+\hline
+Pilar CID violado & \textbf{Confidencialidad}: se accedi\'o a la imagen sin autorizaci\'on consciente. \\
+\hline
+\end{tabularx}
+
+\begin{cajaDefinicion}
+\textbf{Huella digital:} rastro de datos que dejamos al usar tecnolog\'ia.
+\textbf{Permiso (app/navegador):} autorizaci\'on para acceder a un recurso del
+dispositivo (c\'amara, micr\'ofono, ubicaci\'on, contactos).
+\end{cajaDefinicion}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item La vulnerabilidad m\'as com\'un es humana: aceptar sin leer.
+  \item Una p\'agina ``inocente'' puede acceder a recursos sensibles si se le otorga el permiso.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Fundamentos: los 5 conceptos y los pilares CID}
+
+\subsection{Los 5 conceptos fundamentales}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{3cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Concepto & Definici\'on & Ejemplo (e-commerce chico) \\
+\hline
+Activo de informaci\'on & Cualquier elemento con valor para la organizaci\'on que debe protegerse: datos, software, hardware, conocimiento, reputaci\'on, personas. & Base de datos de 5.000 clientes con datos de tarjeta. \\
+\hline
+Amenaza & Evento o actor \emph{potencial} que puede causar da\~no. No es el da\~no en s\'i. & Ataque de phishing a un empleado de atenci\'on al cliente. \\
+\hline
+Vulnerabilidad & Debilidad de un activo, proceso o control que una amenaza puede explotar. Est\'a ``de nuestro lado''. & Empleado sin capacitaci\'on que reutiliza su contrase\~na en sitios personales. \\
+\hline
+Impacto & Consecuencia (econ\'omica, legal, reputacional, operativa) cuando la amenaza explota la vulnerabilidad. & Multa, p\'erdida de clientes, nota en medios. \\
+\hline
+Riesgo & Combinaci\'on de la \textbf{probabilidad} y el \textbf{impacto}. & Alto: probabilidad media-alta e impacto severo. \\
+\hline
+\end{tabularx}
+
+\begin{center}
+\fbox{\parbox{0.7\textwidth}{\centering\large
+$\text{RIESGO} \;\approx\; \text{PROBABILIDAD} \times \text{IMPACTO}$}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={rectangle, draw=azulPrincipal, fill=azulPrincipal!10,
+              text width=2.6cm, align=center, rounded corners=3pt, font=\small\bfseries},
+  arr/.style={-{Stealth[length=3mm]}, thick, azulPrincipal}]
+  \node[box] (amen) {AMENAZA};
+  \node[box, right=1.6cm of amen] (vuln) {VULNERABILIDAD};
+  \node[box, right=1.6cm of vuln] (act) {ACTIVO};
+  \node[box, below=1cm of act] (imp) {IMPACTO};
+  \node[box, below=1cm of imp, fill=dorado!15, draw=dorado] (ries) {RIESGO};
+  \draw[arr] (amen) -- node[above,font=\scriptsize]{explota} (vuln);
+  \draw[arr] (vuln) -- node[above,font=\scriptsize]{afecta} (act);
+  \draw[arr] (act) -- (imp);
+  \draw[arr] (imp) -- node[right,font=\scriptsize]{Prob.\ $\times$ Impacto} (ries);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Los tres pilares CID}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{2.9cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Pilar & Significado & Se viola cuando\ldots \\
+\hline
+Confidencialidad & Solo accede quien est\'a \textbf{autorizado}. & Se reenv\'ia la n\'omina a todo el equipo; un bucket queda p\'ublico; se intercepta HTTP sin cifrar. \\
+\hline
+Integridad & La informaci\'on es \textbf{exacta y completa} y no fue alterada sin autorizaci\'on. & Un malware modifica las cuentas bancarias destino en una fintech. \\
+\hline
+Disponibilidad & La informaci\'on est\'a accesible \textbf{cuando se la necesita}. & Un ataque DDoS deja ca\'ida una app de delivery en la hora del almuerzo; un backup se corrompe. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Atenci\'on con la confusi\'on m\'as frecuente}]
+``Accesible solo para quien est\'a autorizado'' es \textbf{confidencialidad}, no
+disponibilidad. Disponibilidad es que est\'e accesible \emph{cuando se necesita}.
+Si cualquier pilar se rompe, hay un \textbf{incidente}.
+\end{cajaNota}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Amenaza = posibilidad de da\~no; vulnerabilidad = debilidad propia que la amenaza explota.
+  \item Riesgo $\approx$ Probabilidad $\times$ Impacto.
+  \item CID = Confidencialidad, Integridad, Disponibilidad.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Amenazas para negocios digitales y herramientas}
+
+\subsection{Panorama de amenazas}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{naranjaAmenaza}}p{3.3cm}|X|>{\raggedright\arraybackslash}p{3.3cm}|}
+\hline
+\rowcolor{grisClaro}
+Amenaza & Descripci\'on & Pilar m\'as afectado \\
+\hline
+Phishing & Suplantaci\'on de identidad (correo, SMS, web falsa) para robar credenciales o datos. & Confidencialidad \\
+\hline
+Spear Phishing & Phishing \textbf{dirigido e hiper-personalizado} a una v\'ictima concreta. & Confidencialidad \\
+\hline
+Ransomware & Malware que \textbf{cifra los archivos} y exige un rescate (en general en criptomonedas). Hoy suele sumar amenaza de publicar los datos. & Disponibilidad (y C/I si hay fuga) \\
+\hline
+Ingenier\'ia social & Manipulaci\'on psicol\'ogica de las personas; ataca al eslab\'on m\'as d\'ebil: el humano. Ej.: llamar como ``soporte t\'ecnico'' y pedir el c\'odigo 2FA. & Confidencialidad \\
+\hline
+Fraude / BEC & Suplantar a un directivo, proveedor o cliente para inducir una transferencia. En el \textbf{BEC} se compromete o suplanta el correo corporativo de un ejecutivo. & Confidencialidad e Integridad \\
+\hline
+Credential Stuffing & Ataque automatizado que prueba contrase\~nas filtradas en otros sitios. & Confidencialidad \\
+\hline
+\end{tabularx}
+
+\begin{cajaCaso}[title={Caso ``FintechYa''}]
+Una fintech de 20 empleados sufre un \textbf{spear phishing}: el gerente de RR.HH.\
+recibe ``Recibos\_Sueldo\_Actualizados.pdf.exe''. Windows ocultaba la extensi\'on
+real ``.exe'' y el gerente hizo doble clic. Se instal\'o un \textbf{ransomware} que
+cifr\'o la base de clientes: \textbf{5 d\'ias sin procesar transacciones}.\\[3pt]
+\textbf{Consecuencias:} econ\'omica (u\$s 50.000 de ingresos no percibidos),
+reputacional (tendencia negativa en redes) y legal (denuncia ante la autoridad de
+datos personales). \textbf{Pilar afectado principalmente: disponibilidad.}
+\end{cajaCaso}
+
+\subsection{Herramientas gratuitas de verificaci\'on}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Herramienta & Para qu\'e sirve \\
+\hline
+Have I Been Pwned & Base de datos (creada por Troy Hunt) de cuentas comprometidas en brechas p\'ublicas: permite saber si un correo o tel\'efono fue filtrado. \\
+\hline
+VirusTotal & Servicio de Google que analiza archivos y URLs sospechosas con m\'as de 70 motores antivirus y sandboxing. \\
+\hline
+Gestores de contrase\~nas & Bitwarden, 1Password, KeePass: generan, guardan y autocompletan contrase\~nas robustas en una b\'oveda cifrada; solo hay que recordar una. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Regla de oro}]
+Nunca reutilizar la contrase\~na del correo en servicios de terceros: si el tercero
+es hackeado, los atacantes la probar\'an en todos lados (\emph{credential stuffing}).
+Activar \textbf{2FA/MFA} (algo que s\'e + algo que tengo).
+\end{cajaNota}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Phishing, ransomware, ingenier\'ia social y fraude/BEC son las amenazas m\'as comunes.
+  \item \textbf{Sandbox}: entorno aislado para ejecutar archivos sospechosos sin riesgo.
+  \item \textbf{Breach (brecha)}: incidente donde se expone informaci\'on confidencial.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Criptograf\'ia y confianza digital}
+
+\begin{cajaDefinicion}
+\textbf{Cifrar} es transformar texto plano en texto cifrado usando una
+\textbf{clave}, de modo que solo quien tiene la clave adecuada pueda revertirlo.
+\end{cajaDefinicion}
+
+\subsection{Sim\'etrico vs asim\'etrico}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.6cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+ & Sim\'etrico (``caja fuerte con una llave'') & Asim\'etrico (``buz\'on p\'ublico'') \\
+\hline
+Claves & Una sola, compartida & Par: p\'ublica (se comparte) + privada (secreta) \\
+\hline
+Velocidad & Muy r\'apido & M\'as lento \\
+\hline
+Uso t\'ipico & Datos en reposo, sesiones HTTPS & Establecer la conexi\'on, firma digital \\
+\hline
+Desaf\'io & Distribuir la clave de forma segura & Saber que la clave p\'ublica es de quien dice ser (certificados) \\
+\hline
+Ejemplo & AES-256 & RSA, ECC \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Se usan juntos}]
+HTTPS es un sistema \textbf{h\'ibrido}: usa cifrado asim\'etrico para presentarse y
+negociar una \textbf{clave de sesi\'on sim\'etrica}, y luego cifrado sim\'etrico
+para transmitir los datos r\'apido.
+\end{cajaNota}
+
+\subsection{Hashing}
+
+Una \textbf{funci\'on hash} toma cualquier dato y produce una cadena de
+\textbf{longitud fija}. Es \textbf{irreversible} y \textbf{no usa clave}. Un
+m\'inimo cambio (``Hola'' vs ``hola'') produce un hash totalmente distinto, por eso
+sirve para detectar alteraciones.
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.6cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+ & Cifrado & Hash \\
+\hline
+¿Reversible? & S\'i, con la clave correcta & No \\
+\hline
+Prop\'osito & Proteger datos que necesito leer despu\'es & Verificar integridad; almacenar contrase\~nas \\
+\hline
+Salida & Longitud variable & Longitud fija (SHA-256: 256 bits, 64 caracteres hex) \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Almacenamiento de contrase\~nas}]
+Nunca en texto plano. Nunca con hashes simples y r\'apidos como MD5. Se guardan
+\textbf{hasheadas con funciones lentas (bcrypt, Argon2) y un \emph{salt} \'unico
+por usuario}. El salt evita ataques de diccionario y \emph{rainbow tables}
+(tablas precomputadas de hashes). Aun hasheada, una contrase\~na d\'ebil como
+``123456'' sigue siendo vulnerable porque es lo primero que se prueba.
+\end{cajaNota}
+
+\subsection{HTTPS, certificados y firma digital}
+
+\textbf{HTTPS paso a paso:} (1) el navegador pregunta ``¿qui\'en sos?''; (2) el
+servidor presenta su \textbf{certificado digital}, emitido por una Autoridad
+Certificante; (3) el navegador lo valida; (4) se negocia una clave de sesi\'on
+sim\'etrica con criptograf\'ia asim\'etrica; (5) todo viaja cifrado. Sin HTTPS el
+navegador muestra ``No seguro''.
+
+\begin{cajaDefinicion}[title={Firma digital}]
+Garantiza \textbf{autenticidad} (qui\'en firm\'o) e \textbf{integridad} (que no se
+modific\'o). Funcionamiento:
+\begin{enumerate}
+  \item Se calcula el \textbf{hash} del documento.
+  \item Se cifra ese hash con la \textbf{clave privada} del firmante: esa es la firma.
+  \item El receptor descifra la firma con la \textbf{clave p\'ublica} del firmante y compara con el hash que calcula del documento recibido.
+  \item Si coinciden, el documento es aut\'entico e \'integro.
+\end{enumerate}
+\end{cajaDefinicion}
+
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.2cm}|X|>{\raggedright\arraybackslash}p{3cm}|}
+\hline
+\rowcolor{grisClaro}
+\textbf{Escenario} & \textbf{Criptograf\'ia aplicada} & \textbf{Pilar} \\
+\hline
+Pago con tarjeta & HTTPS/TLS + tokenizaci\'on en la pasarela & Confidencialidad \\
+\hline
+Contrase\~nas de usuarios & bcrypt/Argon2 + salt & Confidencialidad \\
+\hline
+Factura o contrato digital & Firma digital & Integridad + autenticidad \\
+\hline
+Backup de la base & Cifrado sim\'etrico AES-256 & Confidencialidad \\
+\hline
+Descarga de un instalador & Hash SHA-256 para verificar que no fue adulterado & Integridad \\
+\hline
+Mensajer\'ia (WhatsApp, Signal) & Cifrado de extremo a extremo (E2EE) & Confidencialidad \\
+\hline
+\end{tabularx}
+
+\begin{cajaIA}
+Reglas para usar IA generativa en todo el curso: \textbf{transparencia} (declarar
+herramienta, uso y prompt), \textbf{verificaci\'on obligatoria} (ninguna salida se
+entrega ``tal cual'': se contrasta con fuentes confiables y se marca lo correcto,
+lo impreciso y lo sobre-simplificado) y \textbf{responsabilidad} (el autor responde
+por el resultado final, use o no IA).
+\end{cajaIA}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Cifrado = reversible con clave. Hash = irreversible, longitud fija.
+  \item HTTPS combina asim\'etrico (negociaci\'on) y sim\'etrico (datos).
+  \item Firma digital = hash cifrado con la clave \textbf{privada}; se verifica con la \textbf{p\'ublica}.
+\end{itemize}
+\end{cajaResumen}
+
+% ============================================================
+\parte{II}{Gesti\'on de riesgos}
+% ============================================================
+
+\section{Gesti\'on de riesgos y matriz de probabilidad e impacto}
+
+\begin{cajaNota}[title={El objetivo NO es el ``riesgo cero''}]
+Eliminar todos los riesgos es t\'ecnicamente imposible y econ\'omicamente inviable.
+El objetivo es \textbf{administrar el riesgo} hasta un nivel aceptable para el negocio.
+\end{cajaNota}
+
+\subsection{El ciclo de gesti\'on de riesgos}
+Proceso \textbf{continuo y c\'iclico} (no se hace una sola vez):
+\begin{enumerate}
+  \item \textbf{Identificaci\'on:} ¿qu\'e puede salir mal? (activos, amenazas, vulnerabilidades).
+  \item \textbf{An\'alisis:} ¿qu\'e tan probable y qu\'e tan grave? (P e I).
+  \item \textbf{Evaluaci\'on:} ¿cu\'ales son prioritarios? (matriz P$\times$I).
+  \item \textbf{Tratamiento:} ¿qu\'e hacemos? (las 4 T).
+\end{enumerate}
+
+\subsection{Mapa de calor (matriz P$\times$I)}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\rowcolor{azulPrincipal!20}
+\textbf{Probabilidad $\downarrow$ / Impacto $\rightarrow$} & \textbf{Bajo} & \textbf{Medio} & \textbf{Alto} \\
+\hline
+\textbf{Alta}  & \cellcolor{riskMed}\textbf{MEDIO} & \cellcolor{riskHigh}\textbf{ALTO}  & \cellcolor{riskCrit}\textbf{CR\'ITICO} \\
+\hline
+\textbf{Media} & \cellcolor{riskLow}\textbf{BAJO}  & \cellcolor{riskMed}\textbf{MEDIO}  & \cellcolor{riskHigh}\textbf{ALTO} \\
+\hline
+\textbf{Baja}  & \cellcolor{riskLow}\textbf{BAJO}  & \cellcolor{riskLow}\textbf{BAJO}   & \cellcolor{riskMed}\textbf{MEDIO} \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Cr\'itico / Alto:} tratamiento inmediato.
+  \item \textbf{Medio:} plan de acci\'on a mediano plazo y monitoreo.
+  \item \textbf{Bajo:} se acepta o se monitorea peri\'odicamente.
+\end{itemize}
+
+\subsection{Opciones de tratamiento: las 4 T}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{2.8cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Estrategia & Descripci\'on & Ejemplo \\
+\hline
+Mitigar (reducir) & Aplicar controles para bajar la probabilidad o el impacto. & Implementar MFA contra el robo de credenciales. \\
+\hline
+Transferir (compartir) & Pasar el impacto financiero a un tercero. & Seguro de ciber-riesgo; hosting tercerizado con SLA. \\
+\hline
+Aceptar (tolerar) & Asumir el riesgo porque el control cuesta m\'as que el da\~no potencial. & Tolerar 10 min de ca\'ida al a\~no porque la redundancia cuesta mucho m\'as que la p\'erdida. \\
+\hline
+Evitar (eliminar) & Dejar de realizar la actividad que genera el riesgo. & No almacenar tarjetas propias y usar siempre una pasarela externa. \\
+\hline
+\end{tabularx}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Orden del ciclo: identificar $\rightarrow$ analizar $\rightarrow$ evaluar $\rightarrow$ tratar.
+  \item Probabilidad Alta $\times$ Impacto Bajo = \textbf{Medio}; Alta $\times$ Alto = \textbf{Cr\'itico}.
+  \item Las 4 T son todas estrategias v\'alidas: Mitigar, Transferir, Aceptar, Evitar.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{BIA, controles e ISO/IEC 27001/27002}
+
+\subsection{BIA: An\'alisis de Impacto al Negocio}
+
+\begin{cajaDefinicion}
+El \textbf{BIA (Business Impact Analysis)} identifica los procesos cr\'iticos y
+cuantifica el impacto de su interrupci\'on para \textbf{priorizar} la recuperaci\'on,
+\textbf{dimensionar inversiones} y \textbf{definir objetivos de recuperaci\'on}.
+\end{cajaDefinicion}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{1.6cm}|X|>{\raggedright\arraybackslash}p{4.6cm}|}
+\hline
+\rowcolor{grisClaro}
+Sigla & ¿Qu\'e pregunta responde? & Ejemplo \\
+\hline
+MTD & ¿Cu\'anto tiempo \textbf{m\'aximo} puede estar ca\'ido el proceso antes de que el da\~no sea inaceptable? & ``La pasarela no puede estar ca\'ida m\'as de 2 h.'' \\
+\hline
+RTO & ¿En cu\'anto tiempo nos \textbf{proponemos} recuperarlo? & ``Volver a operar en 1 h.'' \\
+\hline
+RPO & ¿Cu\'antos \textbf{datos} podemos perder? Define cada cu\'anto se hace backup. & ``Backup cada 15 min.'' \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Regla pr\'actica}]
+Siempre debe cumplirse \textbf{RTO $\leq$ MTD}. Si el proceso tolera 2 horas ca\'ido
+pero el plan tarda 6 horas en recuperarlo, hay un problema de dise\~no.
+\end{cajaNota}
+
+\subsection{Tipos de controles}
+
+Un \textbf{control} es cualquier medida dise\~nada para reducir la probabilidad o el
+impacto de un riesgo.
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{3.3cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Categor\'ia & Abarca & Ejemplos \\
+\hline
+T\'ecnicos & Soluciones tecnol\'ogicas & Firewall, MFA, cifrado, antivirus, backups, IDS/IPS \\
+\hline
+Humanos / organizativos & Personas y procesos & Capacitaci\'on, concientizaci\'on, pol\'iticas, roles \\
+\hline
+F\'isicos & Espacio y hardware & C\'amaras, control de acceso al data center, UPS \\
+\hline
+Legales / normativos & Leyes y contratos & Pol\'itica de privacidad, NDA, seguros, cl\'ausulas \\
+\hline
+\end{tabularx}
+
+\medskip
+Seg\'un su \textbf{funci\'on en el tiempo}:
+\begin{itemize}
+  \item \textbf{Preventivo:} evita que el incidente ocurra (MFA, capacitaci\'on).
+  \item \textbf{Detectivo:} alerta mientras ocurre (antivirus, c\'amaras, monitoreo de tr\'afico).
+  \item \textbf{Correctivo:} restaura la normalidad despu\'es (backups, plan de respuesta).
+\end{itemize}
+
+\begin{cajaNota}[title={Criterio costo-beneficio}]
+Un control se implementa si \textbf{su costo es menor que el impacto esperado del
+riesgo}. Si proteger un activo cuesta m\'as que el activo mismo, lo correcto suele
+ser \textbf{aceptar} o \textbf{transferir}.
+\end{cajaNota}
+
+\subsection{ISO/IEC 27001 y 27002}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.6cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+ & ISO/IEC 27001 & ISO/IEC 27002 \\
+\hline
+¿Qu\'e es? & Norma de \textbf{requisitos} de un SGSI (Sistema de Gesti\'on de Seguridad de la Informaci\'on). & \textbf{Cat\'alogo de buenas pr\'acticas} y controles. \\
+\hline
+Rol & Dice \textbf{QU\'E} hay que hacer. & Sugiere \textbf{C\'OMO} hacerlo. \\
+\hline
+¿Certificable? & \textbf{S\'i}. & \textbf{No} por s\'i sola. \\
+\hline
+Analog\'ia & La ``constituci\'on''. & El ``manual de procedimientos''. \\
+\hline
+\end{tabularx}
+
+Importan por \textbf{confianza comercial}, \textbf{orden interno} y \textbf{ventaja
+competitiva} (muchos contratos B2B exigen cumplimiento de est\'andares).
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item MTD = tolerancia m\'axima; RTO = objetivo de tiempo; RPO = p\'erdida m\'axima de datos.
+  \item Preventivo / detectivo / correctivo.
+  \item 27001 = requisitos, certificable. 27002 = cat\'alogo de controles.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Seguridad en la nube}
+
+\begin{cajaDefinicion}[title={Modelo de responsabilidad compartida}]
+El proveedor (AWS, Azure, GCP) se ocupa de la \textbf{seguridad DE la nube}:
+hardware, data centers, red f\'isica, hipervisor. El cliente se ocupa de la
+\textbf{seguridad EN la nube}: sus datos, sus identidades (IAM), la configuraci\'on
+de sus servicios y el cifrado de su informaci\'on.
+\end{cajaDefinicion}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{azulPrincipal!20}
+\textbf{Capa} & \textbf{IaaS} & \textbf{PaaS} & \textbf{SaaS} \\
+\hline
+Infraestructura, red, hipervisor & \cellcolor{respProv}Proveedor & \cellcolor{respProv}Proveedor & \cellcolor{respProv}Proveedor \\
+\hline
+Sistema operativo y middleware & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respProv}Proveedor & \cellcolor{respProv}Proveedor \\
+\hline
+Aplicaci\'on & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respProv}Proveedor \\
+\hline
+Datos & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respCli}\textbf{Cliente} \\
+\hline
+Identidades y accesos (IAM) & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respCli}\textbf{Cliente} & \cellcolor{respCli}\textbf{Cliente} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\textbf{IaaS} (ej.\ AWS EC2): se alquilan m\'aquinas virtuales.
+\textbf{PaaS} (ej.\ Azure App Service): se sube la aplicaci\'on.
+\textbf{SaaS} (ej.\ Gmail, Office 365, Slack): se usa un software ya hecho.
+
+\begin{cajaNota}[title={Lo que nunca cambia}]
+En IaaS, PaaS o SaaS, \textbf{los datos y las identidades (IAM) siempre son
+responsabilidad del cliente}. El error m\'as com\'un es creer que ``si est\'a en
+AWS, ya est\'a seguro''.
+\end{cajaNota}
+
+\subsection{Errores de configuraci\'on m\'as frecuentes}
+\begin{enumerate}
+  \item Buckets / almacenamiento \textbf{p\'ublico}: cualquiera puede descargar los datos.
+  \item IAM con \textbf{permisos excesivos}.
+  \item \textbf{Access keys} escritas en el c\'odigo o en repositorios p\'ublicos.
+  \item Cuentas administradoras \textbf{sin MFA}.
+  \item \textbf{Sin backups} o sin probarlos.
+\end{enumerate}
+
+\begin{cajaDefinicion}[title={IAM y menor privilegio}]
+\textbf{IAM (Identity and Access Management)} controla \textbf{qui\'en} puede hacer
+\textbf{qu\'e} sobre \textbf{qu\'e recurso}. El \textbf{principio de menor privilegio}
+indica que cada usuario o servicio tenga solo los permisos m\'inimos necesarios:
+si se compromete, el da\~no queda acotado.
+\end{cajaDefinicion}
+
+\begin{cajaCaso}[title={Casos reales}]
+\textbf{Capital One (2019), 100 millones de registros:} un atacante explot\'o una
+mala configuraci\'on del \textbf{WAF} (firewall de aplicaci\'on web) y luego un
+\textbf{rol IAM con permisos excesivos}. La falla fue de configuraci\'on y permisos,
+no de la infraestructura de AWS: se incumpli\'o el \textbf{menor privilegio}.\\[3pt]
+\textbf{Buckets S3 p\'ublicos (patr\'on recurrente):} el almacenamiento no es privado
+por defecto si no se configura; puede pasar meses expuesto sin monitoreo.
+\end{cajaCaso}
+
+\subsection{Backups en la nube: regla 3-2-1}
+El proveedor garantiza la durabilidad de la infraestructura, pero \textbf{el backup
+de los datos es responsabilidad del cliente}.
+\begin{itemize}
+  \item \textbf{3} copias (la original + 2 backups),
+  \item en \textbf{2} medios distintos,
+  \item con \textbf{1} copia fuera del sitio principal (otra regi\'on o cuenta).
+\end{itemize}
+El \textbf{RPO} define cada cu\'anto se hace backup y el \textbf{RTO} qu\'e tan r\'apido
+hay que restaurar. \textbf{Un backup que no se prueba no es un backup.}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Seguridad DE la nube = proveedor; seguridad EN la nube = cliente.
+  \item La mayor\'ia de las brechas en la nube son errores de configuraci\'on evitables.
+  \item Checklist m\'inima: almacenamiento privado, MFA en admins, menor privilegio, cifrado en reposo y tr\'ansito, backups 3-2-1 probados, logging y monitoreo, parcheo.
+\end{itemize}
+\end{cajaResumen}
+
+% ============================================================
+\parte{III}{Marco normativo y \'etico}
+% ============================================================
+
+\section{Protecci\'on de datos personales}
+
+Los datos personales dejaron de verse como ``propiedad'' de la empresa: son una
+\textbf{extensi\'on de la persona} y le son \textbf{confiados} a la organizaci\'on.
+
+\begin{cajaDefinicion}
+\textbf{Dato personal:} informaci\'on que identifica o hace identificable a una
+persona f\'isica.
+\end{cajaDefinicion}
+
+\subsection{Ley 25.326 de Protecci\'on de Datos Personales (Argentina, 2000)}
+\begin{itemize}
+  \item \textbf{Consentimiento informado:} libre, expreso e informado.
+  \item \textbf{Finalidad:} los datos solo se usan para el prop\'osito informado.
+  \item \textbf{Calidad del dato:} ciertos, exactos y actualizados; si ya no son necesarios, se destruyen.
+  \item \textbf{Deber de confidencialidad y seguridad} del responsable del archivo.
+\end{itemize}
+Autoridad de control: \textbf{AAIP} (Agencia de Acceso a la Informaci\'on P\'ublica).
+
+\subsection{GDPR (Uni\'on Europea, 2018)}
+\begin{cajaLegal}[title={Efecto extraterritorial}]
+El GDPR aplica a \textbf{cualquier empresa del mundo} que ofrezca bienes o servicios
+a personas en la UE o monitoree su comportamiento. Un e-commerce argentino que
+env\'ia a Espa\~na \textbf{debe cumplir el GDPR}.
+\end{cajaLegal}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.2cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Aspecto & Ley 25.326 (Argentina) & GDPR (UE) \\
+\hline
+Sanciones & Relativamente bajas & Hasta 20 millones de euros o el \textbf{4\% de la facturaci\'on global anual} \\
+\hline
+Consentimiento & Expreso e informado & \textbf{Expl\'icito y afirmativo} (no vale el silencio ni la casilla pre-tildada) \\
+\hline
+Notificaci\'on de brechas & Sin plazo estricto en la ley original (s\'i en resoluciones de la AAIP) & A la autoridad en \textbf{72 horas} desde la detecci\'on \\
+\hline
+DPO & No siempre obligatorio & Obligatorio para ciertas empresas y vol\'umenes \\
+\hline
+\end{tabularx}
+
+\subsection{Derechos ARCO}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulLegal}}p{3.3cm}|X|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\rowcolor{grisClaro}
+Derecho & Lo que puede exigir el usuario & Plazo (Arg.) \\
+\hline
+Acceso & ``Quiero saber qu\'e datos tienen de m\'i y para qu\'e los usan.'' & 10 d\'ias \\
+\hline
+Rectificaci\'on & ``Tienen mal mi direcci\'on; actual\'icenla.'' & 10 d\'ias \\
+\hline
+Cancelaci\'on (supresi\'on) & ``Ya no quiero ser cliente; b\'orrenme.'' (derecho al olvido) & 10 d\'ias \\
+\hline
+Oposici\'on & ``Pueden tenerme como cliente, pero no usen mis datos para marketing.'' & 10 d\'ias \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Cancelaci\'on vs retenci\'on legal}]
+La cancelaci\'on no es absoluta: se borran los datos de marketing y perfil, pero
+los datos de facturaci\'on se \textbf{bloquean y retienen} el tiempo que exige la ley
+fiscal. Toda empresa necesita un \textbf{canal y un procedimiento interno} para
+recibir y ejecutar solicitudes ARCO.
+\end{cajaNota}
+
+\begin{cajaIA}
+Pedirle a una IA que resuma una pol\'itica de privacidad tiene un \textbf{riesgo de
+cumplimiento}: puede omitir cl\'ausulas cr\'iticas (venta de datos a terceros,
+transferencias internacionales, retenci\'on) o ``alucinar'' derechos inexistentes.
+Siempre se audita contra el texto original antes de publicar.
+\end{cajaIA}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Ley 25.326 = datos personales en Argentina; autoridad: AAIP.
+  \item GDPR: extraterritorial, multas de hasta el 4\% global, notificaci\'on en 72 h.
+  \item ARCO = Acceso, Rectificaci\'on, Cancelaci\'on, Oposici\'on (10 d\'ias en Argentina).
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Cibercrimen, privacidad por dise\~no y cookies}
+
+\subsection{Ley 26.388 de delitos inform\'aticos (Argentina, 2008)}
+Modific\'o el C\'odigo Penal para incorporar los delitos inform\'aticos.
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoAlerta}}p{4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Delito & Qu\'e sanciona \\
+\hline
+Acceso indebido & Entrar sin autorizaci\'on a un sistema o dato restringido. \\
+\hline
+Retenci\'on de datos & Apoderarse de datos o retenerlos contra la voluntad del due\~no. \\
+\hline
+Da\~no inform\'atico & Alterar, destruir o inutilizar datos o sistemas (ej.\ borrar una base). \\
+\hline
+Fraude inform\'atico & Manipular datos para obtener un beneficio econ\'omico injusto (ej.\ alterar precios en un e-commerce). \\
+\hline
+Interceptaci\'on de comunicaciones & Captar comunicaciones electr\'onicas no destinadas al p\'ublico (ej.\ \emph{sniffing}). \\
+\hline
+Pornograf\'ia infantil & Producci\'on, tenencia o distribuci\'on de material de abuso sexual infantil. \\
+\hline
+Grooming & Contacto digital de un adulto con un menor con fines sexuales. \\
+\hline
+\end{tabularx}
+
+Conocer la ley permite saber \textbf{cu\'ando un incidente debe denunciarse} como
+delito penal.
+
+\subsection{Privacidad por Dise\~no (Privacy by Design)}
+Enfoque propuesto por \textbf{Ann Cavoukian}: la privacidad se incorpora en la
+arquitectura del producto \textbf{desde el inicio}, no como un parche al final.
+Sus 7 principios:
+\begin{enumerate}
+  \item Proactivo, no reactivo.
+  \item \textbf{Privacidad por defecto} (\emph{default privacy}): si el usuario no hace nada, est\'a protegido.
+  \item Privacidad embebida en el dise\~no.
+  \item Funcionalidad total (suma positiva): seguridad \emph{y} usabilidad.
+  \item Seguridad de extremo a extremo durante todo el ciclo de vida del dato.
+  \item Visibilidad y transparencia.
+  \item Respeto por la privacidad del usuario.
+\end{enumerate}
+
+\begin{cajaNota}[title={Dark patterns}]
+Dise\~nos de interfaz \textbf{enga\~nosos} que manipulan al usuario (suscripciones
+dif\'iciles de cancelar, ``Aceptar todo'' gigante y ``Rechazar'' escondido). Aunque
+aumenten ventas a corto plazo, erosionan la confianza en la marca.
+\end{cajaNota}
+
+\subsection{Cookies}
+HTTP es ``sin estado'': las cookies son peque\~nos archivos de texto que permiten
+al servidor recordar al usuario.
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.6cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Tipo & Caracter\'istica & Uso \\
+\hline
+De sesi\'on & Se borran al cerrar el navegador. & Carrito de compras. \\
+\hline
+Persistentes & Tienen fecha de expiraci\'on; quedan en el disco. & Idioma, ``Recordarme''. \\
+\hline
+De origen (first-party) & Creadas por el dominio que se est\'a visitando. & Autenticaci\'on, preferencias. \\
+\hline
+De terceros (third-party) & Creadas por \textbf{dominios distintos} (anunciantes, trackers). & Publicidad comportamental, anal\'itica cruzada. \\
+\hline
+\end{tabularx}
+
+Las cookies \textbf{no esenciales} requieren consentimiento. Buena pr\'actica:
+revisar la configuraci\'on y rechazar las no esenciales. Las apps ``gratuitas''
+suelen financiarse con los datos de sus usuarios.
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Ley 26.388 = delitos inform\'aticos en el C\'odigo Penal.
+  \item Privacidad por dise\~no = desde el inicio; privacidad por defecto = protegido sin configurar nada.
+  \item Cookies de terceros = de otro dominio; de sesi\'on = se borran al cerrar el navegador.
+\end{itemize}
+\end{cajaResumen}
+
+% ============================================================
+\parte{IV}{Gobierno, factor humano, incidentes y continuidad}
+% ============================================================
+
+\section{Hacking \'etico, OSINT y simulacros de phishing}
+
+\begin{cajaDefinicion}
+El \textbf{hacking \'etico (pentesting)} aplica las mismas t\'ecnicas que un atacante,
+pero \textbf{con autorizaci\'on expl\'icita del due\~no del sistema}, para encontrar
+vulnerabilidades y reportarlas antes que un delincuente.
+\end{cajaDefinicion}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.2cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Tipo & Descripci\'on \\
+\hline
+White Hat & Hacker \'etico: con autorizaci\'on y dentro de la ley. \\
+\hline
+Black Hat & Ciberdelincuente: sin autorizaci\'on, viola la ley. \\
+\hline
+Gray Hat & Zona intermedia: encuentra fallas sin autorizaci\'on pero las reporta; legalmente ambiguo. \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={La l\'inea divisoria es el consentimiento}]
+Las t\'ecnicas son \textbf{las mismas}; lo \'unico que distingue a un white hat de
+un black hat es la \textbf{autorizaci\'on del due\~no}. Escanear sin autorizaci\'on
+escrita es acceso indebido.
+\end{cajaNota}
+
+\subsection{Fases del pentesting}
+\begin{enumerate}
+  \item \textbf{Reconocimiento (OSINT):} informaci\'on p\'ublica sin interactuar con el objetivo.
+  \item \textbf{Escaneo y an\'alisis:} puertos, servicios, versiones; se mapea la \textbf{superficie de ataque}.
+  \item \textbf{Explotaci\'on:} confirmar de forma controlada qu\'e riesgos son reales.
+  \item \textbf{Post-explotaci\'on:} medir hasta d\'onde llegar\'ia un atacante.
+  \item \textbf{Reporte:} hallazgos, evidencias y recomendaciones priorizadas. \textbf{Es el verdadero producto} del pentest.
+\end{enumerate}
+
+\begin{cajaDefinicion}[title={OSINT}]
+\textbf{Open Source Intelligence:} recolecci\'on de informaci\'on de fuentes
+p\'ublicas (LinkedIn, sitio web, WHOIS, ofertas de empleo, redes sociales). Los
+atacantes la usan para preparar spear phishing e ingenier\'ia social cre\'ibles.
+\end{cajaDefinicion}
+
+\subsection{Se\~nales de alerta de un correo de phishing}
+Remitente con dominio que no coincide $\cdot$ sentido de urgencia $\cdot$ saludo
+gen\'erico $\cdot$ enlaces cuya URL real no coincide con el texto $\cdot$ adjuntos
+inesperados (.zip, .exe, macros) $\cdot$ errores de redacci\'on $\cdot$ pedido de
+datos sensibles.
+
+\subsection{Simulacro de phishing}
+Prueba controlada en la que la organizaci\'on env\'ia correos falsos a sus
+empleados para medir y, sobre todo, \textbf{concientizar}.
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.6cm}|X|>{\centering\arraybackslash}p{2.6cm}|}
+\hline
+\rowcolor{grisClaro}
+M\'etrica & Qu\'e mide & Lo deseable \\
+\hline
+Tasa de apertura & Cu\'antos abrieron el correo & Baja \\
+\hline
+Tasa de clic (CTR) & Cu\'antos hicieron clic (indicador central) & Baja \\
+\hline
+Tasa de reporte & Cu\'antos lo reportaron como sospechoso & \textbf{Alta} \\
+\hline
+Tiempo de reporte & Cu\'anto tard\'o el primer aviso a TI & Corto \\
+\hline
+\end{tabularx}
+
+\begin{cajaNota}[title={Para aprender, no para castigar}]
+Sancionar a quien cae genera miedo y hace que nadie reporte incidentes reales. Quien
+cae recibe capacitaci\'on inmediata. La concientizaci\'on es un \textbf{control humano}.
+\end{cajaNota}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item White Hat vs Black Hat: mismas t\'ecnicas, distinta autorizaci\'on.
+  \item El reporte final es el entregable de mayor valor del pentest.
+  \item En un simulacro se busca CTR baja y tasa de reporte alta.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Gobierno de la seguridad y Pol\'itica de Seguridad Aceptable}
+
+\begin{cajaDefinicion}
+El \textbf{gobierno de la seguridad} es el conjunto de pol\'iticas, normas,
+procedimientos, roles y responsabilidades para dirigir, controlar y mejorar la
+seguridad. La seguridad t\'ecnica dice \emph{c\'omo} se protege; el gobierno dice
+\emph{qui\'en decide qu\'e se protege, por qu\'e y qu\'e pasa si no se cumple}.
+\end{cajaDefinicion}
+
+\subsection{La pir\'amide documental}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulPrincipal}}p{2.8cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+Nivel & Qu\'e es & Ejemplo \\
+\hline
+Pol\'itica & Declaraci\'on de la direcci\'on: el \textbf{qu\'e} y el \textbf{por qu\'e}. Estable en el tiempo. & ``Todos los datos de clientes se cifran en reposo y en tr\'ansito.'' \\
+\hline
+Norma & Regla \textbf{obligatoria y espec\'ifica} que desarrolla la pol\'itica. & ``AES-256 en reposo; TLS 1.2 o superior en tr\'ansito.'' \\
+\hline
+Procedimiento & \textbf{Pasos operativos detallados} para cumplir la norma. & ``Paso 1: generar la clave en el KMS. Paso 2: configurar el bucket\ldots'' \\
+\hline
+\end{tabularx}
+
+Debajo pueden existir gu\'ias, instructivos y plantillas (opcionales).
+
+\subsection{Pol\'itica de Seguridad Aceptable (PSA / AUP)}
+Establece \textbf{qu\'e pueden y qu\'e no pueden hacer} empleados y usuarios con los
+recursos tecnol\'ogicos. Importa por lo \textbf{legal} (respaldo para sanciones), la
+\textbf{claridad} (elimina zonas grises) y la \textbf{cultura}.
+
+Estructura m\'inima (9 secciones): (1) prop\'osito y alcance; (2) uso aceptable;
+(3) contrase\~nas y accesos; (4) correo e internet; (5) dispositivos, BYOD y trabajo
+remoto; (6) informaci\'on confidencial; (7) reporte de incidentes; (8) cumplimiento y
+sanciones; (9) firmas y vigencia.
+
+\begin{cajaNota}[title={Regla de oro de una PSA}]
+\textbf{Corta, clara y espec\'ifica} (2 a 4 p\'aginas), firmada al ingresar y
+acompa\~nada de capacitaci\'on.
+\end{cajaNota}
+
+\subsection{Roles}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.8cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Rol & Responsabilidad \\
+\hline
+Direcci\'on / CEO & Aprueba la pol\'itica, asigna presupuesto. \textbf{Responsable \'ultimo.} \\
+\hline
+CISO & Lidera la estrategia de seguridad y reporta a la direcci\'on. \\
+\hline
+DPO & Vela por el cumplimiento de la normativa de datos personales. \\
+\hline
+Due\~no del activo & Responsable de un activo espec\'ifico. \\
+\hline
+TI / Seguridad & Implementa controles, monitorea, responde incidentes. \\
+\hline
+Todos los empleados & Cumplen la PSA, reportan incidentes, cuidan sus credenciales. \\
+\hline
+\end{tabularx}
+
+En una pyme varios roles pueden recaer en la misma persona, pero \textbf{deben
+existir formalmente}.
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Pol\'itica (qu\'e y por qu\'e) $\rightarrow$ Norma (regla espec\'ifica) $\rightarrow$ Procedimiento (pasos).
+  \item BYOD = ``Bring Your Own Device''.
+  \item El responsable \'ultimo de la seguridad es la Direcci\'on.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Factor humano y gesti\'on de incidentes}
+
+Las personas son a la vez \textbf{el eslab\'on m\'as d\'ebil} (un clic puede
+comprometer todo) y \textbf{la primera l\'inea de defensa} (un empleado capacitado
+detecta y reporta). Se estima que el 95\% de los incidentes tiene un componente
+humano. La concientizaci\'on es un \textbf{proceso continuo}: capacitaci\'on al
+ingreso, actualizaciones peri\'odicas, simulacros, micro-learning y m\'etricas.
+
+\begin{cajaDefinicion}
+Un \textbf{incidente de seguridad} es cualquier evento que compromete la
+confidencialidad, integridad o disponibilidad de los activos. Una \textbf{crisis} es
+un incidente que \textbf{escala}: afecta la reputaci\'on, exige comunicaci\'on
+externa, involucra reguladores o tiene impacto financiero significativo.
+\end{cajaDefinicion}
+
+\subsection{Fases de la gesti\'on de incidentes}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.9cm}|X|>{\raggedright\arraybackslash}p{3.6cm}|}
+\hline
+\rowcolor{grisClaro}
+Fase & Qu\'e se hace & Qui\'en lidera \\
+\hline
+Detecci\'on & Identificar el incidente, su alcance y severidad. & TI / Seguridad \\
+\hline
+Respuesta & \textbf{Contener} el da\~no, \textbf{erradicar} la causa ra\'iz, preservar evidencia. & TI / Seguridad + Legal \\
+\hline
+Comunicaci\'on & Informar a empleados, clientes, reguladores y medios. & Comunicaciones + Legal \\
+\hline
+Recuperaci\'on & Restaurar, monitorear y extraer \textbf{lecciones aprendidas}. & Todos los roles \\
+\hline
+\end{tabularx}
+
+\subsection{La Junta de Crisis: 4 roles}
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{3.6cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Rol & Responsabilidad \\
+\hline
+Gerencia General & Decisiones estrat\'egicas finales, presupuesto de emergencia, nivel de comunicaci\'on p\'ublica, pago o no de un rescate. \\
+\hline
+Legal / Cumplimiento & Cumplimiento normativo (Ley 25.326, GDPR): \textbf{si y cu\'ando notificar a la AAIP}, notificaci\'on a titulares, preservaci\'on de evidencia. \\
+\hline
+Comunicaciones & Comunicados internos y externos, prensa y redes sociales. \\
+\hline
+TI / Seguridad & Contenci\'on t\'ecnica (aislar o desconectar), forense, restauraci\'on. \\
+\hline
+\end{tabularx}
+
+\begin{cajaCaso}[title={Simulaci\'on ``DataShop''}]
+E-commerce de electr\'onica con 8.000 clientes. Un lunes a las 9:15 TI detecta
+tr\'afico de salida inusual desde el servidor de base de datos. Un empleado de
+Finanzas abri\'o un adjunto que parec\'ia de un proveedor e instal\'o software de
+acceso remoto. Se comprometieron nombres, emails, tel\'efonos e historial de compras;
+los datos de pago estaban cifrados, pero no se sabe si la clave fue comprometida. Un
+foro publica una muestra y el atacante pide rescate.\\[3pt]
+\textbf{Inyecciones durante la simulaci\'on:} consulta de un periodista; un cliente
+denuncia en redes un email sospechoso; nota de rescate con plazo de 48 h; la AAIP
+pide informaci\'on sobre la posible brecha.
+\end{cajaCaso}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item Incidente: lo maneja el equipo operativo. Crisis: el incidente escala.
+  \item Contenci\'on = limitar el da\~no; erradicaci\'on = eliminar la causa ra\'iz.
+  \item Legal / Cumplimiento decide sobre notificaciones a la AAIP y la aplicaci\'on del GDPR.
+\end{itemize}
+\end{cajaResumen}
+
+% ------------------------------------------------------------
+\section{Continuidad del negocio y auditor\'ia}
+
+\begin{cajaDefinicion}
+\textbf{BCP (Business Continuity Plan):} procesos para que las funciones cr\'iticas
+contin\'uen o se reanuden r\'apidamente tras una interrupci\'on.\\
+\textbf{DRP (Disaster Recovery Plan):} \textbf{subconjunto del BCP} enfocado en
+recuperar los \textbf{sistemas de informaci\'on y tecnolog\'ia}.
+\end{cajaDefinicion}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{2.6cm}|X|X|}
+\hline
+\rowcolor{grisClaro}
+ & BCP & DRP \\
+\hline
+Alcance & Todo el negocio: personas, procesos, f\'isico, tecnol\'ogico & Solo sistemas de informaci\'on y tecnolog\'ia \\
+\hline
+Pregunta & ¿C\'omo sigue operando el negocio? & ¿C\'omo recuperamos los sistemas? \\
+\hline
+Ejemplo & Mudar la atenci\'on al cliente a otra oficina tras un incendio & Restaurar la base desde el backup tras un ransomware \\
+\hline
+\end{tabularx}
+
+MTD, RTO y RPO (M\'odulo 6) son la columna vertebral del DRP. Ejemplo: pasarela de
+pago con MTD 2 h, RTO 1 h, RPO 5 min $\Rightarrow$ backups cada 5 minutos,
+replicaci\'on en dos regiones y failover autom\'atico.
+
+\subsection{Componentes de un plan de continuidad}
+(1) Alcance y objetivos; (2) roles y responsabilidades; (3) criterios de activaci\'on;
+(4) plan de comunicaci\'on; (5) procedimientos de recuperaci\'on; (6) sitio
+alternativo; (7) pruebas y simulacros; (8) mantenimiento. \textbf{Un plan que nunca se
+prueba no es un plan}: se prueba al menos una vez al a\~no.
+
+\subsection{Auditor\'ia de seguridad}
+\begin{cajaDefinicion}
+Examen \textbf{sistem\'atico, independiente y documentado} para determinar si las
+actividades de seguridad cumplen lo planificado y si se implementan eficazmente.
+\end{cajaDefinicion}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{4.4cm}|X|}
+\hline
+\rowcolor{grisClaro}
+Tipo & Qui\'en la hace y para qu\'e \\
+\hline
+Interna (primera parte) & La propia organizaci\'on, para mejorar procesos. \\
+\hline
+Externa (segunda parte) & Un cliente o partner, para verificar cumplimiento contractual. \\
+\hline
+De certificaci\'on (tercera parte) & Un \textbf{organismo independiente}, para certificar un est\'andar (ej.\ ISO 27001). \\
+\hline
+\end{tabularx}
+
+\subsection{Ciclo PHVA / PDCA de mejora continua}
+\textbf{Planificar} (pol\'iticas, riesgos, controles) $\rightarrow$ \textbf{Hacer}
+(implementar) $\rightarrow$ \textbf{Verificar} (auditar, medir: \emph{aqu\'i est\'a
+la auditor\'ia}) $\rightarrow$ \textbf{Actuar} (corregir y mejorar). La auditor\'ia es
+una herramienta de mejora, no una ``polic\'ia''.
+
+\subsection{Plan de Respuesta a Incidentes: checklist de referencia}
+Basado en \textbf{NIST SP 800-61} (gu\'ia de manejo de incidentes) e
+\textbf{ISO/IEC 27001} (gesti\'on de incidentes). Un buen plan incluye: alcance,
+roles, criterios de activaci\'on, fases (detecci\'on, contenci\'on, erradicaci\'on,
+recuperaci\'on), lecciones aprendidas, preservaci\'on de evidencia, comunicaci\'on
+interna y externa con plazos legales de notificaci\'on, escenarios (ransomware,
+filtraci\'on, ca\'ida prolongada), simulacros peri\'odicos, revisi\'on del plan y
+RTO/RPO de los sistemas cr\'iticos.
+
+\begin{cajaIA}
+Si un borrador se genera con IA, se audita contra este checklist: se documenta qu\'e
+omiti\'o, qu\'e era impreciso o gen\'erico, qu\'e no aplica al negocio y qu\'e se
+adapt\'o a su tama\~no real.
+\end{cajaIA}
+
+\begin{cajaResumen}
+\begin{itemize}
+  \item El BCP incluye al DRP.
+  \item Primera parte = interna; segunda = cliente; tercera = certificaci\'on independiente.
+  \item En PHVA, la auditor\'ia corresponde a ``Verificar''.
+\end{itemize}
+\end{cajaResumen}
+
+% ============================================================
+\clearpage
+\section*{Glosario integrador}
+\addcontentsline{toc}{part}{Glosario integrador}
+
+{\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.2cm}X}
+\toprule
+T\'ermino & Definici\'on \\
+\midrule
+2FA / MFA & Autenticaci\'on de dos o m\'ultiples factores. \\
+AAIP & Autoridad de control de datos personales en Argentina. \\
+Access key & Clave de acceso program\'atico a una cuenta cloud. \\
+Activo & Todo lo que tiene valor y debe protegerse. \\
+Amenaza & Evento o actor que \emph{puede} causar da\~no. \\
+ARCO & Acceso, Rectificaci\'on, Cancelaci\'on y Oposici\'on. \\
+Auditor\'ia & Examen sistem\'atico e independiente de la seguridad. \\
+BCP / DRP & Plan de continuidad del negocio / de recuperaci\'on de sistemas. \\
+BEC & Fraude mediante el correo corporativo comprometido o suplantado. \\
+BIA & An\'alisis de impacto al negocio. \\
+Bucket & Contenedor de almacenamiento de objetos en la nube. \\
+BYOD & Uso de dispositivos propios en el trabajo. \\
+Certificado digital & Vincula una clave p\'ublica con una identidad verificada. \\
+CID & Confidencialidad, Integridad, Disponibilidad. \\
+CISO / DPO & Director de seguridad / Delegado de protecci\'on de datos. \\
+Control (prev./det./corr.) & Medida que previene, detecta o corrige incidentes. \\
+Cookie de terceros & Rastreador de un dominio distinto al visitado. \\
+Credential stuffing & Ataque con contrase\~nas filtradas en otros sitios. \\
+Crisis & Incidente que escala y exige comunicaci\'on externa. \\
+CTR & Tasa de clic en un simulacro de phishing. \\
+Dark pattern & Dise\~no de interfaz enga\~noso. \\
+Firma digital & Hash cifrado con clave privada: autor\'ia e integridad. \\
+GDPR & Reglamento europeo de protecci\'on de datos. \\
+Hash & Funci\'on irreversible de salida de longitud fija. \\
+HTTPS / TLS & Protocolo que cifra la comunicaci\'on navegador-servidor. \\
+IaaS / PaaS / SaaS & Infraestructura / Plataforma / Software como servicio. \\
+IAM & Gesti\'on de identidades y accesos. \\
+Impacto & Consecuencia del da\~no materializado. \\
+ISO/IEC 27001 / 27002 & Requisitos de un SGSI (certificable) / cat\'alogo de controles. \\
+\bottomrule
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{>{\bfseries}p{4.2cm}X}
+\toprule
+T\'ermino & Definici\'on \\
+\midrule
+Ley 25.326 / Ley 26.388 & Datos personales / delitos inform\'aticos (Argentina). \\
+Menor privilegio & Solo los permisos m\'inimos necesarios. \\
+MTD / RTO / RPO & Tiempo m\'aximo tolerable / objetivo de recuperaci\'on / p\'erdida m\'axima de datos. \\
+NIST SP 800-61 & Gu\'ia para el manejo de incidentes de seguridad. \\
+OSINT & Inteligencia de fuentes abiertas. \\
+Pentesting & Prueba de penetraci\'on autorizada. \\
+PHVA / PDCA & Planificar, Hacer, Verificar, Actuar. \\
+Privacidad por dise\~no & Privacidad incorporada desde el inicio del producto. \\
+PSA / AUP & Pol\'itica de Seguridad Aceptable. \\
+Ransomware & Malware que cifra datos y exige rescate. \\
+Regla 3-2-1 & 3 copias, 2 medios, 1 fuera del sitio. \\
+Riesgo & Probabilidad $\times$ Impacto. \\
+Salt & Valor aleatorio agregado antes de hashear. \\
+SGSI & Sistema de Gesti\'on de Seguridad de la Informaci\'on. \\
+Spear phishing & Phishing dirigido y personalizado. \\
+Vulnerabilidad & Debilidad que una amenaza puede explotar. \\
+WAF & Firewall de aplicaci\'on web. \\
+\bottomrule
+\end{tabularx}
+}
+
+\end{document}

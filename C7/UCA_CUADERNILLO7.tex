@@ -29,6 +29,7 @@
 \usepackage{pifont}
 \usepackage{wasysym}
 \usepackage{tikz}
+\usepackage{microtype}
 \usetikzlibrary{positioning,arrows.meta,shapes.geometric}
 
 % ---------- Colores ----------
@@ -48,41 +49,53 @@
 % ---------- tcolorbox estilos ----------
 \tcbuselibrary{skins,breakable}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.30em}
+\setlength{\tabcolsep}{6pt}
+\setlist[itemize]{leftmargin=1.5em, itemsep=0.25em, topsep=0.35em}
+\setlist[enumerate]{leftmargin=1.8em, itemsep=0.25em, topsep=0.35em}
+\sloppy
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.25}
+
 \newtcolorbox{cajaTitulo}[1][]{
+  enhanced, breakable,
   colback=azulUCA, colframe=azulUCA, coltext=white,
-  fonttitle=\Large\bfseries, arc=4mm, #1
+  fonttitle=\Large\bfseries, arc=4mm, boxrule=0.8pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  drop shadow=black!20, #1
 }
 
-\newtcolorbox{cajaDefinicion}{
+\newtcolorbox{cajaDefinicion}[1][]{
   colback=azulCielo!10, colframe=azulCielo,
-  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable
+  fonttitle=\bfseries, title=Definici\'on, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
-\newtcolorbox{cajaNube}{
+\newtcolorbox{cajaNube}[1][]{
   colback=azulNube!8, colframe=azulNube,
   fonttitle=\bfseries\color{azulNube},
-  title={\ding{41}\; En la nube}, arc=3mm, breakable
+  title={\ding{41}\; En la nube}, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
-\newtcolorbox{cajaConcepto}{
+\newtcolorbox{cajaConcepto}[1][]{
   colback=doradoUCA!10, colframe=doradoUCA,
-  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable
+  fonttitle=\bfseries, title=Concepto clave, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
-\newtcolorbox{cajaCaso}{
+\newtcolorbox{cajaCaso}[1][]{
   colback=rojoAlerta!8, colframe=rojoAlerta,
-  fonttitle=\bfseries\color{rojoAlerta}, title=Caso real, arc=3mm, breakable
+  fonttitle=\bfseries\color{rojoAlerta}, title=Caso real, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
-\newtcolorbox{cajaActividad}{
+\newtcolorbox{cajaActividad}[1][]{
   colback=grisClaro, colframe=azulUCA,
   fonttitle=\bfseries\color{azulUCA},
-  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable
+  title={\ding{45}\; Actividad Pr\'actica}, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
-\newtcolorbox{cajaNota}{
+\newtcolorbox{cajaNota}[1][]{
   colback=naranjaAmenaza!10, colframe=naranjaAmenaza,
-  fonttitle=\bfseries\color{naranjaAmenaza}, title=Para tu TP Integrador, arc=3mm, breakable
+  fonttitle=\bfseries\color{naranjaAmenaza}, title=Para tu TP Integrador, arc=3mm, breakable, boxrule=0.6pt, left=7pt, right=7pt, top=5pt, bottom=5pt, #1
 }
 
 % ---------- Header / Footer ----------
@@ -98,10 +111,12 @@
 % ---------- Títulos de sección ----------
 \titleformat{\section}
   {\color{azulUCA}\Large\bfseries}
-  {\thesection.}{0.6em}{}
+  {\thesection.}{0.7em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.8em}
 \titleformat{\subsection}
   {\color{azulCielo}\large\bfseries}
   {\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.6em}
 
 % ---------- Enlaces ----------
 \hypersetup{colorlinks=true, linkcolor=azulUCA, urlcolor=azulCielo}
@@ -212,8 +227,8 @@ La frontera de responsabilidad \textbf{se mueve} seg\'un el modelo de servicio c
 
 \begin{center}
 \small
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{2.6cm}|}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \rowcolor{azulUCA!20}
 \textbf{Capa de responsabilidad} & \textbf{IaaS} & \textbf{PaaS} & \textbf{SaaS} \\
@@ -234,7 +249,7 @@ Datos & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Clien
 \hline
 Identidades y accesos (IAM) & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{respCli} \textbf{Cliente} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{center}
 
 \begin{center}
@@ -247,7 +262,7 @@ Identidades y accesos (IAM) & \cellcolor{respCli} \textbf{Cliente} & \cellcolor{
 \subsection{Los tres modelos de servicio}
 
 \renewcommand{\arraystretch}{1.5}
-\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulNube}}p{2cm}|X|X|}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulNube}\raggedright\arraybackslash}p{2.6cm}|X|X|}
 \hline
 \rowcolor{grisClaro}
 \textbf{Modelo} & \textbf{¿Qu\'e es?} & \textbf{Ejemplo} \\
@@ -274,8 +289,8 @@ La gran mayor\'ia de las brechas en la nube \textbf{no son ataques sofisticados}
 
 \subsection{Los 5 errores m\'as frecuentes}
 
-\renewcommand{\arraystretch}{1.5}
-\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoAlerta}}p{4.2cm}|X|}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{rojoAlerta}\raggedright\arraybackslash}p{4.2cm}|X|}
 \hline
 \rowcolor{grisClaro}
 \textbf{Error} & \textbf{¿Por qu\'e es grave?} \\
@@ -318,7 +333,7 @@ Cada usuario, servicio o aplicaci\'on debe tener \textbf{solo los permisos m\'in
 \end{itemize}
 \end{cajaCaso}
 
-\begin{cajaCaso}[title={Caso 2: Buckets S3 p\'ublicos (patr\'on recurrente)}
+\begin{cajaCaso}[title={Caso 2: Buckets S3 p\'ublicos (patr\'on recurrente)}]
 \textbf{Qu\'e pas\'o:} En m\'ultiples incidentes documentados (empresas de tecnolog\'ia, consultoras y hasta organismos p\'ublicos), investigadores encontraron \textbf{buckets de almacenamiento S3 configurados como p\'ublicos}, exponiendo contrase\~nas, claves privadas, datos de clientes y documentos internos.\\[4pt]
 \textbf{Lecciones:}
 \begin{itemize}[leftmargin=1.5em]
@@ -430,7 +445,7 @@ Complet\'a esta plantilla con la checklist de tu grupo. Es el borrador directo d
 
 \vspace{10pt}
 \renewcommand{\arraystretch}{1.8}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|>{\centering\arraybackslash}p{3.5cm}|}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|X|>{\centering\arraybackslash}p{3.3cm}|}
 \hline
 \rowcolor{azulUCA!20}
 \textbf{\#} & \textbf{Control / punto de la checklist} & \textbf{¿Qu\'e riesgo mitiga?} \\
